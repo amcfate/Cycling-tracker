@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, user_profile, user_gear;
+DROP TABLE IF EXISTS users, user_profile, user_gear, user_bikes;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -23,6 +23,16 @@ CREATE TABLE user_gear (
 	user_id int NOT NULL,
 	misc_gear varchar,
 	CONSTRAINT PK_user_id_gear PRIMARY KEY (user_id)
+);
+
+CREATE TABLE user_bikes (
+	type varchar,
+	bike_name varchar,
+	bike_id int,
+	user_id int,
+	bike_weight decimal,
+	bike_description varchar,
+	CONSTRAINT PK_bike PRIMARY KEY (bike_id)
 );
 
 
