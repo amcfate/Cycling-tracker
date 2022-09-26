@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, user_profile;
+DROP TABLE IF EXISTS users, user_profile, user_gear;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -18,5 +18,12 @@ CREATE TABLE user_profile (
 	user_age int,
 	CONSTRAINT PK_user_id PRIMARY KEY (user_id)
 );
+
+CREATE TABLE user_gear (
+	user_id int NOT NULL,
+	misc_gear varchar,
+	CONSTRAINT PK_user_id_gear PRIMARY KEY (user_id)
+);
+
 
 COMMIT TRANSACTION;
