@@ -29,7 +29,7 @@ CREATE TABLE user_gear (
 CREATE TABLE user_bikes (
 	type varchar,
 	bike_name varchar,
-	bike_id int NOT NULL,
+	bike_id SERIAL NOT NULL,
 	user_id int,
 	bike_weight decimal,
 	bike_description varchar,
