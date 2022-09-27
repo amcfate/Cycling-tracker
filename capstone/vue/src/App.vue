@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <Map />
     <div id="nav">
       <router-link class="home-btn" v-bind:to="{ name: 'home' }"
         >Home</router-link
@@ -9,6 +10,7 @@
         v-if="$store.state.token != ''"
         >Logout</router-link
       >
+      <router-link v-bind:to="{ name: 'Map' }">Map Test!</router-link>
     </div>
     <router-view />
   </div>
@@ -39,3 +41,9 @@
   background-position: center 100%;
 }
 </style>
+<script>
+export default {
+  name: "App",
+  components: {},
+};
+</script>
