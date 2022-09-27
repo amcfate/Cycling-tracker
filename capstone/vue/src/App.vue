@@ -22,6 +22,11 @@ export default {
 };
 </script>
 <style>
+@font-face {
+  font-family: Inter-Light;
+  src: url("../public/static/Inter-Light.ttf");
+}
+
 #nav {
   display: flex;
   flex-direction: row;
@@ -32,7 +37,7 @@ export default {
 }
 
 #app {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Inter-Light, Arial, Helvetica, sans-serif;
   text-align: center;
   color: black;
   display: flex;
