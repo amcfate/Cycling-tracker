@@ -10,4 +10,6 @@ CREATE TABLE users (
 	CONSTRAINT PK_user PRIMARY KEY (user_id)
 );
 
+
+
 COMMIT TRANSACTION;

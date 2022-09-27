@@ -51,6 +51,13 @@ const router = new Router({
       component: Register,
       meta: {
         requiresAuth: false
+      },
+    },
+    { path: "/map",
+      name: "map",
+      component: Map,
+      meta: {
+      requiresAuth: false
       }
     }
   ]
