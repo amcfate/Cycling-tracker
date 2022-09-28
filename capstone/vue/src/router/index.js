@@ -6,6 +6,7 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
+import MapTesting from "@/views/MapTesting";
 
 Vue.use(Router)
 
@@ -55,9 +56,9 @@ const router = new Router({
       },
     },
     {
-      path: "/map",
-      name: "map",
-      component: Map,
+      path: "/maptesting",
+      name: "maptesting",
+      component: MapTesting,
       meta: {
         requiresAuth: false
       }

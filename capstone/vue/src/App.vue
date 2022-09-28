@@ -2,14 +2,14 @@
   <div id="app">
     <Map />
     <div id="nav">
-      <h3>cicleta</h3>
-      <router-link v-bind:to="{ name: 'home' }">Home</router-link>&nbsp;|&nbsp;
+      
+      <router-link v-bind:to="{ name: 'home' }"><h3>cicleta</h3></router-link>&nbsp;|&nbsp;
       <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
         >Logout</router-link
       >
-      <router-link v-bind:to="{ name: 'Map' }">Map Test!</router-link>
+      <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
     </div>
     <router-view />
     <div class="control-bar">
