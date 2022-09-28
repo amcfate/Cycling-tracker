@@ -1,6 +1,6 @@
 BEGIN TRANSACTION;
 
-DROP TABLE IF EXISTS users, user_profile, user_gear, user_bikes, activity, route;
+DROP TABLE IF EXISTS users, user_profile, user_gear, user_bikes, activity, route, trackpoint CASCADE;
 
 CREATE TABLE users (
 	user_id SERIAL,
@@ -42,10 +42,19 @@ CREATE TABLE route (
 	description varchar,
 	distance_miles decimal,
 	elevation int,
-	descent int,
+	ascent int,
 	CONSTRAINT PK_route PRIMARY KEY (route_id) 
 );
 
+CREATE TABLE trackpoint (
+	route_id int,
+	trackpoint_id SERIAL,
+	latitude decimal,
+	longitude decimal,
+	elevation decimal,
+	CONSTRAINT PK_trackpoint PRIMARY KEY (trackpoint_id), 
+	CONSTRAINT FK_route_id FOREIGN KEY (route_id) REFERENCES route (route_id)
+);
 
 CREATE TABLE activity (
 	route_id int,
@@ -57,6 +66,5 @@ CREATE TABLE activity (
 	CONSTRAINT FK_activity_route FOREIGN KEY (route_id) REFERENCES route (route_id),
 	CONSTRAINT FK_activity_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
-
 
 COMMIT TRANSACTION;
