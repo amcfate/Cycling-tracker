@@ -24,7 +24,7 @@ export default {
       await loader.load()
       map.value = new google.maps.Map(mapDiv.value, {
         center: currPos.value,
-        zoom: 7
+        zoom: 15
       })
       clickListener = map.value.addListener(
           'click',
@@ -78,31 +78,69 @@ export default {
 </script>
 
 <style scoped>
-.gmap {
-  height: 500px;
+.text-center{
+
+  display: flex;
+  flex-direction: column;
+  align-content: space-evenly;
+  height: 100%;
+  margin-bottom: 5%;
+  padding-left:5%;
+  padding-right:5%;
 }
+
+.mapDiv{
+  height: 25%;
+  margin-bottom: 10px; 
+}
+.position{
+display: flex;
+justify-content: space-between;
+margin-bottom: 8px;
+}
+.position-header{
+  margin: 0px;
+}
+.miles{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.miles-header{
+  margin: 0px;
+}
+.clicked-position{
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.clicked-header{
+  margin: 0px
+}
+
 </style>
 
 <template>
-  <div class="d-flex text-center" style="height: 20vh">
-    <div class="m-auto">
-      <h4>Your Position</h4>
-      Latitude: {{ currPos.lat.toFixed(2) }}, Longitude:
+  <div class="d-flex text-center" >
+    <div class="m-auto position">
+      <h4 class="position-header">You:</h4>
+      Y: {{ currPos.lat.toFixed(2) }}, X:
       {{ currPos.lng.toFixed(2) }}
     </div>
-    <div class="m-auto">
-      <h4>Distance</h4>
+    <div class="m-auto miles">
+      <h4 class="miles-header">Distance</h4>
       {{ distance.toFixed(2) }} miles
     </div>
-    <div class="m-auto">
-      <h4>Clicked Position</h4>
+    <div class="m-auto clicked-position">
+      <h4 class="clicked-header">Destination</h4>
       <span v-if="otherPos">
-          Latitude: {{ otherPos.lat.toFixed(2) }}, Longitude:
+          Y: {{ otherPos.lat.toFixed(2) }}, X:
           {{ otherPos.lng.toFixed(2) }}
         </span>
-      <span v-else>Click the map to select a position</span>
-      <div ref="mapDiv" style="width: 100%; height: 80vh" />
+      <span v-else>Click the map</span>
+      
     </div>
+    <div ref="mapDiv" class="mapDiv"/>
   </div>
 
 </template>

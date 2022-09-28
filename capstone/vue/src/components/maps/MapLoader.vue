@@ -25,6 +25,7 @@ export default {
       map.value = new google.maps.Map(mapDiv.value, {
         center: currPos.value,
         zoom: 7
+      
       })
       clickListener = map.value.addListener(
           'click',
@@ -78,24 +79,24 @@ export default {
 </script>
 
 <template>
-  <div className="d-flex text-center" style="height: 20vh">
-    <div className="m-auto">
+  <div className="d-flex text-center" >
+    <div className="m-1">
       <h4>Your Position</h4>
       Latitude: {{ currPos.lat.toFixed(2) }}, Longitude:
       {{ currPos.lng.toFixed(2) }}
     </div>
-    <div className="m-auto">
+    <div className="m-1">
       <h4>Distance</h4>
       {{ distance.toFixed(2) }} miles
     </div>
-    <div className="m-auto">
+    <div className="m-1">
       <h4>Clicked Position</h4>
       <span v-if="otherPos">
           Latitude: {{ otherPos.lat.toFixed(2) }}, Longitude:
           {{ otherPos.lng.toFixed(2) }}
         </span>
       <span v-else>Click the map to select a position</span>
-      <div ref="mapDiv" style="width: 100%; height: 80vh"/>
+      <div ref="mapDiv"/>
     </div>
   </div>
 
