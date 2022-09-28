@@ -90,7 +90,7 @@ export default {
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: blur;
-  border-radius: 8px;
+  border-radius: 12px;
   width: 50%;
   box-shadow: 2px 10px 20px darkgrey;
 }

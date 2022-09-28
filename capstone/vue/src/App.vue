@@ -12,6 +12,18 @@
       <router-link v-bind:to="{ name: 'Map' }">Map Test!</router-link>
     </div>
     <router-view />
+    <div class="control-bar">
+      <button class="btn">
+        <router-link v-bind:to="{ name: 'home' }">Home</router-link>
+      </button>
+      <button class="btn">
+        <router-link v-bind:to="{ name: 'map' }">Map</router-link>
+      </button>
+      <!-- <router-link v-bind:to="{ name: 'home' }">Home</router-link> -->
+      <button class="btn">
+        <router-link v-bind:to="{ name: 'profile' }">Profile</router-link>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -36,6 +48,23 @@ export default {
   border: 1px solid lightgray;
 }
 
+.control-bar {
+  display: flex;
+  flex-direction: row;
+  background-color: whitesmoke;
+  border: 1px solid lightgray;
+  padding: 18px;
+  margin: 10px;
+  border-radius: 10px;
+  justify-content: space-between;
+}
+
+.btn {
+  size: flex-grow;
+  border-radius: 6px;
+  padding: 10px;
+}
+
 #app {
   font-family: Inter-Light, Arial, Helvetica, sans-serif;
   text-align: center;
@@ -43,10 +72,15 @@ export default {
   display: flex;
   flex-direction: column;
   background-image: url("../public/mapNY.png");
+  background-color: darkgray;
+  max-width: 800px;
+  background-blend-mode: multiply;
   background-repeat: no-repeat;
   background-size: 100% 100%;
+  background-clip: border-box;
   min-height: 100vh;
   background-position: center 100%;
+  background-attachment: fixed;
 }
 </style>
 
