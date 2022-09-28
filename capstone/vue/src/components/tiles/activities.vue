@@ -28,4 +28,10 @@ export default {
   width: 50%;
   box-shadow: 2px 10px 20px darkgrey;
 }
+.map{
+    position: relative;
+    height: 100px;
+    width: 100px;
+    z-index: 3;
+}
 </style>

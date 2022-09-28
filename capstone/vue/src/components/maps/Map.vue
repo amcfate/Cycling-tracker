@@ -40,6 +40,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+.gmap {
+  height: 500px;
+}
 </style>

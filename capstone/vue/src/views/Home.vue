@@ -1,30 +1,38 @@
 <template>
-<div>
-  <activities>
-    <Map/>
-  </activities>
-  <div class="home">
-    <h1>Home</h1>
-    <p>You must be authenticated to see this</p>
+  <div class="main">
+
+      <nav-block/>
     
-  </div>
   </div>
 </template>
 
 <script>
-import Map from "@/components/maps/Map";
-import Activities from '../components/tiles/activities.vue';
+
+import NavBlock from '../components/NavBar/NavBlock.vue';
+
+
 export default {
   name: "home",
-  components :{
-    Map,
-    Activities
-  }
+  data() {
+    return {
+      ActivityClicked: false,
+    };
+  },
+  components: {
+    
+    NavBlock
+  },
 };
 </script>
 
 <style>
-#Map{
-  opacity: .05;
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  align-content: space-evenly;
+  min-height: 100vh;
 }
+
+
 </style>
