@@ -4,13 +4,7 @@
       <div class="mapDiv">
       <Map class="map" id="map"/>
       </div>    
-        <ul class="menu">
-          <li class="activities"><img src="..\public\assets\open-book.png" alt=""></li>
-          <li><img class="routes" src="..\public\assets\signpost (2).png" alt=""></li>
-          <li class="bikes"><img src="..\public\assets\road-bike (2).png" alt=""></li>
-          <li class="gear"><img src="..\public\assets\darkbackpack.png" alt=""></li>
-          <li class="settings"><img src="..\public\assets\gear.png" alt=""></li>
-        </ul>
+    
         </div>
 </template>
 
@@ -75,18 +69,4 @@ export default {
   flex-shrink: 1;
 }
 
-
-.menu{
-    margin-bottom: 10px;
-    padding: 0px;
-  list-style-type: none;
-  display: flex;
-  justify-content: space-around;
-}
-
-.menu li img{
-  height: 30px;
-  width: 30px;
-  
-}
 </style>
