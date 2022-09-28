@@ -9,7 +9,7 @@
         v-if="$store.state.token != ''"
         >Logout</router-link
       >
-      <router-link v-bind:to="{ name: 'Map' }">Map Test!</router-link>
+      <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
     </div>
     <router-view />
   </div>

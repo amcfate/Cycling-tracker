@@ -1,108 +1,133 @@
+<template>
+  <div>
+    <h1 style="text-align: center">Google Maps</h1>
+
+    <nav class="nav">
+      <button v-on:click="calculateRoute(fromLocation, toLocation)">
+        Get Route!
+      </button>
+
+      <button v-on:click="clearRoutes()">Clear!</button>
+    </nav>
+
+    <div id="map"></div>
+  </div>
+</template>
+
 <script>
-/* eslint-disable no-undef */
-import { computed, ref, onMounted, onUnmounted, watch } from 'vue'
-import { useGeolocation } from './useGeolocation'
-import { Loader } from '@googlemaps/js-api-loader'
-
-const GOOGLE_MAPS_API_KEY = ' AIzaSyDjB5lrCyoXaoU7Lv4RXi909TRAq5Wua9g'
-
+let existingMarker = false;
 export default {
-  name: 'Map',
-  setup() {
-    const { coords } = useGeolocation()
-    const currPos = computed(() => ({
-      lat: coords.value.latitude,
-      lng: coords.value.longitude
-    }))
-    const otherPos = ref(null)
+  data() {
+    return {
+      map: null,
+      directionsDisplay: null,
+      service: null,
+      locations: [
+        { name: "user", loc: { lat: 32.7341, lng: -117.1446 } },
+      ],
+      fromLocation: "",
+      toLocation: "",
+    };
+  },
+  methods: {
+    /*
+     * Initialize map
+     * https://developers.google.com/maps/documentation/javascript/overview
+     */
+    initMap() {
+      const mapElement = document.getElementById("map");
+      const mapOptions = {
+        center: this.locations[0].loc,
+        zoom: 13,
+        mapTypeId: window.google.maps.MapTypeId.ROADMAP,
+        panControl: true,
+        zoomControl: true,
+        mapTypeControl: true,
+        scaleControl: true,
+        streetViewControl: true,
+        overviewMapControl: true,
+        rotateControl: true,
+      };
+      this.map = new window.google.maps.Map(mapElement, mapOptions);
+      this.addMarker();
 
-    const loader = new Loader({ apiKey: GOOGLE_MAPS_API_KEY })
-    const mapDiv = ref(null)
-    let map = ref(null)
-    let clickListener = null
-    onMounted(async () => {
-      await loader.load()
-      map.value = new google.maps.Map(mapDiv.value, {
-        center: currPos.value,
-        zoom: 7
+      window.google.maps.event.addListener(this.map, 'click' , (e) => {
+        this.addMarker(e.latLng, this.map)
       })
-      clickListener = map.value.addListener(
-          'click',
-          ({ latLng: { lat, lng } }) =>
-              (otherPos.value = { lat: lat(), lng: lng() })
-      )
-    })
-    onUnmounted(async () => {
-      if (clickListener) clickListener.remove()
-    })
 
-    let line = null
-    watch([map, currPos, otherPos], () => {
-      if (line) line.setMap(null)
-      if (map.value && otherPos.value != null)
-        line = new google.maps.Polyline({
-          path: [currPos.value, otherPos.value],
-          map: map.value
-        })
-    })
+    },
+    /*
+     * Add Marker
+     */
+    addMarker(latLng, map) {
+      const marker = new window.google.maps.Marker({
+        position: latLng,
+        animation: window.google.maps.Animation.DROP,
+        draggable: true,
+        map: map
+      });
+      if(existingMarker)
+        this.toLocation = latLng;
+      else {
+        this.fromLocation = latLng
+        existingMarker = true
+      }
+      marker.setMap(this.map);
+    },
 
-    const haversineDistance = (pos1, pos2) => {
-      const R = 3958.8 // Radius of the Earth in miles
-      const rlat1 = pos1.lat * (Math.PI / 180) // Convert degrees to radians
-      const rlat2 = pos2.lat * (Math.PI / 180) // Convert degrees to radians
-      const difflat = rlat2 - rlat1 // Radian difference (latitudes)
-      const difflon = (pos2.lng - pos1.lng) * (Math.PI / 180) // Radian difference (longitudes)
-
-      const d =
-          2 *
-          R *
-          Math.asin(
-              Math.sqrt(
-                  Math.sin(difflat / 2) * Math.sin(difflat / 2) +
-                  Math.cos(rlat1) *
-                  Math.cos(rlat2) *
-                  Math.sin(difflon / 2) *
-                  Math.sin(difflon / 2)
-              )
-          )
-      return d
-    }
-    const distance = computed(() =>
-        otherPos.value === null
-            ? 0
-            : haversineDistance(currPos.value, otherPos.value)
-    )
-    return { currPos, otherPos, distance, mapDiv }
-  }
-}
+    /*
+     * Calculate route between 2 Coordinates
+     * https://stackoverflow.com/questions/27341214/how-to-draw-a-route-between-two-markers-in-google-maps
+     * input start: { lat: 32.7341, lng: -117.1446 }
+     * input end: { lat: 32.7075, lng: -117.1575 }
+     */
+    calculateRoute(start, end) {
+      const request = {
+        origin: start,
+        destination: end,
+        // https://developers.google.com/maps/documentation/transportation-logistics/on-demand-rides-deliveries-solution/pickup-and-dropoff-selection/location-selection/reference/rest/v1beta/TravelMode
+        travelMode: window.google.maps.TravelMode.TWO_WHEELER,
+      };
+      this.directionsDisplay.setMap(this.map);
+      this.service.route(request, (response, status) => {
+        if (status == window.google.maps.DirectionsStatus.OK) {
+          this.directionsDisplay.setDirections(response);
+          this.directionsDisplay.setMap(this.map);
+        } else {
+          alert(
+              "Directions Request from " +
+              start.toUrlValue(6) +
+              " to " +
+              end.toUrlValue(6) +
+              " failed: " +
+              status
+          );
+        }
+      });
+    },
+    clearRoutes() {
+      this.directionsDisplay.setMap(null);
+      this.map.markers = null;
+    },
+  },
+  mounted() {
+    // Initialize map after DOM is mounted
+    this.initMap();
+    this.directionsDisplay = new window.google.maps.DirectionsRenderer();
+    this.service = new window.google.maps.DirectionsService();
+  },
+};
 </script>
 
 <style scoped>
-.gmap {
-  height: 500px;
+#map {
+  grid-area: map;
+  width: 500px;
+  height: 400px;
+  padding: 25px;
+  margin: 25px auto;
+}
+.nav {
+  text-align: center;
 }
 </style>
-
-<template>
-  <div class="d-flex text-center" style="height: 20vh">
-    <div class="m-auto">
-      <h4>Your Position</h4>
-      Latitude: {{ currPos.lat.toFixed(2) }}, Longitude:
-      {{ currPos.lng.toFixed(2) }}
-    </div>
-    <div class="m-auto">
-      <h4>Distance</h4>
-      {{ distance.toFixed(2) }} miles
-    </div>
-    <div class="m-auto">
-      <h4>Clicked Position</h4>
-      <span v-if="otherPos">
-          Latitude: {{ otherPos.lat.toFixed(2) }}, Longitude:
-          {{ otherPos.lng.toFixed(2) }}
-        </span>
-      <span v-else>Click the map to select a position</span>
-      <div ref="mapDiv" style="width: 100%; height: 80vh" />
-    </div>
-  </div>
-
-</template>
