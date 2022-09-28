@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-      <h2 class="header">{{name}}</h2>
+      <h2 class="header">Home</h2>
       <div class="mapDiv">
       <Map class="map" id="map"/>
       </div>    
@@ -36,7 +36,6 @@ export default {
 
   margin: auto;
   display: flex;
-  /* align-items: stretch; */
   align-content: space-between;
   flex-direction: column;
   justify-content: center;
