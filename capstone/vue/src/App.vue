@@ -57,6 +57,7 @@ export default {
   margin: 10px;
   border-radius: 10px;
   justify-content: space-between;
+  width: 86vw;
 }
 
 .btn {
@@ -71,14 +72,10 @@ export default {
   color: black;
   display: flex;
   flex-direction: column;
-<<<<<<< HEAD
-  /* background-image: url("../public/mapNY.png"); */
-=======
   background-image: url("../public/mapNY.png");
   background-color: darkgray;
   max-width: 800px;
-  background-blend-mode: multiply;
->>>>>>> main
+  background-blend-mode: difference;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-clip: border-box;

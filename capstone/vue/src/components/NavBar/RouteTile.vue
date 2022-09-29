@@ -1,15 +1,19 @@
 <template>
   <div class="home">
-      <h2 class="header">Home</h2>
-      <div class="mapDiv">
-      <Map class="map" id="map"/>
-      </div>    
-    
-        </div>
+      <h2 class="header">LastRoute</h2>
+      <div class="info">
+      <h5>date:</h5>
+      <p>500ad</p>
+      <h5>Best time:</h5>
+      <p>500 hours</p>
+      <h5></h5>
+      </div>
+      <div class="mapDiv"></div>    
+  </div>
 </template>
 
 <script>
-import Map from "@/components/maps/Map";
+
 export default {
 
   name: "home",
@@ -19,32 +23,24 @@ export default {
     };
   },
   components: {
-    Map
+    
   },
 };
 
 </script>
 
 <style>
-.home{
 
-  margin: auto;
+.home{
   display: flex;
-  align-content: space-between;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   background-color: lightgray;
-  background-size: 100% 100%;
   border-radius: 8px;
-  height: 60vh;
-  box-shadow: 2px 10px 20px darkgrey;
-    width: 60vh;
-    padding-left:3%;
-    padding-right: 3%;
-    
-    
+  box-shadow: 2px 10px 20px darkgrey;  
   }
-@media only screen and (max-width: 1000px){
+/* @media only screen and (max-width: 1000px){
   .home {
   margin: auto;
   display: flex;
@@ -60,13 +56,25 @@ export default {
  
   flex-basis:auto;
 }
-}
+} */
 
 .mapDiv{
     
   border-radius: 8px;
-  flex-grow: 1;
-  flex-shrink: 1;
+  height:50%;
+  width: 80%;
+  background-color: black;
+  margin-bottom: 22px;
+  
+}
+h5{
+  margin-top: 3px;
+  margin-bottom: 3px;
+  padding: none;
+}
+p{
+   margin-top: 3px;
+  margin-bottom: 3px;
 }
 
 </style>
