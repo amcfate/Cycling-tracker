@@ -1,36 +1,57 @@
 <template>
-  <div class="main">
-   
-    <div id="map"></div>
-
+  <div>
     <h1 style="text-align: center">Google Maps</h1>
 
-    <nav class="nav">
-      <button v-on:click="calculatePoints()">
+    <nav className="nav">
+      <select name="" id="" v-model="fromLocation">
+        <option value="">--from--</option>
+        <option
+            v-for="(eachLocation, index) in locations"
+            v-bind:key="index"
+            v-bind:value="eachLocation.loc"
+        >
+          {{ eachLocation.name }}
+        </option>
+      </select>
+
+      <select name="" id="" v-model="toLocation">
+        <option value="">--to--</option>
+        <option
+            v-for="(eachLocation, index) in locations"
+            v-bind:key="index"
+            v-bind:value="eachLocation.loc"
+        >
+          {{ eachLocation.name }}
+        </option>
+      </select>
+
+      <button v-on:click="calculateRoute(fromLocation, toLocation)">
         Get Route!
       </button>
 
-      <button v-on:click="savePins()">Save markers!</button>
-
-      <button v-on:click="clearRoutes()">Clear!</button>
+      <button v-on:click="clearRoutes()">Clear route and hide markers!</button>
+      <button v-on:click="deleteMarkers()">Delete all markers!</button>
+      <button v-on:click="saveRoute()">Save route!</button>
     </nav>
 
-    
+    <div id="map"></div>
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
       map: null,
       directionsDisplay: null,
       service: null,
-      path: null,
-      poly: null,
-      lat_ling: [],
+      markers: [],
       locations: [
-        { name: "user", loc: { lat: 32.7341, lng: -117.1446 } },
+        {name: "balboaPark", loc: {lat: 32.7341, lng: -117.1446}},
+        {name: "petcoPark", loc: {lat: 32.7075, lng: -117.1575}},
+        {name: "sanDiegoAirport", loc: {lat: 32.7323, lng: -117.196}},
       ],
       fromLocation: "",
       toLocation: "",
@@ -56,59 +77,52 @@ export default {
         rotateControl: true,
       };
       this.map = new window.google.maps.Map(mapElement, mapOptions);
+      window.google.maps.event.addListener(this.map, 'click', this.addPinViaClick);
+      this.getLocation()
+    },
 
-      window.google.maps.event.addListener(this.map, 'click' , (e) => {
-        this.addPinViaClick(e)
-      })
+    //Get user location
+    getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function (position) {
+          let initialLocation = new this.map.LatLng(position.coords.latitude, position.coords.longitude);
+          this.map.setCenter(initialLocation);
+        });
+      }
 
     },
     /*
      * Add Marker
      */
     addPinViaClick(event) {
-      let description = window.prompt("Enter a description");
+      let description = window.prompt("Name marker:");
+      if(description.length === 0){
+        window.alert("Please enter a description.")
+        return;
+      }
       const markerObj = this.makeMarkerObj(event.latLng.toJSON(), description);
       this.locations.push(markerObj);
       this.dropPin(markerObj);
     },
 
     dropPin(markerObj) {
-      new window.google.maps.Marker({
-        position: markerObj.coord,
+      if (this.markers.length === 2) {
+        this.markers.slice(2)
+      }
+      let marker = new window.google.maps.Marker({
+        position: markerObj.loc,
         map: this.map,
         label: {
           text: markerObj.name,
           color: "blue",
         },
       });
+      this.markers.unshift(marker)
     },
-
 
     makeMarkerObj(latLng, name) {
-      const markerObj = { coord: latLng, name: name };
+      const markerObj = {loc: latLng, name: name};
       return markerObj;
-    },
-
-
-    calculatePoints(){
-      this.locations.forEach(pos => {
-        let myLatLng = new window.google.maps.LatLng(pos.lat, pos.lng);
-        this.lat_ling.push(myLatLng)
-      })
-      for(let i = 0; i < this.lat_ling.length; i++){
-        if((i + 1) < this.lat_ling.length){
-          let src = this.lat_ling[i];
-          let des = this.lat_ling[i + 1];
-          this.path.push(src)
-          this.poly.setPath(this.path)
-          this.service.route ({
-            origin: src,
-            destination: des,
-            travelMode: window.google.maps.TravelMode.TWO_WHEELER
-          })
-          }
-        }
-      }
     },
 
     /*
@@ -122,65 +136,65 @@ export default {
         origin: start,
         destination: end,
         // https://developers.google.com/maps/documentation/transportation-logistics/on-demand-rides-deliveries-solution/pickup-and-dropoff-selection/location-selection/reference/rest/v1beta/TravelMode
-        travelMode: window.google.maps.TravelMode.TWO_WHEELER,
+        travelMode: window.google.maps.TravelMode.TWO_WHEELER
       };
       this.directionsDisplay.setMap(this.map);
       this.service.route(request, (response, status) => {
         if (status == window.google.maps.DirectionsStatus.OK) {
           this.directionsDisplay.setDirections(response);
           this.directionsDisplay.setMap(this.map);
-        } else {
-          alert(
-              "Directions Request from " +
-              start.toUrlValue(6) +
-              " to " +
-              end.toUrlValue(6) +
-              " failed: " +
-              status
-          );
         }
       });
     },
     clearRoutes() {
+      this.hideMarkers();
       this.directionsDisplay.setMap(null);
-      this.map.markers = null;
     },
-    savePins(){
-      alert("This feature has not been created yet!")
+
+    setMapOnAll(map) {
+      for (let i = 0; i < this.markers.length; i++) {
+        this.markers[i].setMap(map);
+      }
     },
+
+    hideMarkers() {
+      this.setMapOnAll(null)
+    },
+
+    showMarkers() {
+      this.setMapOnAll(this.map)
+    },
+
+    deleteMarkers() {
+      this.hideMarkers();
+      this.markers = []
+      this.locations = []
+    },
+
+    saveRoute(){
+      for(let i = 0; i < this.locations.length; i++){
+        axios.post('/saveRoute', {
+          lat: this.locations[i].loc.lat,
+          lng: this.locations[i].loc.lng
+        })
+      }
+
+
+    }
+
+  },
+
   mounted() {
     // Initialize map after DOM is mounted
     this.initMap();
     this.directionsDisplay = new window.google.maps.DirectionsRenderer();
     this.service = new window.google.maps.DirectionsService();
-    this.path = new window.google.maps.MVCArray();
-    this.poly = new window.google.maps.Polyline({ map: this.map, strokeColor: '#46986E7'});
   },
 };
+
 </script>
 
 <style scoped>
-.main{
-  display: flex;
-}
-.text-center{
-
-  display: flex;
-  flex-direction: column;
-  align-content: space-evenly;
-  height: 100%;
-  margin-bottom: 5%;
-  padding-left:5%;
-  padding-right:5%;
-}
-
-.nav{
-  height: 25%;
-  margin-bottom: 10px; 
-  position: absolute;
-  z-index: 5;
-}
-
 #map {
   grid-area: map;
   width: 100vw;
@@ -189,9 +203,8 @@ export default {
   
 
 }
+
 .nav {
-  justify-self: center;
   text-align: center;
-  position: absolute;
 }
 </style>

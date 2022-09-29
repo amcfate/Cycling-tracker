@@ -15,7 +15,6 @@
 <script>
 
 export default {
-
   name: "home",
   data() {
     return {
@@ -26,7 +25,6 @@ export default {
     
   },
 };
-
 </script>
 
 <style>
@@ -44,22 +42,39 @@ export default {
   .home {
   margin: auto;
   display: flex;
+  flex-grow: auto;
   align-content: space-between;
   flex-direction: column;
   justify-content: center;
   background-color: lightgray;
   background-size: 100% 100%;
   border-radius: 8px;
-  width: 70%;
   height: 80vh;
   box-shadow: 2px 10px 20px darkgrey;
- 
-  flex-basis:auto;
+  width: auto;
+  padding-left: 3%;
+  padding-right: 3%;
 }
-} */
+@media only screen and (max-width: 1000px) {
+  .home {
+    margin: auto;
+    display: flex;
+    flex-grow: auto;
+    align-content: space-between;
+    flex-direction: column;
+    justify-content: center;
+    background-color: lightgray;
+    background-size: 100% 100%;
+    border-radius: 8px;
+    width: 70%;
+    height: 80vh;
+    box-shadow: 2px 10px 20px darkgrey;
 
-.mapDiv{
-    
+    flex-basis: auto;
+  }
+}
+
+.mapDiv {
   border-radius: 8px;
   height:50%;
   width: 80%;
@@ -76,5 +91,4 @@ p{
    margin-top: 3px;
   margin-bottom: 3px;
 }
-
 </style>
