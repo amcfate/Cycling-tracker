@@ -38,7 +38,8 @@ export default {
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgrey;  
   }
-/* @media only screen and (max-width: 1000px){
+
+ @media only screen and (max-width: 1000px){
   .home {
   margin: auto;
   display: flex;
@@ -55,6 +56,7 @@ export default {
   padding-left: 3%;
   padding-right: 3%;
 }
+ }
 @media only screen and (max-width: 1000px) {
   .home {
     margin: auto;
