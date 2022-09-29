@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49187ca3-e65a-4f88-b395-2f82d3dd8b15" name="Changes" comment="Added delete markers and hide markers to map.">
+    <list default="true" id="49187ca3-e65a-4f88-b395-2f82d3dd8b15" name="Changes" comment="Added markers array">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capstone/vue/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/vue/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capstone/vue/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/vue/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/capstone/vue/src/components/maps/Map.vue" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/vue/src/components/maps/Map.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/vue/src/components/maps/MapTestComponent.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/vue/src/views/MapTesting.vue" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/vue/src/views/MapTesting.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,14 +55,7 @@
       <option name="project" value="LOCAL" />
       <updated>1664469741115</updated>
     </task>
-    <task id="LOCAL-00002" summary="Added delete markers and hide markers to map.">
-      <created>1664472616582</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1664472616582</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -69,19 +63,7 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/isaac" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -89,7 +71,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added markers array" />
-    <MESSAGE value="Added delete markers and hide markers to map." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added delete markers and hide markers to map." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added markers array" />
   </component>
 </project>

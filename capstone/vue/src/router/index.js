@@ -54,14 +54,7 @@ const router = new Router({
         requiresAuth: false
       },
     },
-    {
-      path: "/maptesting",
-      name: "maptesting",
-      component: MapTesting,
-      meta: {
-        requiresAuth: false
-      }
-    },
+
     {
       path: "/profile",
       name: "profile",

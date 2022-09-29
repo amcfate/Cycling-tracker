@@ -78,7 +78,6 @@ export default {
   display: flex;
   flex-grow: auto;
   flex-direction: column;
-  /* background-image: url("../public/mapNY.png"); */
   background-image: url("../public/mapNY.png");
   background-color: darkgray;
   max-width: 800px;
