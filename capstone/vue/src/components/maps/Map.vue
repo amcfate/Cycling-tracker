@@ -31,6 +31,7 @@
 
       <button v-on:click="clearRoutes()">Clear route and hide markers!</button>
       <button v-on:click="deleteMarkers()">Delete all markers!</button>
+      <button v-on:click="saveRoute()">Save route!</button>
     </nav>
 
     <div id="map"></div>
@@ -38,6 +39,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -167,6 +170,17 @@ export default {
       this.markers = []
       this.locations = []
     },
+
+    saveRoute(){
+      for(let i = 0; i < this.locations.length; i++){
+        axios.post('/saveRoute', {
+          lat: this.locations[i].loc.lat,
+          lng: this.locations[i].loc.lng
+        })
+      }
+
+
+    }
 
   },
 
