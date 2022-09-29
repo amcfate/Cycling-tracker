@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="map">
     <MapTestComponent />
   </div>
 </template>
@@ -14,3 +14,10 @@ export default {
   },
 };
 </script>
+
+<style>
+#map {
+  height: 100%;
+  width: 100% ;
+}
+</style>

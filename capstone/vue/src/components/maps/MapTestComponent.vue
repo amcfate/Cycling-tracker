@@ -74,8 +74,7 @@ export default {
       this.map = new window.google.maps.Map(mapElement, mapOptions);
       window.google.maps.event.addListener(this.map, 'click' , (e) => {
         this.addPinViaClick(e)
-      });
-      this.getLocation()
+      })
     },
 
     //Get user location
@@ -147,7 +146,6 @@ export default {
     },
     clearRoutes() {
       this.directionsDisplay.setMap(null);
-      this.map.markers = null;
     },
   },
   mounted() {
