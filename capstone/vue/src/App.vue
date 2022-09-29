@@ -2,8 +2,8 @@
   <div id="app">
     <Map />
     <div id="nav">
-      
-      <router-link v-bind:to="{ name: 'home' }"><h3>cicleta</h3></router-link>&nbsp;|&nbsp;
+      <router-link v-bind:to="{ name: 'home' }"><h3>cicleta</h3></router-link
+      >&nbsp;|&nbsp;
       <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
@@ -51,12 +51,18 @@ export default {
 .control-bar {
   display: flex;
   flex-direction: row;
+  justify-self: center;
   background-color: whitesmoke;
   border: 1px solid lightgray;
   padding: 18px;
   margin: 10px;
   border-radius: 10px;
   justify-content: space-between;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 86vw;
+  /* width: 86%; */
 }
 
 .btn {
@@ -70,11 +76,12 @@ export default {
   text-align: center;
   color: black;
   display: flex;
+  flex-grow: auto;
   flex-direction: column;
   background-image: url("../public/mapNY.png");
   background-color: darkgray;
   max-width: 800px;
-  background-blend-mode: multiply;
+  background-blend-mode: difference;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-clip: border-box;
