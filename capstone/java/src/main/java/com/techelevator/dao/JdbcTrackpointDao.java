@@ -43,6 +43,11 @@ public class JdbcTrackpointDao implements TrackpointDao{
     }
 
     @Override
+    public Trackpoint getTrackpointById(int trackpointId) {
+        return null;
+    }
+
+    @Override
     public boolean create(int routeId, BigDecimal latitude, BigDecimal longitude, double elevation) {
         return false;
     }

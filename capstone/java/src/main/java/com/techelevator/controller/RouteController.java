@@ -23,7 +23,7 @@ public class RouteController {
     //have to call get trackpoint? No one is ever going to know a trackpoint id or route id,
     //but if they click on a route, do I want it to give them the lat/long/elev
 
- @RequestMapping(value = "/getTrackpoint/{id}", method = RequestMethod.GET)
+ @RequestMapping(value = "/gettrackpoint/{id}", method = RequestMethod.GET)
     public Trackpoint getTrackpointById (int trackpointId){
      return trackpointDao.getTrackpointById(trackpointId);
  }
