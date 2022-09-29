@@ -1,18 +1,23 @@
 <template>
   <div class="profile-page">
     <div class="header">
-      <h2 id="username">// username</h2>
+      <h2 id="username">{{ this.username }}</h2>
     </div>
-    <!-- <activities /> -->
   </div>
 </template>
 
 <script>
-// import activities from "../tiles/activities.vue";
 export default {
   name: "user-profile",
-  components: {
-    // activities,
+  components: {},
+  data() {
+    return {
+      id: "",
+      username: "",
+      cyclingTeam: "",
+      userWeight: "",
+      uerAge: "",
+    };
   },
 };
 </script>
