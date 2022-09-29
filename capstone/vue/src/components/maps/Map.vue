@@ -29,7 +29,9 @@
         Get Route!
       </button>
 
-      <button v-on:click="clearRoutes()">Clear!</button>
+      <button v-on:click="clearRoutes()">Clear route and hide markers!</button>
+      <button v-on:click="deleteMarkers()">Delete all markers!</button>
+      <button v-on:click="saveRoute()">Save route!</button>
     </nav>
 
     <div id="map"></div>
@@ -37,6 +39,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data() {
     return {
@@ -73,9 +77,7 @@ export default {
         rotateControl: true,
       };
       this.map = new window.google.maps.Map(mapElement, mapOptions);
-      window.google.maps.event.addListener(this.map, 'click', (e) => {
-        this.addPinViaClick(e)
-      });
+      window.google.maps.event.addListener(this.map, 'click', this.addPinViaClick);
       this.getLocation()
     },
 
@@ -92,10 +94,19 @@ export default {
     /*
      * Add Marker
      */
-
+    addPinViaClick(event) {
+      let description = window.prompt("Name marker:");
+      if(description.length === 0){
+        window.alert("Please enter a description.")
+        return;
+      }
+      const markerObj = this.makeMarkerObj(event.latLng.toJSON(), description);
+      this.locations.push(markerObj);
+      this.dropPin(markerObj);
+    },
 
     dropPin(markerObj) {
-      if (this.markers.length === 2){
+      if (this.markers.length === 2) {
         this.markers.slice(2)
       }
       let marker = new window.google.maps.Marker({
@@ -132,15 +143,6 @@ export default {
         if (status == window.google.maps.DirectionsStatus.OK) {
           this.directionsDisplay.setDirections(response);
           this.directionsDisplay.setMap(this.map);
-        } else {
-          alert(
-              "Directions Request from " +
-              start.toUrlValue(6) +
-              " to " +
-              end.toUrlValue(6) +
-              " failed: " +
-              status
-          );
         }
       });
     },
@@ -148,28 +150,39 @@ export default {
       this.hideMarkers();
       this.directionsDisplay.setMap(null);
     },
-  },
 
-  setMapOnAll(map){
-    for (let i = 0; i < this.markers.length; i++) {
-      this.markers[i].setMap(map);
+    setMapOnAll(map) {
+      for (let i = 0; i < this.markers.length; i++) {
+        this.markers[i].setMap(map);
+      }
+    },
+
+    hideMarkers() {
+      this.setMapOnAll(null)
+    },
+
+    showMarkers() {
+      this.setMapOnAll(this.map)
+    },
+
+    deleteMarkers() {
+      this.hideMarkers();
+      this.markers = []
+      this.locations = []
+    },
+
+    saveRoute(){
+      for(let i = 0; i < this.locations.length; i++){
+        axios.post('/saveRoute', {
+          lat: this.locations[i].loc.lat,
+          lng: this.locations[i].loc.lng
+        })
+      }
+
+
     }
-  },
 
-  hideMarkers(){
-    this.setMapOnAll(null)
   },
-
-  showMarkers(){
-    this.setMapOnAll(this.map)
-  },
-
-  deleteMarkers(){
-    this.hideMarkers();
-    this.markers = []
-    this.locations = []
-  },
-
 
   mounted() {
     // Initialize map after DOM is mounted
@@ -178,15 +191,17 @@ export default {
     this.service = new window.google.maps.DirectionsService();
   },
 };
+
 </script>
 
 <style scoped>
 #map {
   grid-area: map;
-  width: 500px;
-  height: 400px;
-  padding: 25px;
-  margin: 25px auto;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  
+
 }
 
 .nav {
