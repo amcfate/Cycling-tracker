@@ -14,7 +14,10 @@ public interface TrackpointDao {
     //get all trackpoints by route id
 
     //get a single trackpoint?
-    Trackpoint getTrackpointById(int trackpointId);
+    
+
+    public Trackpoint getTrackpointById(int trackpointId);
+
 
     //get a beginning trackpoint?
 
