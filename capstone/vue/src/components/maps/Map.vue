@@ -43,6 +43,7 @@ export default {
       map: null,
       directionsDisplay: null,
       service: null,
+      markers: [],
       locations: [
         {name: "balboaPark", loc: {lat: 32.7341, lng: -117.1446}},
         {name: "petcoPark", loc: {lat: 32.7075, lng: -117.1575}},
@@ -92,15 +93,12 @@ export default {
      * Add Marker
      */
 
-    addPinViaClick(event) {
-      let description = window.prompt("Enter a description");
-      const markerObj = this.makeMarkerObj(event.latLng.toJSON(), description);
-      this.locations.push(markerObj);
-      this.dropPin(markerObj);
-    },
 
     dropPin(markerObj) {
-      new window.google.maps.Marker({
+      if (this.markers.length === 2){
+        this.markers.slice(2)
+      }
+      let marker = new window.google.maps.Marker({
         position: markerObj.loc,
         map: this.map,
         label: {
@@ -108,6 +106,7 @@ export default {
           color: "blue",
         },
       });
+      this.markers.unshift(marker)
     },
 
     makeMarkerObj(latLng, name) {
@@ -126,7 +125,7 @@ export default {
         origin: start,
         destination: end,
         // https://developers.google.com/maps/documentation/transportation-logistics/on-demand-rides-deliveries-solution/pickup-and-dropoff-selection/location-selection/reference/rest/v1beta/TravelMode
-        travelMode: window.google.maps.TravelMode.TWO_WHEELER,
+        travelMode: window.google.maps.TravelMode.TWO_WHEELER
       };
       this.directionsDisplay.setMap(this.map);
       this.service.route(request, (response, status) => {
@@ -146,10 +145,32 @@ export default {
       });
     },
     clearRoutes() {
+      this.hideMarkers();
       this.directionsDisplay.setMap(null);
-      this.map.markers = null;
     },
   },
+
+  setMapOnAll(map){
+    for (let i = 0; i < this.markers.length; i++) {
+      this.markers[i].setMap(map);
+    }
+  },
+
+  hideMarkers(){
+    this.setMapOnAll(null)
+  },
+
+  showMarkers(){
+    this.setMapOnAll(this.map)
+  },
+
+  deleteMarkers(){
+    this.hideMarkers();
+    this.markers = []
+    this.locations = []
+  },
+
+
   mounted() {
     // Initialize map after DOM is mounted
     this.initMap();

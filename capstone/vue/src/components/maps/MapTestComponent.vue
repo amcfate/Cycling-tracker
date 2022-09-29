@@ -158,12 +158,12 @@ export default {
 </script>
 
 <style scoped>
-#map {
-  grid-area: map;
-  width: 500px;
-  height: 400px;
-  padding: 25px;
-  margin: 25px auto;
+.map{
+  height: 100vh;
+  width: 70vw;
+  z-index: 1;
+  position: absolute;
+
 }
 .nav {
   text-align: center;
