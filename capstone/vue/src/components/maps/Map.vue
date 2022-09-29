@@ -6,9 +6,11 @@
     <h1 style="text-align: center">Google Maps</h1>
 
     <nav class="nav">
-      <button v-on:click="calculateRoute(fromLocation, toLocation)">
+      <button v-on:click="calculatePoints()">
         Get Route!
       </button>
+
+      <button v-on:click="savePins()">Save markers!</button>
 
       <button v-on:click="clearRoutes()">Clear!</button>
     </nav>
@@ -18,13 +20,15 @@
 </template>
 
 <script>
-let existingMarker = false;
 export default {
   data() {
     return {
       map: null,
       directionsDisplay: null,
       service: null,
+      path: null,
+      poly: null,
+      lat_ling: [],
       locations: [
         { name: "user", loc: { lat: 32.7341, lng: -117.1446 } },
       ],
@@ -52,29 +56,59 @@ export default {
         rotateControl: true,
       };
       this.map = new window.google.maps.Map(mapElement, mapOptions);
-     
+
       window.google.maps.event.addListener(this.map, 'click' , (e) => {
-        this.addMarker(e.latLng, this.map)
+        this.addPinViaClick(e)
       })
 
     },
     /*
      * Add Marker
      */
-    addMarker(latLng, map) {
-      const marker = new window.google.maps.Marker({
-        position: latLng,
-        animation: window.google.maps.Animation.DROP,
-        draggable: true,
-        map: map
+    addPinViaClick(event) {
+      let description = window.prompt("Enter a description");
+      const markerObj = this.makeMarkerObj(event.latLng.toJSON(), description);
+      this.locations.push(markerObj);
+      this.dropPin(markerObj);
+    },
+
+    dropPin(markerObj) {
+      new window.google.maps.Marker({
+        position: markerObj.coord,
+        map: this.map,
+        label: {
+          text: markerObj.name,
+          color: "blue",
+        },
       });
-      if(existingMarker)
-        this.toLocation = latLng;
-      else {
-        this.fromLocation = latLng
-        existingMarker = true
+    },
+
+
+    makeMarkerObj(latLng, name) {
+      const markerObj = { coord: latLng, name: name };
+      return markerObj;
+    },
+
+
+    calculatePoints(){
+      this.locations.forEach(pos => {
+        let myLatLng = new window.google.maps.LatLng(pos.lat, pos.lng);
+        this.lat_ling.push(myLatLng)
+      })
+      for(let i = 0; i < this.lat_ling.length; i++){
+        if((i + 1) < this.lat_ling.length){
+          let src = this.lat_ling[i];
+          let des = this.lat_ling[i + 1];
+          this.path.push(src)
+          this.poly.setPath(this.path)
+          this.service.route ({
+            origin: src,
+            destination: des,
+            travelMode: window.google.maps.TravelMode.TWO_WHEELER
+          })
+          }
+        }
       }
-      marker.setMap(this.map);
     },
 
     /*
@@ -111,12 +145,16 @@ export default {
       this.directionsDisplay.setMap(null);
       this.map.markers = null;
     },
-  },
+    savePins(){
+      alert("This feature has not been created yet!")
+    },
   mounted() {
     // Initialize map after DOM is mounted
     this.initMap();
     this.directionsDisplay = new window.google.maps.DirectionsRenderer();
     this.service = new window.google.maps.DirectionsService();
+    this.path = new window.google.maps.MVCArray();
+    this.poly = new window.google.maps.Polyline({ map: this.map, strokeColor: '#46986E7'});
   },
 };
 </script>
@@ -156,8 +194,4 @@ export default {
   text-align: center;
   position: absolute;
 }
-
 </style>
-
-
-
