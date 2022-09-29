@@ -2,9 +2,9 @@
   <div class="home">
       <h2 class="header">LastRoute</h2>
       <div class="info">
-      <h5>date:</h5>
-      <p>500ad</p>
-      <h5>Best time:</h5>
+      <h5>Length</h5>
+      <p>500 miles</p>
+      <h5>Diffic</h5>
       <p>500 hours</p>
       <h5></h5>
       </div>
