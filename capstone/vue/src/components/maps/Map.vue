@@ -197,10 +197,11 @@ export default {
 <style scoped>
 #map {
   grid-area: map;
-  width: 500px;
-  height: 400px;
-  padding: 25px;
-  margin: 25px auto;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  
+
 }
 
 .nav {
