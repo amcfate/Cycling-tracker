@@ -2,7 +2,7 @@
   <div>
     <h1 style="text-align: center">Google Maps</h1>
 
-    <nav className="nav">
+    <nav class="nav">
       <select name="" id="" v-model="fromLocation">
         <option value="">--from--</option>
         <option
@@ -44,9 +44,9 @@ export default {
       directionsDisplay: null,
       service: null,
       locations: [
-        {name: "balboaPark", loc: {lat: 32.7341, lng: -117.1446}},
-        {name: "petcoPark", loc: {lat: 32.7075, lng: -117.1575}},
-        {name: "sanDiegoAirport", loc: {lat: 32.7323, lng: -117.196}},
+        { name: "balboaPark", loc: { lat: 32.7341, lng: -117.1446 } },
+        { name: "petcoPark", loc: { lat: 32.7075, lng: -117.1575 } },
+        { name: "sanDiegoAirport", loc: { lat: 32.7323, lng: -117.196 } },
       ],
       fromLocation: "",
       toLocation: "",
@@ -72,14 +72,14 @@ export default {
         rotateControl: true,
       };
       this.map = new window.google.maps.Map(mapElement, mapOptions);
-      window.google.maps.event.addListener(this.map, 'click', (e) => {
+      window.google.maps.event.addListener(this.map, 'click' , (e) => {
         this.addPinViaClick(e)
       });
       this.getLocation()
     },
 
     //Get user location
-    getLocation() {
+    getLocation(){
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
           let initialLocation = new this.map.LatLng(position.coords.latitude, position.coords.longitude);
@@ -111,7 +111,7 @@ export default {
     },
 
     makeMarkerObj(latLng, name) {
-      const markerObj = {loc: latLng, name: name};
+      const markerObj = { loc: latLng, name: name };
       return markerObj;
     },
 
@@ -167,7 +167,6 @@ export default {
   padding: 25px;
   margin: 25px auto;
 }
-
 .nav {
   text-align: center;
 }

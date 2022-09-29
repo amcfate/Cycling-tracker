@@ -11,15 +11,18 @@
   },
   "dependencies": {
     "@fawmi/vue-google-maps": "^0.9.79",
+    "@googlemaps/js-api-loader": "^1.14.3",
     "axios": "^0.21.1",
     "core-js": "^3.9.1",
+    "google-maps-api-loader": "^1.1.1",
+    "leaflet": "^1.9.1",
     "vue": "^2.6.12",
     "vue-router": "^3.5.1",
+    "vue2-leaflet": "^2.7.1",
     "vuejs-google-maps": "^0.2.0",
     "vuex": "^3.6.2"
   },
   "devDependencies": {
-    "@googlemaps/js-api-loader": "^1.14.3",
     "@vue/cli-plugin-babel": "^5.0.8",
     "@vue/cli-plugin-e2e-cypress": "^5.0.8",
     "@vue/cli-plugin-eslint": "^5.0.8",
