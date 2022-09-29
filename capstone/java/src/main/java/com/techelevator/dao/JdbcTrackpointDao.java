@@ -3,12 +3,13 @@ package com.techelevator.dao;
 import com.techelevator.model.Trackpoint;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.stereotype.Component;
 
-import javax.sound.midi.Track;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class JdbcTrackpointDao implements TrackpointDao{
 
     private final JdbcTemplate jdbcTemplate;
@@ -40,6 +41,18 @@ public class JdbcTrackpointDao implements TrackpointDao{
         }
 
         return getTrackpointsByRouteId;
+    }
+
+    @Override
+    public Trackpoint getTrackpointById(int trackpointId) {
+        Trackpoint trackpoint = null;
+        String sql = "SELECT * FROM trackpoint WHERE trackpoint_id = ?";
+
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, trackpointId);
+        while  (results.next()){
+            trackpoint = mapRowToTrackpoint(results);
+
+        } return trackpoint;
     }
 
     @Override
