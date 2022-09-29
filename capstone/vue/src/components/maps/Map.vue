@@ -1,5 +1,8 @@
 <template>
-  <div>
+  <div class="main">
+   
+    <div id="map"></div>
+
     <h1 style="text-align: center">Google Maps</h1>
 
     <nav class="nav">
@@ -10,7 +13,7 @@
       <button v-on:click="clearRoutes()">Clear!</button>
     </nav>
 
-    <div id="map"></div>
+    
   </div>
 </template>
 
@@ -119,6 +122,9 @@ export default {
 </script>
 
 <style scoped>
+.main{
+  display: flex;
+}
 .text-center{
 
   display: flex;
@@ -133,19 +139,22 @@ export default {
 .nav{
   height: 25%;
   margin-bottom: 10px; 
+  position: absolute;
+  z-index: 5;
 }
 
 #map {
   grid-area: map;
-  width: 80%;
-  height: 80%;
-  padding: 25px;
-  margin: 25px auto;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  
 
 }
 .nav {
+  justify-self: center;
   text-align: center;
+  position: absolute;
 }
 
 </style>

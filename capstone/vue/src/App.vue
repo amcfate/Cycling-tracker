@@ -42,7 +42,7 @@ export default {
   color: black;
   display: flex;
   flex-direction: column;
-  background-image: url("../public/mapNY.png");
+  /* background-image: url("../public/mapNY.png"); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   min-height: 100vh;
