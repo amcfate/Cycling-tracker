@@ -59,7 +59,14 @@ public class JdbcTrackpointDao implements TrackpointDao{
 
     @Override
     public Trackpoint addTrackpoint(Trackpoint newTrackpoint) {
-        
+        String sql = "INSERT INTO trackpoint (route_id, trackpoint_id, latitude, longitude, elevation) VALUES (?, ?, ?, ?, ?)";
+
+        int routeId = ;
+        int trackpointId = ;
+        BigDecimal latitude = ;
+        BigDecimal longitude = ;
+        double elevation = ;
+
         return null;
     }
 
