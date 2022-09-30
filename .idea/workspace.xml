@@ -4,11 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49187ca3-e65a-4f88-b395-2f82d3dd8b15" name="Changes" comment="Added delete markers and hide markers to map.">
+    <list default="true" id="49187ca3-e65a-4f88-b395-2f82d3dd8b15" name="Changes" comment="Added markers array">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/cycling-tracker-capstone.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/cycling-tracker-capstone.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capstone/vue/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/vue/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/capstone/vue/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/vue/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/capstone/vue/src/components/maps/Map.vue" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/vue/src/components/maps/Map.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/capstone/vue/src/router/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/capstone/vue/src/router/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,8 +38,16 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "node.js.selected.package.tslint": "(autodetect)"
+    "WebServerToolWindowFactoryState": "false",
+    "node.js.detected.package.eslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -46,6 +58,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1664202987359</updated>
+      <workItem from="1664549626984" duration="4364000" />
     </task>
     <task id="LOCAL-00001" summary="Added markers array">
       <created>1664469741115</created>
@@ -54,34 +67,18 @@
       <option name="project" value="LOCAL" />
       <updated>1664469741115</updated>
     </task>
-    <task id="LOCAL-00002" summary="Added delete markers and hide markers to map.">
-      <created>1664472616582</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1664472616582</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
+    <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="FILTERS">
-                <map>
-                  <entry key="branch">
-                    <value>
-                      <list>
-                        <option value="origin/isaac" />
-                      </list>
-                    </value>
-                  </entry>
-                </map>
-              </option>
-            </State>
+            <State />
           </value>
         </entry>
       </map>
@@ -89,7 +86,6 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added markers array" />
-    <MESSAGE value="Added delete markers and hide markers to map." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added delete markers and hide markers to map." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added markers array" />
   </component>
 </project>
