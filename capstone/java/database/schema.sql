@@ -2,6 +2,8 @@ BEGIN TRANSACTION;
 
 DROP TABLE IF EXISTS users, user_profile, user_gear, user_bikes, activity, route, trackpoint CASCADE;
 
+DROP SEQUENCE IF EXISTS seq_trackpoint_id, seq_route_id;
+
 CREATE TABLE users (
 	user_id SERIAL,
 	username varchar(50) NOT NULL UNIQUE,
@@ -37,6 +39,11 @@ CREATE TABLE user_bikes (
 	CONSTRAINT PK_bike PRIMARY KEY (bike_id)
 );
 
+CREATE SEQUENCE seq_route_id
+  INCREMENT BY 1
+  START WITH 1
+  NO MAXVALUE;
+
 CREATE TABLE route (
 	route_id SERIAL,
 	route_name varchar,
@@ -47,6 +54,11 @@ CREATE TABLE route (
 	CONSTRAINT PK_route PRIMARY KEY (route_id) 
 );
 
+CREATE SEQUENCE seq_trackpoint_id
+  INCREMENT BY 1
+  START WITH 1
+  NO MAXVALUE;
+  
 CREATE TABLE trackpoint (
 	route_id int,
 	trackpoint_id SERIAL,

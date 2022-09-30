@@ -19,11 +19,15 @@ export default {
   data() {
     return {
       ActivityClicked: false,
+      activity: [],
     };
   },
   components: {
     
   },
+  created:{
+      
+  }
 };
 </script>
 

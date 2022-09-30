@@ -4,7 +4,7 @@
       <div class="info">
       <h5>Length</h5>
       <p>500 miles</p>
-      <h5>Diffic</h5>
+      <h5>Difficulty</h5>
       <p>500 hours</p>
       <h5></h5>
       </div>

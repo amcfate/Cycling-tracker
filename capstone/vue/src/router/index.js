@@ -54,7 +54,6 @@ const router = new Router({
         requiresAuth: false
       },
     },
-
     {
       path: "/profile/{id}",
       name: "profile",
