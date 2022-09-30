@@ -61,13 +61,18 @@ public class JdbcTrackpointDao implements TrackpointDao{
     public Trackpoint addTrackpoint(Trackpoint newTrackpoint) {
         String sql = "INSERT INTO trackpoint (route_id, trackpoint_id, latitude, longitude, elevation) VALUES (?, ?, ?, ?, ?)";
 
-//        int routeId = ;
-//        int trackpointId = ;
-//        BigDecimal latitude = ;
-//        BigDecimal longitude = ;
-//        double elevation = ;
+        int routeId = newTrackpoint.getRouteId();
+        //When we create a new
+        //route, it needs to get the id of that new route, which should be the next value,
+        //int newTrackpointId = getNextTrackpointId(); //also messing up because it wants to start at 1 but there is already a 1
+        int newTrackpointId = newTrackpoint.getTrackpointId(); //just for testing purposes, they shouldn't have to actually enter in an id
+        BigDecimal latitude = newTrackpoint.getLatitude();
+        BigDecimal longitude = newTrackpoint.getLongitude();
+        double elevation = newTrackpoint.getElevation();
 
-        return null;
+        jdbcTemplate.update(sql, routeId, newTrackpointId, latitude, longitude, elevation);
+
+        return getTrackpointById(newTrackpointId);
     }
 
     @Override
@@ -84,4 +89,16 @@ public class JdbcTrackpointDao implements TrackpointDao{
         trackpoint.setElevation(rs.getDouble("elevation"));
         return trackpoint;
     }
-}
+
+    private int getNextTrackpointId(){
+        SqlRowSet nextIdResult = jdbcTemplate.queryForRowSet("SELECT nextval('seq_trackpoint_id')");
+        if(nextIdResult.next()) {
+            return nextIdResult.getInt(1);
+        } else {
+            throw new RuntimeException("Something went wrong while getting an id for the new transfer");
+        }
+    }
+
+
+    }
+

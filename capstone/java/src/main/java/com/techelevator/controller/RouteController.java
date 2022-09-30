@@ -53,7 +53,7 @@ public class RouteController {
     @RequestMapping(value = "/savetrackpoint", method = RequestMethod.POST)
     public Trackpoint createTrackpoint(@Valid @RequestBody NewTrackpointDTO newTrackpointDTO){ //what does Valid do here, or what would lack of Valid do
         Trackpoint newTrackpoint = buildTrackpointFromTrackpointDTO(newTrackpointDTO);
-        //create savetrackpoint method in Trackpoint DTO
+        newTrackpoint = trackpointDao.addTrackpoint(newTrackpoint);
         return newTrackpoint;
     }
 
