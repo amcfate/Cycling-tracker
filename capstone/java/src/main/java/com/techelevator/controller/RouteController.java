@@ -2,7 +2,9 @@ package com.techelevator.controller;
 
 import com.techelevator.dao.RouteDao;
 import com.techelevator.dao.TrackpointDao;
+import com.techelevator.model.NewRouteDTO;
 import com.techelevator.model.NewTrackpointDTO;
+import com.techelevator.model.Route;
 import com.techelevator.model.Trackpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,7 @@ public class RouteController {
 
     @Autowired
     private TrackpointDao trackpointDao;
+    @Autowired
     private RouteDao routeDao;
 
     //GET methods
@@ -42,9 +45,19 @@ public class RouteController {
         return trackpointDao.findTrackpointsByRouteId(id);
     }
 
-    @RequestMapping(value = "/gettrackpoint", method = RequestMethod.GET)
+    @RequestMapping(value = "/getalltrackpoints", method = RequestMethod.GET)
     public List <Trackpoint> getAllTrackpoints(){
         return trackpointDao.findAllTrackpoints();
+    }
+
+    @RequestMapping(value = "/getallroutes", method = RequestMethod.GET)
+    public List <Route> getAllRoutes(){
+        return routeDao.findAllRoutes(); //getting a null pointer exception in IntelliJ when I try to get in postman
+    }
+
+    @RequestMapping(value = "/getroute/{id}", method = RequestMethod.GET)
+    public Route getRouteById(@PathVariable int id) {
+        return routeDao.findRouteById(id);
     }
 
     //POST methods
@@ -57,6 +70,14 @@ public class RouteController {
         return newTrackpoint;
     }
 
+    @ResponseStatus(HttpStatus.CREATED)
+    @RequestMapping(value = "/saveroute", method = RequestMethod.POST)
+    public Route createRoute(@Valid @RequestBody NewRouteDTO newRouteDTO){
+        Route newRoute =buildRouteFromRouteDTO(newRouteDTO);
+        newRoute = routeDao.addRoute(newRoute);
+        return newRoute;
+    }
+
    //Other methods
 
     private Trackpoint buildTrackpointFromTrackpointDTO(NewTrackpointDTO trackpointDTO){
@@ -65,6 +86,11 @@ public class RouteController {
                               trackpointDTO.getLatitude(),
                               trackpointDTO.getLongitude(),
                               trackpointDTO.getElevation());
+    }
+
+    private Route buildRouteFromRouteDTO(NewRouteDTO routeDTO){
+        return new Route(routeDTO.getRouteId(), routeDTO.getRouteName(), routeDTO.getDescription(),
+                routeDTO.getDistanceMiles(), routeDTO.getElevation(), routeDTO.getAscent());
     }
 
 
