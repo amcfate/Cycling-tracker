@@ -4,6 +4,7 @@ import com.techelevator.dao.RouteDao;
 import com.techelevator.dao.TrackpointDao;
 import com.techelevator.model.Trackpoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 
@@ -27,21 +28,27 @@ public class RouteController {
     private TrackpointDao trackpointDao;
     private RouteDao routeDao;
 
-    //where do I want to route a trackpoint? you don't actually ever wants to get a trackpoint
-    //by itself probably.... or do you
-    //but maybe build this method just to test that I can get a trackpoint since getRoute will
-    //have to call get trackpoint? No one is ever going to know a trackpoint id or route id,
-    //but if they click on a route, do I want it to give them the lat/long/elev
-
-
-
     @RequestMapping(value = "/gettrackpoint/{id}", method = RequestMethod.GET)
     public Trackpoint getTrackpointById (@PathVariable int id){
         return trackpointDao.getTrackpointById(id);
     }
 
+    @RequestMapping(value = "gettrackpoint/route/{id}", method = RequestMethod.GET)
+    public List <Trackpoint> getTrackpointsByRouteId(@PathVariable int id) {
+        return trackpointDao.findTrackpointsByRouteId(id);
+    }
+
+    @RequestMapping(value = "/gettrackpoint", method = RequestMethod.GET)
+    public List <Trackpoint> getAllTrackpoints(){
+        return trackpointDao.findAllTrackpoints();
+    }
+
+    //POST methods
+
+    
 
  }
+
 
 
 

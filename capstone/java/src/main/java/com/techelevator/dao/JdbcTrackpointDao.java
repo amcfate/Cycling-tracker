@@ -19,7 +19,7 @@ public class JdbcTrackpointDao implements TrackpointDao{
     @Override
     public List<Trackpoint> findAllTrackpoints() {
         List<Trackpoint> allTrackpoints = new ArrayList<>();
-        String sql = "SELECT * from trackpoints";
+        String sql = "SELECT * from trackpoint";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
@@ -32,9 +32,9 @@ public class JdbcTrackpointDao implements TrackpointDao{
     @Override
     public List<Trackpoint> findTrackpointsByRouteId(int routeId) {
         List<Trackpoint> getTrackpointsByRouteId = new ArrayList<>();
-        String sql = "SELECT * from trackpoints WHERE route_id = ?";
+        String sql = "SELECT * from trackpoint WHERE route_id = ?";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, routeId);
         while (results.next()) {
             Trackpoint trackpoint = mapRowToTrackpoint(results);
             getTrackpointsByRouteId.add(trackpoint);
