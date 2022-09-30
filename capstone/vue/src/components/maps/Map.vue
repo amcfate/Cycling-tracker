@@ -3,37 +3,11 @@
     <div id="map"></div>
     <!-- <h1 style="text-align: center">Google Maps</h1> -->
 
-    <nav className="nav">
-      <select name="" id="" v-model="fromLocation">
-        <option value="">--from--</option>
-        <option
-            v-for="(eachLocation, index) in locations"
-            v-bind:key="index"
-            v-bind:value="eachLocation.loc"
-        >
-          {{ eachLocation.name }}
-        </option>
-      </select>
-
-      <select name="" id="" v-model="toLocation">
-        <option value="">--to--</option>
-        <option
-            v-for="(eachLocation, index) in locations"
-            v-bind:key="index"
-            v-bind:value="eachLocation.loc"
-        >
-          {{ eachLocation.name }}
-        </option>
-      </select>
-
-      <button v-on:click="calculateRoute(fromLocation, toLocation)">
+      <button v-on:click="calculateRoute()">
         Get Route!
       </button>
-
-      <button v-on:click="clearRoutes()">Clear route and hide markers!</button>
-      <button v-on:click="deleteMarkers()">Delete all markers!</button>
+      <button v-on:click="deleteMarkers()">Start Over</button>
       <button v-on:click="saveRoute()">Save route!</button>
-    </nav>
 
     
   </div>
@@ -41,19 +15,17 @@
 
 <script>
 import axios from "axios";
-
 export default {
   data() {
     return {
+      startingLat: null,
+      startingLong: null,
       map: null,
       directionsDisplay: null,
       service: null,
       markers: [],
-      locations: [
-        {name: "balboaPark", loc: {lat: 32.7341, lng: -117.1446}},
-        {name: "petcoPark", loc: {lat: 32.7075, lng: -117.1575}},
-        {name: "sanDiegoAirport", loc: {lat: 32.7323, lng: -117.196}},
-      ],
+      waypoints: [],
+      locations: [],
       fromLocation: "",
       toLocation: "",
     };
@@ -66,7 +38,7 @@ export default {
     initMap() {
       const mapElement = document.getElementById("map");
       const mapOptions = {
-        center: this.locations[0].loc,
+        center: {lat: 40.73061, lng:  -73.935242},
         zoom: 13,
         mapTypeId: window.google.maps.MapTypeId.ROADMAP,
         panControl: true,
@@ -77,20 +49,17 @@ export default {
         overviewMapControl: true,
         rotateControl: true,
       };
-      this.map = new window.google.maps.Map(mapElement, mapOptions);
-      window.google.maps.event.addListener(this.map, 'click', this.addPinViaClick);
-      this.getLocation()
-    },
 
-    //Get user location
-    getLocation() {
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-          let initialLocation = new this.map.LatLng(position.coords.latitude, position.coords.longitude);
-          this.map.setCenter(initialLocation);
+          let initialLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          mapOptions.center = initialLocation;
         });
       }
 
+      //this.getLocation();
+      this.map = new window.google.maps.Map(mapElement, mapOptions);
+      window.google.maps.event.addListener(this.map, 'click', this.addPinViaClick);
     },
     /*
      * Add Marker
@@ -101,28 +70,31 @@ export default {
         window.alert("Please enter a description.")
         return;
       }
+
+      let markLatLng = new window.google.maps.LatLng(event.latLng.toJSON())
+      this.waypoints.push(markLatLng)
+
       const markerObj = this.makeMarkerObj(event.latLng.toJSON(), description);
       this.locations.push(markerObj);
       this.dropPin(markerObj);
     },
 
     dropPin(markerObj) {
-      if (this.markers.length === 2) {
-        this.markers.slice(2)
-      }
       let marker = new window.google.maps.Marker({
         position: markerObj.loc,
+        animation: window.google.maps.Animation.DROP,
         map: this.map,
         label: {
           text: markerObj.name,
           color: "blue",
         },
       });
+
       this.markers.unshift(marker)
     },
 
     makeMarkerObj(latLng, name) {
-      const markerObj = {loc: latLng, name: name};
+      const markerObj =  {loc: latLng, name: name};
       return markerObj;
     },
 
@@ -132,20 +104,31 @@ export default {
      * input start: { lat: 32.7341, lng: -117.1446 }
      * input end: { lat: 32.7075, lng: -117.1575 }
      */
-    calculateRoute(start, end) {
+    calculateRoute() {
+      let waypnts = []
+      let orgn = this.waypoints[0];
+      if(this.waypoints.length > 2) {
+        for (let i = 1; i < this.waypoints.length - 1; i++) {
+          waypnts.push({location: this.waypoints[i], stopover:true});
+        }
+      }
+
       const request = {
-        origin: start,
-        destination: end,
+        origin: orgn,
+        waypoints: waypnts,
+        destination: this.waypoints[(this.waypoints.length - 1)],
         // https://developers.google.com/maps/documentation/transportation-logistics/on-demand-rides-deliveries-solution/pickup-and-dropoff-selection/location-selection/reference/rest/v1beta/TravelMode
         travelMode: window.google.maps.TravelMode.TWO_WHEELER
       };
       this.directionsDisplay.setMap(this.map);
       this.service.route(request, (response, status) => {
-        if (status == window.google.maps.DirectionsStatus.OK) {
+        if (status === window.google.maps.DirectionsStatus.OK) {
           this.directionsDisplay.setDirections(response);
           this.directionsDisplay.setMap(this.map);
         }
       });
+      this.hideMarkers();
+      this.markers = []
     },
     clearRoutes() {
       this.hideMarkers();
@@ -167,9 +150,8 @@ export default {
     },
 
     deleteMarkers() {
-      this.hideMarkers();
-      this.markers = []
       this.locations = []
+      this.markers = []
     },
 
     saveRoute(){

@@ -19,7 +19,7 @@ public class JdbcTrackpointDao implements TrackpointDao{
     @Override
     public List<Trackpoint> findAllTrackpoints() {
         List<Trackpoint> allTrackpoints = new ArrayList<>();
-        String sql = "SELECT * from trackpoints";
+        String sql = "SELECT * from trackpoint";
 
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
         while (results.next()) {
@@ -32,9 +32,9 @@ public class JdbcTrackpointDao implements TrackpointDao{
     @Override
     public List<Trackpoint> findTrackpointsByRouteId(int routeId) {
         List<Trackpoint> getTrackpointsByRouteId = new ArrayList<>();
-        String sql = "SELECT * from trackpoints WHERE route_id = ?";
+        String sql = "SELECT * from trackpoint WHERE route_id = ?";
 
-        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql, routeId);
         while (results.next()) {
             Trackpoint trackpoint = mapRowToTrackpoint(results);
             getTrackpointsByRouteId.add(trackpoint);
@@ -45,6 +45,7 @@ public class JdbcTrackpointDao implements TrackpointDao{
 
     @Override
     public Trackpoint getTrackpointById(int trackpointId) {
+
         Trackpoint trackpoint = null;
         String sql = "SELECT * FROM trackpoint WHERE trackpoint_id = ?";
 
@@ -53,6 +54,20 @@ public class JdbcTrackpointDao implements TrackpointDao{
             trackpoint = mapRowToTrackpoint(results);
 
         } return trackpoint;
+
+    }
+
+    @Override
+    public Trackpoint addTrackpoint(Trackpoint newTrackpoint) {
+        String sql = "INSERT INTO trackpoint (route_id, trackpoint_id, latitude, longitude, elevation) VALUES (?, ?, ?, ?, ?)";
+
+//        int routeId = ;
+//        int trackpointId = ;
+//        BigDecimal latitude = ;
+//        BigDecimal longitude = ;
+//        double elevation = ;
+
+        return null;
     }
 
     @Override
