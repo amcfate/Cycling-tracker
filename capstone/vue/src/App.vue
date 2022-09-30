@@ -38,14 +38,26 @@ export default {
   font-family: Inter-Light;
   src: url("../public/static/Inter-Light.ttf");
 }
+html{
+  background-color: black;
+  min-height: 100vh;
+  overflow: hidden;
+}
+body{
+  background-color: red;
+  min-height: 100vh;
+   overflow: hidden;
+}
 
 #nav {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   background-color: whitesmoke;
   border: 1px solid lightgray;
+  width: 100vw;
+  height: 5vh;
 }
 
 .control-bar {
@@ -70,24 +82,27 @@ export default {
   border-radius: 6px;
   padding: 10px;
 }
+router-link{
+  padding: 20px;
+}
 
 #app {
+  margin: none;
   font-family: Inter-Light, Arial, Helvetica, sans-serif;
   text-align: center;
   color: black;
   display: flex;
-  flex-grow: auto;
   flex-direction: column;
   background-image: url("../public/mapNY.png");
   background-color: darkgray;
-  max-width: 800px;
   background-blend-mode: difference;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-clip: border-box;
-  min-height: 100vh;
+  height: 100vh;
   background-position: center 100%;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
+  
 }
 </style>
 

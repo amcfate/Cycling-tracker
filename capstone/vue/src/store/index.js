@@ -29,12 +29,52 @@ export default new Vuex.Store({
         ascent: 0,
 
       },
+      {
+        routeName: "block",
+        description: "",
+        distance: 0,
+        elevation: 0,
+        ascent: 0,
+
+      },
+      {
+        routeName: "float",
+        description: "",
+        distance: 0,
+        elevation: 0,
+        ascent: 0,
+
+      },
     ],
     activity: [
       {
         route_id: 0,
         user_id: 0,
         activity_name: "activity",
+        activity_id: 1,
+        is_public: true,
+        photos: "xxxxx",
+        description: "cool",
+        activity_date: "today",
+        start_time: "morn",
+        end_time: "never",
+      },
+      {
+        route_id: 0,
+        user_id: 0,
+        activity_name: "bike ride",
+        activity_id: 1,
+        is_public: true,
+        photos: "xxxxx",
+        description: "cool",
+        activity_date: "today",
+        start_time: "morn",
+        end_time: "never",
+      },
+      {
+        route_id: 0,
+        user_id: 0,
+        activity_name: "run",
         activity_id: 1,
         is_public: true,
         photos: "xxxxx",
