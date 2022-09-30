@@ -14,11 +14,12 @@ CREATE TABLE users (
 
 CREATE TABLE user_profile (
 	user_id int NOT NULL,
-	activities varchar,
+	username varchar(50),
 	cycling_team varchar,
 	user_weight int,
 	user_age int,
-	CONSTRAINT FK_profile FOREIGN KEY (user_id) REFERENCES users (user_id)
+	CONSTRAINT FK_user_profile FOREIGN KEY (user_id) REFERENCES users (user_id),
+	CONSTRAINT FK_user_profile_username FOREIGN KEY (username) REFERENCES users (username)
 );
 
 CREATE TABLE user_gear (

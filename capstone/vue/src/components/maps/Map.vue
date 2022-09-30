@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div id="map"></div>
-    <h1 style="text-align: center">Google Maps</h1>
+    <!-- <h1 style="text-align: center">Google Maps</h1> -->
 
       <button v-on:click="calculateRoute()">
         Get Route!
@@ -180,12 +180,14 @@ export default {
 <style scoped>
 .wrapper{
   position:relative;
+  height: 100vh;
+  width: 100vw;
 }
 #map {
   grid-area: map;
-  width: 100vw;
-  height: 100vh;
-  position: absolute;
+  width: 100%;
+  height: 100%;
+  /* position: absolute; */
   z-index: 1;
 
 }
