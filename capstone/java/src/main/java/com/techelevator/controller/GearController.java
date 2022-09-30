@@ -1,8 +1,8 @@
 package com.techelevator.controller;
 
+import com.techelevator.dao.GearDao;
 import com.techelevator.dao.UserDao;
-import com.techelevator.dao.UserProfileDao;
-import com.techelevator.model.UserProfile;
+import com.techelevator.model.Gear;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,16 +13,15 @@ import java.security.Principal;
 
 @CrossOrigin
 @RestController
-public class UserProfileController {
+public class GearController{
 
     @Autowired
-    private UserProfileDao userProfileDao;
+    private GearDao gearDao;
     @Autowired
     private UserDao userDao;
 
-    @RequestMapping(path = "/profile", method = RequestMethod.GET)
-    public UserProfile getProfile(Principal principal){
-        return userProfileDao.getProfileById(userDao.findIdByUsername(principal.getName()));
+    @RequestMapping(path = "/gear", method = RequestMethod.GET)
+    public Gear getGearByUserId(Principal principal) {
+        return gearDao.getGearByUserId(userDao.findIdByUsername(principal.getName()));
     }
-
 }

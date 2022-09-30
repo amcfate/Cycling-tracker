@@ -32,9 +32,10 @@ public class JdbcUserProfileDao implements UserProfileDao{
     private UserProfile mapRowToUserProfile(SqlRowSet rs) {
         UserProfile userProfile = new UserProfile();
         userProfile.setId(rs.getInt("user_id"));
-        userProfile.setCyclingTeam(rs.getString("cyclingTeam"));
-        userProfile.setUserWeight(rs.getDouble("userWeight"));
-        userProfile.setUserAge(rs.getInt("userAge"));
+        userProfile.setUsername(rs.getString("username"));
+        userProfile.setCyclingTeam(rs.getString("cycling_team"));
+        userProfile.setUserWeight(rs.getDouble("user_weight"));
+        userProfile.setUserAge(rs.getInt("user_age"));
         return userProfile;
     }
 }

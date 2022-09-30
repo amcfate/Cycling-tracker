@@ -1,23 +1,43 @@
 <template>
   <div class="profile-page">
     <div class="header">
-      <h2 id="username">{{ this.username }}</h2>
+      <h2 id="username">
+        {{ userProfile.username }}
+      </h2>
+      <ul>
+        <li class="details">Team: {{ userProfile.cyclingTeam }}</li>
+        <li class="details">Age: {{ userProfile.userAge }}</li>
+      </ul>
     </div>
   </div>
 </template>
 
 <script>
+import profileService from "../../services/ProfileService.js";
 export default {
   name: "user-profile",
   components: {},
   data() {
     return {
-      id: "",
-      username: "",
-      cyclingTeam: "",
-      userWeight: "",
-      uerAge: "",
+      userProfile: {
+        id: "",
+        username: "",
+        cyclingTeam: "",
+        userWeight: "",
+        uerAge: "",
+      },
     };
+  },
+  methods: {
+    loadProfile() {
+      profileService.getProfileDetails().then((response) => {
+        this.userProfile = response.data;
+      });
+    },
+  },
+
+  mounted() {
+    this.loadProfile();
   },
 };
 </script>

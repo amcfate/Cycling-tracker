@@ -54,7 +54,15 @@ export default new Vuex.Store({
 
       },
     ],
-    user_profile: []
+    user_profile: [
+      // {
+      //   user_id: 5,
+      //   username: "markb",
+      //   cycling_team: "",
+      //   user_weight: "",
+      //   userAge: 25
+      // }
+    ]
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {

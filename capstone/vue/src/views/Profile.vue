@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="profile">
     <user-profile />
     <activities />
     <gear />
@@ -7,18 +7,23 @@
 </template>
 
 <script>
-import Activities from "../components/tiles/activities.vue";
+import activities from "../components/tiles/activities.vue";
 import Gear from "../components/tiles/Gear.vue";
 import userProfile from "../components/tiles/UserProfile.vue";
 export default {
   name: "profile",
   components: {
     userProfile,
-    Activities,
+    activities,
     Gear,
   },
 };
 </script>
 
 <style>
+.profile {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+}
 </style>

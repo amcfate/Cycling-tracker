@@ -1,48 +1,66 @@
 <template>
   <div class="main">
-
-      <nav class="desktop-nav">
-        <h1 class="logo">Wheels of Fury</h1>
-        <h2></h2>
-        <h3 @click="hideOtherTiles(); showRouteTile = !showRouteTile">Routes</h3>
-        <h3 @click="hideOtherTiles(); showActivitiesTile = !showActivitiesTile">My Activities</h3>
-        <router-link v-bind:to="{name: 'profile'}" 
-        style="text-decoration: none; color: inherit;" class="h3"><h3>Profile</h3></router-link>
-      
+    <nav class="desktop-nav">
+      <h1 class="logo">Wheels of Fury</h1>
+      <h2></h2>
+      <h3
+        @click="
+          hideOtherTiles();
+          showRouteTile = !showRouteTile;
+        "
+      >
+        Routes
+      </h3>
+      <h3
+        @click="
+          hideOtherTiles();
+          showActivitiesTile = !showActivitiesTile;
+        "
+      >
+        My Activities
+      </h3>
+      <router-link
+        v-bind:to="{ name: 'profile' }"
+        style="text-decoration: none; color: inherit"
+        class="h3"
+        ><h3>Profile</h3></router-link
+      >
     </nav>
     <div class="view">
-      
-        <div class="route-tile overlay" v-show ="showRouteTile">
-            <h3>Routes</h3>
-            <div class="route-options">
-              <h4>My routes</h4>
-              <h4>Public Routes</h4>
-              <h4></h4>
-            </div>
-          <input  type="text"  id="route-search" v-model="searchRoute.routeName">
-          <route-tile class="route-div"/>
+      <div class="route-tile overlay" v-show="showRouteTile">
+        <h3>Routes</h3>
+        <div class="route-options">
+          <h4>My routes</h4>
+          <h4>Public Routes</h4>
+          <h4></h4>
         </div>
+        <input type="text" id="route-search" v-model="searchRoute.routeName" />
+        <route-tile class="route-div" />
+      </div>
 
-
-         <div class="route-tile overlay" v-show ="showActivitiesTile">
-          <h3>My Activities</h3>
-          <h4>Add Activity</h4>
-          <input  type="text"  id="route-search" v-model="activityFilter.activity_name">
-          <!-- activity filter needs to be implemented -->
-          <activity class="activity" v-for="activity in filteredActivity"
-          v-bind:key="activity.activity_id"/>
-          
-        </div>
-        <Map class="map"></Map >
+      <div class="route-tile overlay" v-show="showActivitiesTile">
+        <h3>My Activities</h3>
+        <h4>Add Activity</h4>
+        <input
+          type="text"
+          id="route-search"
+          v-model="activityFilter.activity_name"
+        />
+        <!-- activity filter needs to be implemented -->
+        <activity
+          class="activity"
+          v-for="activity in filteredActivity"
+          v-bind:key="activity.activity_id"
+        />
+      </div>
+      <Map class="map"></Map>
     </div>
   </div>
 </template>
 
 <script>
-
-
 import Map from "../components/maps/Map.vue";
-import activity from "../components/tiles/activity.vue"
+import activity from "../components/tiles/activity.vue";
 import RouteTile from "../components/tiles/RouteTile.vue";
 
 export default {
@@ -59,25 +77,24 @@ export default {
         description: "",
         activity_date: "",
         start_time: "",
-        end_time: ""
+        end_time: "",
       },
-      searchRoute:{
-        routeName:"Search for Routes"
+      searchRoute: {
+        routeName: "Search for Routes",
       },
-      searchActivity:{
-        ActivityName: "Search Activities"
+      searchActivity: {
+        ActivityName: "Search Activities",
       },
       showRouteTile: false,
       showActivitiesTile: false,
-      routes:[],
-      activities:[],
+      routes: [],
+      activities: [],
     };
   },
   components: {
     Map,
     RouteTile,
     activity,
-   
   },
   computed: {
     filteredActivity() {
@@ -86,91 +103,83 @@ export default {
       const activities = this.$store.state.activity;
       if (activityFilter != "") {
         filteredActivity = activities.filter((activity) =>
-          activity.activity_name.toLowerCase()
+          activity.activity_name
+            .toLowerCase()
             .includes(activityFilter.toLowerCase())
-        );   
-  } return filteredActivity;
-},
-  lastRoute(){
-    const routes = this.$store.state.routes;
-    const lastRoute = routes.pop();
-     return lastRoute.routeName;
-  }
+        );
+      }
+      return filteredActivity;
+    },
+    lastRoute() {
+      const routes = this.$store.state.routes;
+      const lastRoute = routes.pop();
+      return lastRoute.routeName;
+    },
   },
-  methods:{
-    hideOtherTiles(){
+  methods: {
+    hideOtherTiles() {
       this.showRouteTile = false;
-      this.showActivitiesTile = false;  
-    }
-  }
+      this.showActivitiesTile = false;
+    },
+  },
 };
-
 </script>
 
 <style>
-body{
-  
-}
-.view{
+.view {
   display: flex;
   height: 100vh;
   width: 80vw;
-  
 }
-.main{
+.main {
   display: flex;
   height: 100vh;
 }
-.logo{
-  padding-top: 6%; 
-  padding-bottom: 8%; 
+.logo {
+  padding-top: 6%;
+  padding-bottom: 8%;
 }
-h2{
- border-right: 0px;
-  border-top:0px;
+h2 {
+  border-right: 0px;
+  border-top: 0px;
   border-left: 0px;
   border-bottom: 2px;
-  border-style:solid;
+  border-style: solid;
   border-color: black;
   margin-left: 30%;
   margin-right: 30%;
 }
-.logo:hover{
+.logo:hover {
   background-color: whitesmoke;
 }
 .desktop-nav {
- height: 100vh;
- width: 30vw;
- background: lightgray;
-
+  height: 100vh;
+  width: 30vw;
+  background: lightgray;
 }
-.map{
+.map {
   height: 100vh;
   width: 70vw;
   z-index: 1;
   position: absolute;
-  
 }
 
-h3{
+h3 {
   padding-top: 4%;
   padding-bottom: 4%;
-
 }
 
-h3:hover{
+h3:hover {
   background-color: whitesmoke;
 }
-.h3{
+.h3 {
   padding-top: 4%;
   padding-bottom: 4%;
-  
-  
 }
-.h3:hover{
+.h3:hover {
   background-color: whitesmoke;
 }
-.route-tile{
+.route-tile {
   display: flex;
   flex-direction: column;
   border-radius: 8px;
@@ -185,14 +194,14 @@ h3:hover{
   overflow: auto;
 }
 
-#route-search{
+#route-search {
   margin: 5%;
 }
-#route-selector{
+#route-selector {
   margin: 5%;
 }
 
-.route-div{
+.route-div {
   height: 50%;
   width: 80%;
   background-color: whitesmoke;
@@ -200,17 +209,16 @@ h3:hover{
   justify-self: center;
   justify-self: end;
 }
-.route-options{
+.route-options {
   display: flex;
   justify-content: space-evenly;
 }
- .activity{
-   height: 50%;
+.activity {
+  height: 50%;
   width: 80%;
   background-color: whitesmoke;
   align-self: center;
   justify-self: center;
   justify-self: end;
 }
-
 </style>

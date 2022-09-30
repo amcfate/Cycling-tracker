@@ -3,6 +3,7 @@ package com.techelevator.model;
 public class UserProfile {
 
     private int id;
+    private String username;
     private String cyclingTeam;
     private double userWeight;
     private int userAge;
@@ -13,8 +14,9 @@ public class UserProfile {
         this.id = id;
     }
 
-    public UserProfile(int id, String cyclingTeam, double userWeight, int userAge) {
+    public UserProfile(int id, String username, String cyclingTeam, double userWeight, int userAge) {
         this.id = id;
+        this.username = username;
         this.cyclingTeam = cyclingTeam;
         this.userWeight = userWeight;
         this.userAge = userAge;
@@ -26,6 +28,14 @@ public class UserProfile {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getCyclingTeam() {
