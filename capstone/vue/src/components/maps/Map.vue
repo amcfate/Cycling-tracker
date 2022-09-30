@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <div class="wrapper">
+    <div id="map"></div>
     <h1 style="text-align: center">Google Maps</h1>
 
       <button v-on:click="calculateRoute()">
@@ -8,7 +9,7 @@
       <button v-on:click="deleteMarkers()">Start Over</button>
       <button v-on:click="saveRoute()">Save route!</button>
 
-    <div id="map"></div>
+    
   </div>
 </template>
 
@@ -177,15 +178,21 @@ export default {
 </script>
 
 <style scoped>
+.wrapper{
+  position:relative;
+}
 #map {
   grid-area: map;
-  width: 500px;
-  height: 400px;
-  padding: 25px;
-  margin: 25px auto;
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  z-index: 1;
+
 }
 
 .nav {
   text-align: center;
+  position: absolute;
+  z-index: 5;
 }
 </style>

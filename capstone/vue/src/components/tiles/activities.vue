@@ -1,7 +1,7 @@
 <template>
   <div class="tile">
     <h3>My Activities</h3>
-    <div class="disp-coneent">//user has no activities/history</div>
+    <div class="disp-content">//user has no activities/history</div>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .tile {
   margin: auto;
   background-color: lightgray;

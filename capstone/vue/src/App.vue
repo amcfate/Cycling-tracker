@@ -12,18 +12,18 @@
       <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
     </div>
     <router-view />
-    <div class="control-bar">
+    <!-- <div class="control-bar">
       <button class="btn">
         <router-link v-bind:to="{ name: 'home' }">Home</router-link>
       </button>
       <button class="btn">
         <router-link v-bind:to="{ name: 'map' }">Map</router-link>
       </button>
-      <!-- <router-link v-bind:to="{ name: 'home' }">Home</router-link> -->
+    
       <button class="btn">
         <router-link v-bind:to="{ name: 'profile' }">Profile</router-link>
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -78,7 +78,6 @@ export default {
   display: flex;
   flex-grow: auto;
   flex-direction: column;
-  /* background-image: url("../public/mapNY.png"); */
   background-image: url("../public/mapNY.png");
   background-color: darkgray;
   max-width: 800px;

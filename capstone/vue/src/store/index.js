@@ -12,14 +12,49 @@ Vue.use(Vuex)
 const currentToken = localStorage.getItem('token')
 const currentUser = JSON.parse(localStorage.getItem('user'));
 
-if(currentToken != null) {
+if (currentToken != null) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${currentToken}`;
 }
 
 export default new Vuex.Store({
   state: {
     token: currentToken || '',
-    user: currentUser || {}
+    user: currentUser || {},
+    routes: [
+      {
+        routeName: "steve",
+        description: "",
+        distance: 0,
+        elevation: 0,
+        ascent: 0,
+
+      },
+    ],
+    activity: [
+      {
+        route_id: 0,
+        user_id: 0,
+        activity_name: "activity",
+        activity_id: 1,
+        is_public: true,
+        photos: "xxxxx",
+        description: "cool",
+        activity_date: "today",
+        start_time: "morn",
+        end_time: "never",
+      },
+    ],
+    user_bikes: [
+      {
+
+      },
+    ],
+    user_gear: [
+      {
+
+      },
+    ],
+    user_profile: []
   },
   mutations: {
     SET_AUTH_TOKEN(state, token) {
@@ -29,7 +64,7 @@ export default new Vuex.Store({
     },
     SET_USER(state, user) {
       state.user = user;
-      localStorage.setItem('user',JSON.stringify(user));
+      localStorage.setItem('user', JSON.stringify(user));
     },
     LOGOUT(state) {
       localStorage.removeItem('token');
@@ -37,6 +72,9 @@ export default new Vuex.Store({
       state.token = '';
       state.user = {};
       axios.defaults.headers.common = {};
+    },
+    ADD_ROUTE(state, route) {
+      state.routes.unshift(route)
     }
   }
 })
