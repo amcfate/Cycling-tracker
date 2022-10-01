@@ -4,14 +4,14 @@
       <h1 class="logo">Wheels of Fury</h1>
       <h2></h2>
 
-      <h3
+      <div class="highlighter"><h3
         @click="
           showActivitiesTile = false;
           showRouteTile = !showRouteTile;
         "
       >
         Routes
-      </h3>
+      </h3></div>
 
       <h3
         @click="
@@ -22,12 +22,12 @@
         My Activities
       </h3>
 
-      <router-link
+     <h3> <router-link
         v-bind:to="{ name: 'profile' }"
         style="text-decoration: none; color: inherit"
         class="h3"
-        ><h3>Profile</h3></router-link
-      >
+        >Profile</router-link
+      ></h3>
     </nav>
 
     <nav class="desktop-nav" v-else>
@@ -204,6 +204,9 @@ export default {
 
 </script>
 <style>
+
+ 
+
 @media only screen and (min-width: 700px) {
   .view {
     display: flex;
@@ -462,6 +465,8 @@ export default {
     overflow: auto;
     margin-bottom: 32%;
   }
+ 
+
   .activity {
     height: 50%;
     width: 80%;
@@ -495,32 +500,30 @@ export default {
     background-color: whitesmoke;
     border: 1px solid lightgray;
     margin: 10px;
-    border-radius: 10px;
     justify-content: space-evenly;
     position: fixed;
     left: 0;
     bottom: 0;
-    height: 10vh;
-    width: 100vw;
+    height: 90px;
+    width: 96.5%;
     background: lightgray;
-    z-index: 5;
+    z-index: 4;
     float: inherit;
   }
 
-  h3 {
-    padding-top: 4%;
-    padding-bottom: 4%;
+
+
+  h3, .h3{
+    text-align: center;
+    padding: 1%;
   }
 
-  h3:hover {
+  h3:hover, h3:hover {
+  color: whitesmoke;
+  }
+ 
+  /* .h3:hover {
     background-color: whitesmoke;
-  }
-  .h3 {
-    padding-top: 4%;
-    padding-bottom: 4%;
-  }
-  .h3:hover {
-    background-color: whitesmoke;
-  }
+  } */
 }
 </style>

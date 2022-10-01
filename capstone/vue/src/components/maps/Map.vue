@@ -1,15 +1,16 @@
 <template>
   <div class="wrapper">
-    <div id="map"></div>
+   
     <!-- <h1 style="text-align: center">Google Maps</h1> -->
 
-      <button v-on:click="calculateRoute()">
-        Get Route!
-      </button>
-      <button v-on:click="deleteMarkers()">Start Over</button>
-      <button v-on:click="saveRoute()">Save route!</button>
-
-    
+    <div class="nav-controls">
+      <div class="button" v-on:click="calculateRoute()">
+        Get Route
+      </div>
+      <div class="button" v-on:click="deleteMarkers()">Start Over</div>
+      <div class="last-btn" v-on:click="saveRoute()">Save route</div>
+    </div>
+     <div id="map"></div>
   </div>
 </template>
 
@@ -43,6 +44,9 @@ export default {
         mapTypeId: window.google.maps.MapTypeId.ROADMAP,
         panControl: true,
         zoomControl: true,
+          zoomControlOptions: {
+      position: window.google.maps.ControlPosition.RIGHT_TOP,
+    },
         mapTypeControl: true,
         scaleControl: true,
         streetViewControl: true,
@@ -179,19 +183,54 @@ export default {
 
 <style scoped>
 .wrapper{
+  display: flex;
   position:relative;
   height: 100vh;
   width: 100vw;
 }
+
 #map {
   grid-area: map;
   width: 100%;
   height: 100%;
   /* position: absolute; */
-  z-index: 1;
+  
 
 }
 
+.nav-controls{
+  
+  font-weight: bold;
+  display: flex;
+  background-color: #fff;
+  z-index: 1;
+  width:200px;
+  align-self: start;
+  border-radius: 3px;
+  margin-top: 65px;
+  margin-left: 10px;
+  margin-right: 0%;
+  position: absolute;
+ 
+}
+
+
+
+.button{
+  padding: 5px;
+  border-right-style: solid;
+  border-width: 2px;
+  border-color:  rgb(240, 240, 240);
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.last-btn{
+  border: none;
+  padding: 5px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
 .nav {
   text-align: center;
   position: absolute;

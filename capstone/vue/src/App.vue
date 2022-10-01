@@ -1,16 +1,17 @@
  <template>
-
+ 
   <div id="app">
     <Map />
     <div id="nav">
       <router-link v-bind:to="{ name: 'home' }"><h3>cicleta</h3></router-link
       >&nbsp;|&nbsp;
-      <router-link
+    
+      <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
+        <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
         >Logout</router-link
       >
-      <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
     </div>
     <router-view />
     <!-- <div class="control-bar">
@@ -35,6 +36,15 @@ export default {
 };
 </script>
 <style>
+*::-webkit-scrollbar{
+  width:.5em;
+  height:10px;  
+}
+*::-webkit-scrollbar-thumb{
+    background-color: darkgrey;
+    border-radius: 5px;
+  
+}
 @font-face {
   font-family: Inter-Light;
   src: url("../public/static/Inter-Light.ttf");
