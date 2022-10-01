@@ -156,7 +156,7 @@ export default {
 
   computed: {
     filteredActivity() {
-      let activityFilter = this.activityFilter.activity_name;
+      let activityFilter = this.activityFilter;
       let filteredActivity = this.activities;
       const activities = this.$store.state.activity;
       if (activityFilter != "") {
