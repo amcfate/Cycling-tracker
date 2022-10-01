@@ -62,10 +62,7 @@ public class JdbcTrackpointDao implements TrackpointDao{
         String sql = "INSERT INTO trackpoint (route_id, trackpoint_id, latitude, longitude, elevation) VALUES (?, ?, ?, ?, ?)";
 
         int routeId = newTrackpoint.getRouteId();
-        //When we create a new
-        //route, it needs to get the id of that new route, which should be the next value,
-        //int newTrackpointId = getNextTrackpointId(); //also messing up because it wants to start at 1 but there is already a 1
-        int newTrackpointId = newTrackpoint.getTrackpointId(); //just for testing purposes, they shouldn't have to actually enter in an id
+        int newTrackpointId = getNextTrackpointId(); //is this method really necessary
         BigDecimal latitude = newTrackpoint.getLatitude();
         BigDecimal longitude = newTrackpoint.getLongitude();
         double elevation = newTrackpoint.getElevation();

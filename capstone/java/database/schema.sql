@@ -50,7 +50,7 @@ CREATE TABLE route (
 	description varchar,
 	distance_miles decimal,
 	elevation int,
-	ascent int,
+	ascent decimal,
 	CONSTRAINT PK_route PRIMARY KEY (route_id) 
 );
 
