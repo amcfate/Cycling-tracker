@@ -25,5 +25,6 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  align-items: center;
 }
 </style>

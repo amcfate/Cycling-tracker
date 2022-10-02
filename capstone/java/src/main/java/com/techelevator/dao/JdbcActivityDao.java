@@ -31,6 +31,17 @@ public class JdbcActivityDao implements ActivityDao{
     }
 
     @Override
+    public void addNewActivity(Activity activity) {
+        String sql = "INSERT INTO activity (route_id, user_id, activity_name, " +
+                "is_public, description, activity_date, start_time, end_time) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, activity.getRouteId(), activity.getUserId(),
+                activity.getActivityName(), activity.isPublic(),
+                activity.getDescription(), activity.getActivityDate(),
+                activity.getStartTime(), activity.getEndTime());
+    }
+
+    @Override
     public Activity getActivityByRouteId(int routeId) {
         return null;
     }

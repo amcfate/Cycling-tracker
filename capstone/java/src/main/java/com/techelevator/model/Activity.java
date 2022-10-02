@@ -3,6 +3,7 @@ package com.techelevator.model;
 import java.sql.Date;
 import java.sql.Time;
 
+
 public class Activity {
 
     private int routeId;
@@ -19,13 +20,25 @@ public class Activity {
 
     public Activity(){}
 
+    public Activity(/*int routeId,*/ int userId,  String activityName,
+                    boolean isPublic, String description,
+                    Date activityDate, Time startTime, Time endTime) {
+       /* this.routeId = routeId;*/
+        this.userId = userId;
+        this.activityName = activityName;
+        this.isPublic = isPublic;
+        this.description = description;
+        this.activityDate = activityDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     public Activity(int routeId, int userId, int activityId,  String activityName,
                     boolean isPublic, String photos, String description,
                     Date activityDate, Time startTime, Time endTime) {
         this.routeId = routeId;
         this.userId = userId;
         this.activityId = activityId;
-
         this.activityName = activityName;
         this.isPublic = isPublic;
         this.photos = photos;
@@ -41,7 +54,6 @@ public class Activity {
         this.routeId = routeId;
         this.userId = userId;
         this.activityId = activityId;
-
         this.activityName = activityName;
         this.isPublic = isPublic;
         this.description = description;

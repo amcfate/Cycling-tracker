@@ -95,13 +95,7 @@ export default new Vuex.Store({
       },
     ],
     user_profile: [
-      // {
-      //   user_id: 5,
-      //   username: "markb",
-      //   cycling_team: "",
-      //   user_weight: "",
-      //   userAge: 25
-      // }
+
     ]
   },
   mutations: {
@@ -123,6 +117,12 @@ export default new Vuex.Store({
     },
     ADD_ROUTE(state, route) {
       state.routes.unshift(route)
+    },
+    ADD_GEAR(state, gear) {
+      state.user_gear.unshift(gear);
+    },
+    ADD_ACTIVITY(state, newActivity) {
+      state.activity.unshift(newActivity);
     }
   }
 })

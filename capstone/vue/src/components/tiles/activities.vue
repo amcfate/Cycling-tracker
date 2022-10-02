@@ -2,9 +2,20 @@
   <div class="tile">
     <div class="tile-head">
       <h3>My Activities</h3>
-      <button class="activity-btn">Add Activity</button>
+      <button id="activity-btn" @click="showActivityForm = !showActivityForm">
+        Add Activity
+      </button>
+      <!-- <newActivityForm
+        class="activity-form"
+        v-show="(showActivityForm = true)"
+      /> -->
     </div>
-    <div class="display-content" v-for="activity in activities" :key="activity">
+    <new-activity-form
+      class="form"
+      v-show="showActivityForm"
+      :userId="activities[0].userId"
+    />
+    <div id="display-content" v-for="activity in activities" :key="activity">
       <h2>{{ activity.activityName }}</h2>
       <ul class="act-details">
         <li>
@@ -19,11 +30,15 @@
 
 <script>
 import activitiesService from "../../services/ActivitiesService.js";
+import NewActivityForm from "../forms/NewActivityForm.vue";
 export default {
   name: "activities",
-  components: {},
+  components: {
+    NewActivityForm,
+  },
   data() {
     return {
+      showActivityForm: false,
       activities: [
         {
           routeId: "",
@@ -55,6 +70,9 @@ export default {
 
 <style scoped>
 .tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   margin: 12px;
   background-color: lightgray;
   background-repeat: no-repeat;
@@ -66,14 +84,17 @@ export default {
   padding: 6px;
 }
 
-.display-content {
+#display-content,
+.form {
   margin: 6px;
   background-color: whitesmoke;
-  border: 1px solid black;
+  padding: 6px;
+  /* border: 1px solid black; */
   border-radius: 8px;
-  text-decoration-color: black;
+  box-shadow: 2px 10px 20px darkgray;
   text-align: left;
 }
+
 .tile-head {
   display: flex;
   flex-direction: row;
@@ -84,12 +105,12 @@ export default {
   padding: 6px;
 }
 
-.activity-btn {
+#activity-btn {
   margin: 6px;
   background-color: whitesmoke;
-  border: 1px solid black;
   border-radius: 8px;
-  text-decoration-color: black;
+  border-block-style: none;
+  box-shadow: 2px 10px 20px darkgray;
   text-align: center;
 }
 </style>

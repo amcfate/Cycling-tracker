@@ -50,10 +50,13 @@ export default {
   border: 1px solid darkgray;
   border-radius: 8px;
   margin: 4px;
+  justify-content: space-evenly;
+  width: 96vw;
 }
 
 #username {
   color: black;
   text-align: left;
+  border-block-style: none;
 }
 </style>
