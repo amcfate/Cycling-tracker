@@ -27,23 +27,23 @@ export default new Vuex.Store({
         description: "",
         distance: 0,
         elevation: 0,
-        ascent: 0,
+        ascent: 2,
 
       },
       {
         routeName: "block",
         description: "",
-        distance: 0,
+        distance: 40,
         elevation: 0,
-        ascent: 0,
+        ascent: 4,
 
       },
       {
         routeName: "float",
         description: "",
-        distance: 0,
+        distance: 500,
         elevation: 0,
-        ascent: 0,
+        ascent: 500,
 
       },
     ],
@@ -122,8 +122,14 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
-    ADD_ROUTE(state, route) {
-      state.routes.unshift(route)
+    SET_ROUTES(state, routes) {
+      routes.forEach(route => {
+        state.routes.unshift(route)
+      });
+      
+    },
+    SET_ACTIVITIES(state, activities) {
+      state.activity = activities
     }
   }
 })

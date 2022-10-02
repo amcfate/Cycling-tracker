@@ -19,7 +19,7 @@
           showActivitiesTile = !showActivitiesTile;
         "
       >
-        My Activities
+      Activities
       </h3>
 
      <h3> <router-link
@@ -46,7 +46,7 @@
           showActivitiesTile = !showActivitiesTile;
         "
       >
-        My Activities
+        Activities
       </h3>
 
       <router-link
@@ -58,21 +58,9 @@
     </nav>
 
     <div class="view">
-      <div class="route-tile overlay" v-show="showRouteTile">
-        <h3>Routes</h3>
 
-        <div class="route-options">
-          <!-- make the next two lines functional -->
-          <h4>My routes</h4>
-          <h4>Public Routes</h4>
-        </div>
-        <input type="text" id="route-search" v-model="routeFilter.routeName" />
-        <route-tile
-          class="route-div"
-          v-for="route in filteredRoutes"
-          v-bind:key="route.route_id"
-        />
-      </div>
+      <routes-tile v-show="showRouteTile"/>
+   
 
       <div class="route-tile overlay" v-show="showActivitiesTile">
         <h3>My Activities</h3>
@@ -102,8 +90,9 @@
 
 import Map from "../components/maps/Map.vue";
 import activity from "../components/tiles/activity.vue";
-import RouteTile from "../components/tiles/RouteTile.vue";
-
+import RouteService from "@/services/RouteServices.js"
+import ActivitiesService from "@/services/ActivitiesService.js"
+import RoutesTile from '../components/tiles/RoutesTile.vue';
 export default {
   name: "home",
 
@@ -139,8 +128,11 @@ export default {
   },
   components: {
     Map,
-    RouteTile,
+    
     activity,
+    RoutesTile,
+    // Activities,
+    
   },
   mounted() {
     this.$nextTick(() => {
@@ -151,6 +143,29 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
+  },
+   created(){
+      RouteService
+      .getAllRoutes()
+      .then(response => {
+        this.$store.commit("SET_ROUTES", response.data);
+      })
+      .catch(error => {
+        if (error.response.status == 404) {
+          this.$router.push({name: 'NotFound'});
+        }
+      });
+      ActivitiesService
+      .getAllActivities()
+      .then(response => {
+        this.$store.commit("SET_ACTIVITIES", response.data);
+      })
+      .catch(error => {
+        if (error.response.status == 404) {
+          this.$router.push({name: 'NotFound'});
+        }
+      });
+
   },
 
   computed: {
@@ -254,34 +269,7 @@ export default {
   .h3:hover {
     background-color: whitesmoke;
   }
-  .route-tile {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 8px;
-    position: absolute;
-    padding-left: 5px;
-    margin-left: 10px;
-    padding-top: 30px;
-    height: 76%;
-    width: 35%;
-    background: lightgray;
-    z-index: 5;
-    align-self: center;
-    overflow: auto;
-  }
-  #route-search {
-    margin: 5%;
-  }
-  .route-div {
-    height: 50%;
-    width: 80%;
-    margin: 10px;
-    background-color: whitesmoke;
-    align-self: center;
-    justify-self: center;
-    justify-self: end;
-  }
+
   .activity-div {
     height: 50%;
     width: 90%;
@@ -364,34 +352,7 @@ export default {
   .h3:hover {
     background-color: whitesmoke;
   }
-  .route-tile {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 8px;
-    position: absolute;
-    padding-left: 5px;
-    margin-left: 10px;
-    padding-top: 30px;
-    height: 76%;
-    width: 35%;
-    background: lightgray;
-    z-index: 5;
-    align-self: center;
-    overflow: auto;
-  }
-  #route-search {
-    margin: 5%;
-  }
-  .route-div {
-    height: 50%;
-    width: 80%;
-    margin: 10px;
-    background-color: whitesmoke;
-    align-self: center;
-    justify-self: center;
-    justify-self: end;
-  }
+
   .activity-div {
     height: 50%;
     width: 90%;
@@ -447,23 +408,7 @@ export default {
     width: 10%;
     overflow: hidden;
   }
-  .route-tile {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    border-radius: 8px;
-    position: absolute;
-    padding-left: 5px;
-    margin-left: 10px;
-    padding-top: 30px;
-    height: 30%;
-    width: 80%;
-    background: lightgray;
-    z-index: 5;
-    align-self: flex-end;
-    overflow: auto;
-    margin-bottom: 32%;
-  }
+
  
 
   .activity {
@@ -474,15 +419,7 @@ export default {
     justify-self: center;
     justify-self: end;
   }
-  .route-div {
-    height: 50%;
-    width: 80%;
-    margin: 10px;
-    background-color: whitesmoke;
-    align-self: center;
-    justify-self: center;
-    justify-self: end;
-  }
+ 
   .activity-div {
     height: 50%;
     width: 90%;
