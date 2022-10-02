@@ -82,7 +82,6 @@
           id="route-search"
           v-model="activityFilter.activity_name"
         />
-        <!-- activity filter needs to be implemented -->
         <activity
           class="activity-div"
           v-for="activity in filteredActivity"
@@ -98,7 +97,7 @@
 
 
 <script>
-// make media queries work like they should
+
 //expand search feature and apply to routes && bikes
 
 import Map from "../components/maps/Map.vue";
@@ -156,7 +155,7 @@ export default {
 
   computed: {
     filteredActivity() {
-      let activityFilter = this.activityFilter;
+      let activityFilter = this.activityFilter.activity_name;
       let filteredActivity = this.activities;
       const activities = this.$store.state.activity;
       if (activityFilter != "") {
