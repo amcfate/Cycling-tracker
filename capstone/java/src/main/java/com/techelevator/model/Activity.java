@@ -20,6 +20,7 @@ public class Activity {
 
     public Activity(){}
 
+    //constructor w/ no image
     public Activity(/*int routeId,*/ int userId,  String activityName,
                     boolean isPublic, String description,
                     Date activityDate, Time startTime, Time endTime) {
@@ -33,6 +34,7 @@ public class Activity {
         this.endTime = endTime;
     }
 
+    //constructor to make activity w/ all properties
     public Activity(int routeId, int userId, int activityId,  String activityName,
                     boolean isPublic, String photos, String description,
                     Date activityDate, Time startTime, Time endTime) {

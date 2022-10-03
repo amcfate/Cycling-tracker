@@ -2,12 +2,16 @@ import axios from 'axios';
 
 export default {
 
-  getBike(bikeName) {
-    return axios.get('/bikes', bikeName)
+  getUserBikes() {
+    return axios.get(`/bikes`);
   },
 
-  postBike(bike) {
-    return axios.post('/bikes', bike)
-  }
+  // getBike(bikeName) {
+  //   return axios.get('/bikes', bikeName)
+  // },
+
+  // postBike(bike) {
+  //   return axios.post('/bikes', bike)
+  // }
 
 }

@@ -1,7 +1,7 @@
 <template>
   <div id="activity-form">
     <form action="" class="new-activity-form">
-      <div class="left-container">
+      <div class="left-form-container">
         <h2>New Activity</h2>
         <label class="public" for="isPublic"
           >Public:
@@ -66,11 +66,11 @@ export default {
   methods: {
     submitForm() {
       console.log(this.newActivity);
-
       activitiesService.addNewActivity(this.newActivity).then((response) => {
         if (response.status === 201) {
           this.$store.commit("ADD_ACTIVITY", this.newActivity);
           this.$router.push("/activity");
+          console.log(this.newActivity);
         }
       });
     },
@@ -80,11 +80,11 @@ export default {
       activityName: this.activityName,
       activityDate: this.activityDate,
       userId: this.userId,
-      startTime: this.userId,
+      startTime: this.startTime,
       endTime: this.endTime,
       description: this.description,
       isPublic: this.isPublic,
-      routeId: this.isPublic,
+      routeId: this.routeId,
     };
     console.log(this.newActivity);
   },
@@ -96,7 +96,7 @@ export default {
   display: flex;
   flex-direction: row;
 }
-.left-container {
+.left-form-container {
   display: flex;
   flex-direction: column;
   align-content: space-evenly;

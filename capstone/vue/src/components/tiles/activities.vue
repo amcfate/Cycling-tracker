@@ -5,10 +5,6 @@
       <button id="activity-btn" @click="showActivityForm = !showActivityForm">
         Add Activity
       </button>
-      <!-- <newActivityForm
-        class="activity-form"
-        v-show="(showActivityForm = true)"
-      /> -->
     </div>
     <new-activity-form
       class="form"
@@ -42,7 +38,7 @@ export default {
       activities: [
         {
           routeId: "",
-          userId: "int",
+          userId: "",
           activityName: "",
           activityId: "",
           isPublic: "",

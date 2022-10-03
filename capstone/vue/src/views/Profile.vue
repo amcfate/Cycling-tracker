@@ -2,12 +2,14 @@
   <div class="profile">
     <user-profile />
     <activities />
+    <bikes />
     <gear />
   </div>
 </template>
 
 <script>
 import activities from "../components/tiles/activities.vue";
+import Bikes from "../components/tiles/Bikes.vue";
 import Gear from "../components/tiles/Gear.vue";
 import userProfile from "../components/tiles/UserProfile.vue";
 export default {
@@ -15,6 +17,7 @@ export default {
   components: {
     userProfile,
     activities,
+    Bikes,
     Gear,
   },
 };

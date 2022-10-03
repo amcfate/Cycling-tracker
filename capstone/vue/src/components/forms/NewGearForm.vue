@@ -28,11 +28,12 @@ export default {
   },
   methods: {
     submitForm() {
-      //console.log(this.newGear);
+      console.log(this.newGear);
       gearService.addGear(this.newGear).then((response) => {
         if (response.status === 201) {
           this.$store.commit("ADD_GEAR", this.newGear);
           this.$router.push("/gear");
+          console.log(this.newGear);
         }
       });
     },

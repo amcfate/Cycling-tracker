@@ -20,7 +20,14 @@ INSERT INTO activity();
 INSERT INTO user_profile ( ) VALUES
 ( );
 
-INSERT INTO user_gear () VALUES
-( );
+INSERT INTO user_gear (user_id, misc_gear)
+	VALUES (3, 'Shoes: Giro Empire');
+
+INSERT INTO user_gear (user_id, misc_gear)
+ 	VALUES (3, 'CPU: Wahoo Bolt');
+
+INSERT INTO user_gear (user_id, misc_gear)
+ 	VALUES (3, 'Saddle: Fi zik Aireon');
+
 
 COMMIT TRANSACTION;
