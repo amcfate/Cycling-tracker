@@ -1,23 +1,23 @@
 <template>
   <div class="wrapper">
+
+    <div class="nav-controls">
+      <div class="button" v-on:click="calculateRoute()">Get Route</div>
+      <div class="button" v-on:click="deleteMarkers()">Start Over</div>
+      <div class="last-btn" v-on:click="saveRoute()">Save route</div>
+    </div>
     <div id="map"></div>
-    <!-- <h1 style="text-align: center">Google Maps</h1> -->
-
-      <button v-on:click="calculateRoute()">
-        Get Route!
-      </button>
-      <button v-on:click="deleteMarkers()">Start Over</button>
-      <button v-on:click="saveRoute()">Save route!</button>
-
-    
   </div>
 </template>
 
 <script>
 import axios from "axios";
+
 export default {
   data() {
     return {
+      distance: null,
+      elevation: null,
       startingLat: null,
       startingLong: null,
       map: null,
@@ -38,11 +38,14 @@ export default {
     initMap() {
       const mapElement = document.getElementById("map");
       const mapOptions = {
-        center: {lat: 40.73061, lng:  -73.935242},
+        center: {lat: 40.73061, lng: -73.935242},
         zoom: 13,
         mapTypeId: window.google.maps.MapTypeId.ROADMAP,
         panControl: true,
         zoomControl: true,
+          zoomControlOptions: {
+      position: window.google.maps.ControlPosition.RIGHT_TOP,
+    },
         mapTypeControl: true,
         scaleControl: true,
         streetViewControl: true,
@@ -52,12 +55,11 @@ export default {
 
       if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
-          let initialLocation = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          mapOptions.center = initialLocation;
+          mapOptions.center = new window.google.maps.LatLng(position.coords.latitude, position.coords.longitude);
         });
       }
 
-      //this.getLocation();
+      //this.getLocation();zex3ase3Z@ws
       this.map = new window.google.maps.Map(mapElement, mapOptions);
       window.google.maps.event.addListener(this.map, 'click', this.addPinViaClick);
     },
@@ -65,8 +67,9 @@ export default {
      * Add Marker
      */
     addPinViaClick(event) {
+      //Accept input on click for marker name
       let description = window.prompt("Name marker:");
-      if(description.length === 0){
+      if (description.length === 0) {
         window.alert("Please enter a description.")
         return;
       }
@@ -80,6 +83,7 @@ export default {
     },
 
     dropPin(markerObj) {
+      //Instantiate new marker and drop it on location of markerObj
       let marker = new window.google.maps.Marker({
         position: markerObj.loc,
         animation: window.google.maps.Animation.DROP,
@@ -94,8 +98,7 @@ export default {
     },
 
     makeMarkerObj(latLng, name) {
-      const markerObj =  {loc: latLng, name: name};
-      return markerObj;
+      return {loc: latLng, name: name};
     },
 
     /*
@@ -107,17 +110,17 @@ export default {
     calculateRoute() {
       let waypnts = []
       let orgn = this.waypoints[0];
-      if(this.waypoints.length > 2) {
+      let des = this.waypoints[(this.waypoints.length - 1)]
+      if (this.waypoints.length > 2) {
         for (let i = 1; i < this.waypoints.length - 1; i++) {
-          waypnts.push({location: this.waypoints[i], stopover:true});
+          waypnts.push({location: this.waypoints[i], stopover: true});
         }
       }
 
       const request = {
         origin: orgn,
         waypoints: waypnts,
-        destination: this.waypoints[(this.waypoints.length - 1)],
-        // https://developers.google.com/maps/documentation/transportation-logistics/on-demand-rides-deliveries-solution/pickup-and-dropoff-selection/location-selection/reference/rest/v1beta/TravelMode
+        destination: des,
         travelMode: window.google.maps.TravelMode.TWO_WHEELER
       };
       this.directionsDisplay.setMap(this.map);
@@ -127,12 +130,9 @@ export default {
           this.directionsDisplay.setMap(this.map);
         }
       });
+      this.getDistance(orgn, des);
       this.hideMarkers();
       this.markers = []
-    },
-    clearRoutes() {
-      this.hideMarkers();
-      this.directionsDisplay.setMap(null);
     },
 
     setMapOnAll(map) {
@@ -141,22 +141,38 @@ export default {
       }
     },
 
+    getDistance(start, end) {
+      axios = require('axios')
+      var config = {
+        method: 'get',
+        url: 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + start + '&destinations=' + end + '&units=imperial&key=AIzaSyDjB5lrCyoXaoU7Lv4RXi909TRAq5Wua9g',
+        headers: {}
+      };
+      axios(config)
+          .then(function (response) {
+            if (response.status !== "REQUEST_DENIED")
+              this.distance = response.rows[0].elements.distance;
+            else{
+              window.alert('ERROR GETTING ROUTE DISTANCE')
+            }
+          })
+    },
+
     hideMarkers() {
+      //Simply points the markers to a null map via setMapOnAll
       this.setMapOnAll(null)
     },
 
-    showMarkers() {
-      this.setMapOnAll(this.map)
-    },
-
     deleteMarkers() {
+      //Makes marker and locations array empty
       this.locations = []
       this.markers = []
     },
 
-    saveRoute(){
-      for(let i = 0; i < this.locations.length; i++){
-        axios.post('/saveRoute', {
+    saveRoute() {
+      for (let i = 0; i < this.locations.length; i++) {
+        //Pass back each lat and long to controller
+        axios.post('/saveroute', {
           lat: this.locations[i].loc.lat,
           lng: this.locations[i].loc.lng
         })
@@ -179,19 +195,88 @@ export default {
 
 <style scoped>
 .wrapper{
+  display: flex;
   position:relative;
   height: 100vh;
   width: 100vw;
 }
+
 #map {
   grid-area: map;
   width: 100%;
   height: 100%;
   /* position: absolute; */
-  z-index: 1;
+
 
 }
 
+.nav-controls {
+  font-weight: bold;
+  display: flex;
+  background-color: #fff;
+  z-index: 1;
+  width: 200px;
+  align-self: start;
+  border-radius: 3px;
+  margin-top: 65px;
+  margin-left: 10px;
+  margin-right: 0%;
+  position: absolute;
+
+}
+
+
+.button {
+  display: block;
+  padding: 5px;
+  border-right-style: solid;
+  border-width: 2px;
+  border-color: rgb(240, 240, 240);
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.last-btn {
+  display: block;
+  border: none;
+  padding: 5px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
+
+.nav-controls{
+  
+  font-weight: bold;
+  display: flex;
+  background-color: #fff;
+  z-index: 1;
+  width:200px;
+  align-self: start;
+  border-radius: 3px;
+  margin-top: 65px;
+  margin-left: 10px;
+  margin-right: 0%;
+  position: absolute;
+ 
+}
+
+
+
+.button{
+  padding: 5px;
+  border-right-style: solid;
+  border-width: 2px;
+  border-color:  rgb(240, 240, 240);
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.last-btn{
+  border: none;
+  padding: 5px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
 .nav {
   text-align: center;
   position: absolute;

@@ -71,7 +71,7 @@ public class RouteController {
     }
 
     @ResponseStatus(HttpStatus.CREATED)
-    @RequestMapping(value = "/saveroute", method = RequestMethod.POST)
+    @RequestMapping(value = "/saveroute", method = RequestMethod.POST) // -- A route would simply be a group of trackpoints
     public Route createRoute(@Valid @RequestBody NewRouteDTO newRouteDTO){
         Route newRoute =buildRouteFromRouteDTO(newRouteDTO);
         newRoute = routeDao.addRoute(newRoute);

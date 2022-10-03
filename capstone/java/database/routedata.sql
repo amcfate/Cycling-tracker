@@ -24,4 +24,8 @@ INSERT INTO trackpoint (route_id, latitude, longitude, elevation) VALUES
 INSERT INTO trackpoint (route_id, latitude, longitude, elevation) VALUES
 (1, 39.60996000, -104.941380, 1680.0);
 
+INSERT INTO activity(route_id, user_id, activity_name, activity_id, is_public, photos, description, activity_date, start_time, end_time) VALUES
+(1, 3, 'pre-beer ride', 1, true, '', 'Fun ride', '09/20/2002', '07:00:00', '08:00:00');
+
+
 COMMIT TRANSACTION;

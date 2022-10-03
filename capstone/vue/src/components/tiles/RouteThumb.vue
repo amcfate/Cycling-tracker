@@ -1,11 +1,11 @@
 <template>
-  <div class="home">
-      <h2 class="header">LastRoute</h2>
+  <div class="home route-thumb">
+      <h2 class="header">{{route.routeName}}</h2>
       <div class="info">
       <h5>Length</h5>
-      <p>500 miles</p>
-      <h5>Difficulty</h5>
-      <p>500 hours</p>
+      <p>{{route.distance}} miles</p>
+      <h5>elevation gain</h5>
+      <p>{{route.ascent}} feet</p>
       <h5></h5>
       </div>
       <div class="mapDiv"></div>    
@@ -14,17 +14,21 @@
 
 <script>
 
+
 export default {
-  name: "home",
+  name: "route-thumb",
+  props: ["route"],
+  
   data() {
     return {
       ActivityClicked: false,
+      // routes: [],
+     
     };
-  },
-  components: {
     
   },
-};
+
+  };
 </script>
 
 <style>
@@ -40,7 +44,7 @@ export default {
   }
 
  @media only screen and (max-width: 1000px){
-  .home {
+  .route-thumb {
   margin: auto;
   display: flex;
   flex-grow: auto;
@@ -58,7 +62,7 @@ export default {
 }
  }
 @media only screen and (max-width: 1000px) {
-  .home {
+  .route-thumb {
     margin: auto;
     display: flex;
     flex-grow: auto;
