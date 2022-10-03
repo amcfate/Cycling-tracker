@@ -18,8 +18,8 @@ public class Route {
         this.routeName = routeName;
         this.description = description;
         this.distanceMiles = distanceMiles;
-        this.elevation = elevation; //What is this? So first waypoint ok
-        this.ascent = ascent; //Is it the same as this?
+        this.elevation = elevation;
+        this.ascent = ascent;
     }
 
     public int getRouteId() {
