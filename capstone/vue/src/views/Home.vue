@@ -28,6 +28,13 @@
         class="h3"
         >Profile</router-link
       ></h3>
+
+      <h3> <router-link
+        v-bind:to="{ name: 'leaderboard' }"
+        style="text-decoration: none; color: inherit"
+        class="h3"
+        >Leaderboard</router-link
+      ></h3>
     </nav>
 
     <nav class="desktop-nav" v-else>

@@ -6,6 +6,8 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
+import Leaderboard from '../views/Leaderboard.vue'
+
 
 Vue.use(Router)
 
@@ -61,7 +63,18 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path: "/leaderboard",
+      name: "leaderboard",
+      component: Leaderboard,
+      meta: {
+        requiresAuth: false
+      }
+      
+
+    },
+   
   ]
 })
 
