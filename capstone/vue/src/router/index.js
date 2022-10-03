@@ -8,6 +8,8 @@ import store from '../store/index'
 import Profile from '../views/Profile.vue'
 import RouteDetail from '../views/RouteDetail.vue'
 import ActivityDetail from '../views/ActivityDetail.vue'
+import Leaderboard from '../views/Leaderboard.vue'
+
 
 Vue.use(Router)
 
@@ -73,7 +75,16 @@ const router = new Router({
       path: '/activity/{id}',
       name: 'activity-detail',
       component: ActivityDetail
-    }
+    },
+    {
+      path: "/leaderboard",
+      name: "leaderboard",
+      component: Leaderboard,
+      meta: {
+        requiresAuth: false
+      }
+    },
+   
   ]
 })
 
