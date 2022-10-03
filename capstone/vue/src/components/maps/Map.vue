@@ -11,13 +11,15 @@
 </template>
 
 <script>
-import axios from "axios";
+import routeServices from "@/services/RouteServices";
 
 export default {
   data() {
     return {
+      routeDescription: null,
+      routeName: null,
       distance: null,
-      elevation: null,
+      elevations: null,
       startingLat: null,
       startingLong: null,
       map: null,
@@ -43,9 +45,9 @@ export default {
         mapTypeId: window.google.maps.MapTypeId.ROADMAP,
         panControl: true,
         zoomControl: true,
-          zoomControlOptions: {
-      position: window.google.maps.ControlPosition.RIGHT_TOP,
-    },
+        zoomControlOptions: {
+          position: window.google.maps.ControlPosition.RIGHT_TOP,
+        },
         mapTypeControl: true,
         scaleControl: true,
         streetViewControl: true,
@@ -101,6 +103,15 @@ export default {
       return {loc: latLng, name: name};
     },
 
+    makeTrackPointObj(markObj) {
+      let obj = {
+        lat: markObj.loc.lat,
+        lng: markObj.loc.lng,
+        elevation: this.getElevation(markObj.loc.lat, markObj.loc.lng)
+      }
+      return obj;
+    },
+
     /*
      * Calculate route between 2 Coordinates
      * https://stackoverflow.com/questions/27341214/how-to-draw-a-route-between-two-markers-in-google-maps
@@ -113,7 +124,7 @@ export default {
       let des = this.waypoints[(this.waypoints.length - 1)]
       if (this.waypoints.length > 2) {
         for (let i = 1; i < this.waypoints.length - 1; i++) {
-          waypnts.push({location: this.waypoints[i], stopover: true});
+          waypnts.push({location: this.waypoints[i], stopover: false});
         }
       }
 
@@ -141,21 +152,23 @@ export default {
       }
     },
 
-    getDistance(start, end) {
-      let axios = require('axios')
-      var config = {
+    getElevation(lat, lng) {
+      let axios = require('axios');
+
+      let config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + start + '&destinations=' + end + '&units=imperial&key=AIzaSyDjB5lrCyoXaoU7Lv4RXi909TRAq5Wua9g',
+        url: 'https://maps.googleapis.com/maps/api/elevation/json?locations=' + lat + '%2C' + lng + '&key=AIzaSyDjB5lrCyoXaoU7Lv4RXi909TRAq5Wua9g',
         headers: {}
       };
+
       axios(config)
           .then(function (response) {
-            if (response.status !== "REQUEST_DENIED")
-              this.distance = response.rows[0].elements.distance;
-            else{
-              window.alert('ERROR GETTING ROUTE DISTANCE')
-            }
+            this.elevations.unshift(response.data.results.elevation)
+            return parseInt(response.data.results.elevation);
           })
+          .catch(function (error) {
+            console.log(error);
+          });
     },
 
     hideMarkers() {
@@ -170,19 +183,70 @@ export default {
     },
 
     saveRoute() {
-      for (let i = 0; i < this.locations.length; i++) {
-        //Pass back each lat and long to controller
-        axios.post('/saveroute', {
-          lat: this.locations[i].loc.lat,
-          lng: this.locations[i].loc.lng
-        })
+      this.routeName = window.prompt("Name this route");
+      if(this.routeName === null){
+        window.alert("Please enter a name")
+        this.saveRoute();
+      }
+      this.routeDescription = window.prompt("Give this route a description");
+      if(this.routeDescription === null){
+        window.alert("Please enter a description");
+        this.saveRoute();
+      }
+      this.distance = parseInt(window.prompt("Enter distance in miles"));
+      if(this.distance === null){
+        window.alert("Please enter a distance in miles");
+        this.saveRoute();
       }
 
+      let obj = {
+        routeName: this.routeName,
+        description: this.routeDescription,
+        distanceMiles: this.distance,
+        elevation: this.elevation[0],
+        ascent: this.calculateAscent()
+      }
 
+      routeServices.saveRoute(obj).then((response) => {
+        if (response.status === 201) {
+          this.$store.commit("ADD_ROUTE", obj)
+          this.$router.push("/saveroute")
+        }
+      });
+
+      this.saveTrackPoints()
+
+    },
+
+    calculateAscent(){
+      let largest = this.elevations[0];
+      let smallest = this.elevations[1];
+      for(let i = 0; i < this.elevations.length; i++){
+        let current = this.elevations[i]
+        if(current > largest){
+          largest = current;
+        }
+        else if(current < smallest){
+          smallest = current
+        }
+      }
+      return largest - smallest;
+    },
+
+    saveTrackPoints() {
+      for (let i = 0; i < this.locations.length; i++) {
+        let trackPoint = this.makeTrackPointObj(this.locations[i]);
+
+        routeServices.saveTrackPoints(trackPoint).then((response) => {
+          if (response.status === 201) {
+            this.$store.commit("ADD_TRACKPOINT", trackPoint)
+            this.$router.push("/savetrackpoint")
+          }
+        });
+
+      }
     }
-
   },
-
   mounted() {
     // Initialize map after DOM is mounted
     this.initMap();
@@ -194,9 +258,9 @@ export default {
 </script>
 
 <style scoped>
-.wrapper{
+.wrapper {
   display: flex;
-  position:relative;
+  position: relative;
   height: 100vh;
   width: 100vw;
 }
@@ -244,39 +308,39 @@ export default {
   border-bottom-right-radius: 2px;
 }
 
-.nav-controls{
-  
+.nav-controls {
+
   font-weight: bold;
   display: flex;
   background-color: #fff;
   z-index: 1;
-  width:200px;
+  width: 200px;
   align-self: start;
   border-radius: 3px;
   margin-top: 65px;
   margin-left: 10px;
   margin-right: 0%;
   position: absolute;
- 
+
 }
 
 
-
-.button{
+.button {
   padding: 5px;
   border-right-style: solid;
   border-width: 2px;
-  border-color:  rgb(240, 240, 240);
+  border-color: rgb(240, 240, 240);
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
 
-.last-btn{
+.last-btn {
   border: none;
   padding: 5px;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
 }
+
 .nav {
   text-align: center;
   position: absolute;
