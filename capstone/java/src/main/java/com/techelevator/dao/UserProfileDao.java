@@ -6,4 +6,6 @@ public interface UserProfileDao {
 
     UserProfile getProfileById(int userId);
 
+    boolean create (int id, String username);
+
 }
