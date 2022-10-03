@@ -6,6 +6,10 @@ import Logout from '../views/Logout.vue'
 import Register from '../views/Register.vue'
 import store from '../store/index'
 import Profile from '../views/Profile.vue'
+import RouteDetail from '../views/RouteDetail.vue'
+import ActivityDetail from '../views/ActivityDetail.vue'
+import Leaderboard from '../views/Leaderboard.vue'
+
 
 Vue.use(Router)
 
@@ -61,7 +65,26 @@ const router = new Router({
       meta: {
         requiresAuth: true
       }
-    }
+    },
+    {
+      path: '/route/:id',
+      name: 'route-detail',
+      component: RouteDetail
+    },
+    {
+      path: '/activity/{id}',
+      name: 'activity-detail',
+      component: ActivityDetail
+    },
+    {
+      path: "/leaderboard",
+      name: "leaderboard",
+      component: Leaderboard,
+      meta: {
+        requiresAuth: false
+      }
+    },
+   
   ]
 })
 

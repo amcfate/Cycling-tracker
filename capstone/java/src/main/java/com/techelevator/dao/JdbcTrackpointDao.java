@@ -61,13 +61,15 @@ public class JdbcTrackpointDao implements TrackpointDao{
     public Trackpoint addTrackpoint(Trackpoint newTrackpoint) {
         String sql = "INSERT INTO trackpoint (route_id, trackpoint_id, latitude, longitude, elevation) VALUES (?, ?, ?, ?, ?)";
 
-//        int routeId = ;
-//        int trackpointId = ;
-//        BigDecimal latitude = ;
-//        BigDecimal longitude = ;
-//        double elevation = ;
+        int routeId = newTrackpoint.getRouteId();
+        int newTrackpointId = getNextTrackpointId(); //is this method really necessary
+        BigDecimal latitude = newTrackpoint.getLatitude();
+        BigDecimal longitude = newTrackpoint.getLongitude();
+        double elevation = newTrackpoint.getElevation();
 
-        return null;
+        jdbcTemplate.update(sql, routeId, newTrackpointId, latitude, longitude, elevation);
+
+        return getTrackpointById(newTrackpointId);
     }
 
     @Override
@@ -84,4 +86,16 @@ public class JdbcTrackpointDao implements TrackpointDao{
         trackpoint.setElevation(rs.getDouble("elevation"));
         return trackpoint;
     }
-}
+
+    private int getNextTrackpointId(){
+        SqlRowSet nextIdResult = jdbcTemplate.queryForRowSet("SELECT nextval('seq_trackpoint_id')");
+        if(nextIdResult.next()) {
+            return nextIdResult.getInt(1);
+        } else {
+            throw new RuntimeException("Something went wrong while getting an id for the new transfer");
+        }
+    }
+
+
+    }
+

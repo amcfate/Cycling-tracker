@@ -53,7 +53,7 @@ CREATE TABLE route (
 	description varchar,
 	distance_miles decimal,
 	elevation int,
-	ascent int,
+	ascent decimal,
 	CONSTRAINT PK_route PRIMARY KEY (route_id) 
 );
 
@@ -73,17 +73,22 @@ CREATE TABLE trackpoint (
 );
 
 CREATE TABLE activity (
+
 	route_id int,
 	user_id int,
 	activity_name varchar,
+
 	activity_id SERIAL NOT NULL,
+
 	is_public boolean,
 	photos varchar,
 	description varchar,
 	activity_date date DEFAULT CURRENT_DATE,
 	start_time time,
 	end_time time,
-	CONSTRAINT PK_activity_id PRIMARY KEY (activity_id),
+
+    CONSTRAINT PK_activity PRIMARY KEY (activity_id),
+
 	CONSTRAINT FK_activity_route FOREIGN KEY (route_id) REFERENCES route (route_id),
 	CONSTRAINT FK_activity_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );

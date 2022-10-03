@@ -1,34 +1,37 @@
 <template>
-  <div class="home">
-      <h2 class="header">LastRoute</h2>
+<router-link class="home route-thumb" 
+v-bind:to="{name: 'route-detail', params: {id: route_id}}" 
+v-bind:route="route"
+ style="text-decoration: none; color: inherit">
+      <h2 class="header">{{route.routeName}}</h2>
       <div class="info">
       <h5>Length</h5>
-      <p>500 miles</p>
-      <h5>Difficulty</h5>
-      <p>easy</p>
+      <p>{{route.distance}} miles</p>
+      <h5>elevation gain</h5>
+      <p>{{route.ascent}} feet</p>
       <h5></h5>
       </div>
       <div class="mapDiv"></div>    
-  </div>
+  </router-link>
 </template>
 
 <script>
 
+
 export default {
-  name: "home",
+  name: "route-thumb",
+  props: ["route"],
+  
   data() {
     return {
       ActivityClicked: false,
-      activity: [],
+      
+     
     };
-  },
-  components: {
     
   },
-  created:{
-      
-  }
-};
+
+  };
 </script>
 
 <style>
@@ -44,7 +47,7 @@ export default {
   }
 
  @media only screen and (max-width: 1000px){
-  .home {
+  .route-thumb {
   margin: auto;
   display: flex;
   flex-grow: auto;
@@ -62,7 +65,7 @@ export default {
 }
  }
 @media only screen and (max-width: 1000px) {
-  .home {
+  .route-thumb {
     margin: auto;
     display: flex;
     flex-grow: auto;

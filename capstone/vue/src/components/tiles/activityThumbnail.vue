@@ -1,29 +1,33 @@
 <template>
-  <div class="home">
-      <h2 class="header">LastRoute</h2>
+  <router-link class="home"
+  v-bind:to="{name: 'activity-detail', params: {id: activity_id}}"
+  v-bind:activity="activity"
+  style="text-decoration: none; color: inherit">
+      <h2 class="header">{{activity.activityName}}</h2>
       <div class="info">
-      <h5>Length</h5>
-      <p>500 miles</p>
-      <h5>Difficulty</h5>
-      <p>500 hours</p>
+      <h5>Description</h5>
+      <p>{{activity.description}}</p>
+      <h5>Date</h5>
+      <p>{{activity.activity_date}}</p>
       <h5></h5>
       </div>
       <div class="mapDiv"></div>    
-  </div>
+  </router-link>
 </template>
 
 <script>
 
 export default {
-  name: "home",
+  name: "activity-thumb",
+  props: ["activity"],
+
   data() {
     return {
       ActivityClicked: false,
+     
     };
   },
-  components: {
-    
-  },
+
 };
 </script>
 
