@@ -70,16 +70,17 @@ CREATE TABLE trackpoint (
 );
 
 CREATE TABLE activity (
+    activity_id SERIAL,
 	route_id int,
 	user_id int,
 	activity_name varchar,
-	activity_id int,
 	is_public boolean,
 	photos varchar,
 	description varchar,
 	activity_date date NOT NULL DEFAULT CURRENT_DATE,
 	start_time time,
 	end_time time,
+    CONSTRAINT PK_activity PRIMARY KEY (activity_id),
 	CONSTRAINT FK_activity_route FOREIGN KEY (route_id) REFERENCES route (route_id),
 	CONSTRAINT FK_activity_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );

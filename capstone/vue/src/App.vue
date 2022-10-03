@@ -2,8 +2,9 @@
  
   <div id="app">
     <Map />
-    <div id="nav">
-      <router-link v-bind:to="{ name: 'home' }"><h3>cicleta</h3></router-link
+    <div id="nav" v-if="isMobile">
+      
+      <router-link v-bind:to="{ name: 'home' }"><h3>Velocidad</h3></router-link
       >&nbsp;|&nbsp;
     
       <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
@@ -14,25 +15,40 @@
       >
     </div>
     <router-view />
-    <!-- <div class="control-bar">
-      <button class="btn">
-        <router-link v-bind:to="{ name: 'home' }">Home</router-link>
-      </button>
-      <button class="btn">
-        <router-link v-bind:to="{ name: 'map' }">Map</router-link>
-      </button>
-    
-      <button class="btn">
-        <router-link v-bind:to="{ name: 'profile' }">Profile</router-link>
-      </button>
-    </div> -->
   </div>
 </template>
 
 <script>
 export default {
   name: "App",
+   data() {
+    return {
+      isMobile: false,
+      windowWidth: window.innerWidth,
+    };
+   },
   components: {},
+   mounted() {
+    this.$nextTick(() => {
+      window.addEventListener("resize", this.onResize);
+      this.onResize();
+    });
+  },
+
+  beforeDestroy() {
+    window.removeEventListener("resize", this.onResize);
+  },
+  methods:{
+  
+      onResize() {
+      this.windowWidth = window.innerWidth;
+      if (this.windowWidth < 700) {
+        this.isMobile = true;
+      } else {
+        this.isMobile = false;
+      }
+    },
+  }
 };
 </script>
 <style>

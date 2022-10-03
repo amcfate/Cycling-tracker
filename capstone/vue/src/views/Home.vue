@@ -1,7 +1,8 @@
 <template>
   <div class="main">
+
     <nav class="desktop-nav" v-if="!isMobile">
-      <h1 class="logo">Wheels of Fury</h1>
+      <h1 class="logo">Velocidad</h1>
       <h2></h2>
 
       <div class="highlighter"><h3
@@ -28,6 +29,13 @@
         class="h3"
         >Profile</router-link
       ></h3>
+
+       <router-link
+        v-bind:to="{ name: 'logout' }"
+        style="text-decoration: none; color: inherit"
+        class="h3"
+        ><h3>Logout</h3></router-link
+      >
     </nav>
 
     <nav class="desktop-nav" v-else>
@@ -55,6 +63,8 @@
         class="h3"
         ><h3>Profile</h3></router-link
       >
+
+     
     </nav>
 
     <div class="view">
@@ -62,20 +72,7 @@
       <routes-tile v-show="showRouteTile"/>
    
       <activities-tile v-show="showActivitiesTile"/>
-      <!-- <div class="route-tile overlay" v-show="showActivitiesTile">
-        <h3>My Activities</h3>
-        <h4>Add Activity</h4>
-        <input
-          type="text"
-          id="route-search"
-          v-model="activityFilter.activity_name"
-        />
-        <activity
-          class="activity-div"
-          v-for="activity in filteredActivity"
-          v-bind:key="activity.activity_id"
-        />
-      </div> -->
+
 
       <Map class="map"></Map>
     </div>
@@ -101,18 +98,6 @@ export default {
     return {
       isMobile: false,
       windowWidth: window.innerWidth,
-      activityFilter: {
-        route_id: 0,
-        user_id: 0,
-        activity_name: "",
-        activity_id: 0,
-        is_public: true,
-        photos: "",
-        description: "",
-        activity_date: "",
-        start_time: "",
-        end_time: "",
-      },
       showRouteTile: false,
       showActivitiesTile: false,
       routes: [],
@@ -141,39 +126,19 @@ export default {
       .getAllRoutes()
       .then(response => {
         this.$store.commit("SET_ROUTES", response.data);
+        this.getAllActivities();
       })
       .catch(error => {
         if (error.response.status == 404) {
           this.$router.push({name: 'NotFound'});
         }
       });
-      ActivitiesService
-      .getActivities()
-      .then(response => {
-        this.$store.commit("SET_ACTIVITIES", response.data);
-      })
-      .catch(error => {
-        if (error.response.status == 404) {
-          this.$router.push({name: 'NotFound'});
-        }
-      });
+    
 
   },
 
   computed: {
-    filteredActivity() {
-      let activityFilter = this.activityFilter.activity_name;
-      let filteredActivity = this.activities;
-      const activities = this.$store.state.activity;
-      if (activityFilter != "") {
-        filteredActivity = activities.filter((activity) =>
-          activity.activity_name
-            .toLowerCase()
-            .includes(activityFilter.toLowerCase())
-        );
-        return filteredActivity;
-      } else return this.$store.state.activity;
-    },
+
     lastRoute() {
       const routes = this.$store.state.routes;
       const lastRoute = routes.pop();
@@ -193,6 +158,19 @@ export default {
         this.isMobile = false;
       }
     },
+    getAllActivities(){
+          ActivitiesService
+      .getActivities()
+      .then(response => {
+        this.$store.commit("SET_ACTIVITIES", response.data);
+      })
+      .catch(error => {
+        if (error.response.status == 404) {
+          this.$router.push({name: 'NotFound'});
+        }
+      });
+    }
+
   },
 };
 

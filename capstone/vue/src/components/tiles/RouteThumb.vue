@@ -1,5 +1,8 @@
 <template>
-  <div class="home route-thumb">
+<router-link class="home route-thumb" 
+v-bind:to="{name: 'route-detail', params: {id: route_id}}" 
+v-bind:route="route"
+ style="text-decoration: none; color: inherit">
       <h2 class="header">{{route.routeName}}</h2>
       <div class="info">
       <h5>Length</h5>
@@ -9,7 +12,7 @@
       <h5></h5>
       </div>
       <div class="mapDiv"></div>    
-  </div>
+  </router-link>
 </template>
 
 <script>

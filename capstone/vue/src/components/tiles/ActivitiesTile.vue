@@ -6,21 +6,22 @@
       id="route-search"
       v-model="activityFilter.activityName"
     />
-    <activity
-      class="activity-div"
+    <activity-thumb
+      class="route-div"
       v-for="activity in filteredActivity"
       v-bind:key="activity.activity_id"
       v-bind:activity="activity"
+      @click="displayDetail = !displayDetail"
     />
   </div>
 </template>
 
 <script>
-import Activity from "./activity.vue";
+import ActivityThumb from "./activityThumbnail.vue";
 export default {
   name: "activities-tile",
   components: {
-    Activity,
+    ActivityThumb,
   },
   data() {
     return {
@@ -37,22 +38,22 @@ export default {
         end_time: "",
       },
       showActivitiesTile: false,
+      displayDetail: false,
       activities: [],
     };
   },
   computed: {
     filteredActivity() {
-      let activityFilter = this.activityFilter.activityName;
+      let filteredActivityName = this.activityFilter.activityName;
       let filteredActivity = this.activities;
-      const activities = this.$store.state.activity;
-      if (activityFilter != "") {
-        filteredActivity = activities.filter((activity) =>
-          activity.activity_name
-            .toLowerCase()
-            .includes(activityFilter.toLowerCase())
+      if (filteredActivityName != "") {
+        filteredActivity = this.$store.state.activity.filter((activity) =>
+         activity.activityName.toLowerCase()
+         .includes(filteredActivityName.toLowerCase())
         );
         return filteredActivity;
       } else return this.$store.state.activity;
+      
     },
   },
 };

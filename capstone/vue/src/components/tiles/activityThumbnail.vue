@@ -1,6 +1,9 @@
 <template>
-  <div class="home">
-      <h2 class="header">{{activity.activity_name}}</h2>
+  <router-link class="home"
+  v-bind:to="{name: 'activity-detail', params: {id: activity_id}}"
+  v-bind:activity="activity"
+  style="text-decoration: none; color: inherit">
+      <h2 class="header">{{activity.activityName}}</h2>
       <div class="info">
       <h5>Description</h5>
       <p>{{activity.description}}</p>
@@ -9,13 +12,13 @@
       <h5></h5>
       </div>
       <div class="mapDiv"></div>    
-  </div>
+  </router-link>
 </template>
 
 <script>
 
 export default {
-  name: "activity",
+  name: "activity-thumb",
   props: ["activity"],
 
   data() {

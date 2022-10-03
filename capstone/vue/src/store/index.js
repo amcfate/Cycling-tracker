@@ -51,7 +51,7 @@ export default new Vuex.Store({
       {
         route_id: 125,
         user_id: 0,
-        activity_name: "activity",
+        activityName: "activity",
         activity_id: 99,
         is_public: true,
         photos: "xxxxx",
@@ -63,7 +63,7 @@ export default new Vuex.Store({
       {
         route_id: 123,
         user_id: 0,
-        activity_name: "bike ride",
+        activityName: "bike ride",
         activity_id: 37,
         is_public: true,
         photos: "xxxxx",
@@ -75,7 +75,7 @@ export default new Vuex.Store({
       {
         route_id: 100,
         user_id: 0,
-        activity_name: "run",
+        activityName: "run",
         activity_id: 55,
         is_public: true,
         photos: "xxxxx",

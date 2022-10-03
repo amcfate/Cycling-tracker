@@ -4,15 +4,19 @@
     <input type="text" id="route-search" v-model="routeFilter.routeName" />
     <route-thumb
       class="route-div"
+      @click="displayDetail = !displayDetail"
       v-for="route in filteredRoutes"
       v-bind:key="route.route_id"
       v-bind:route="route"
     />
+    <route-detail v-show="!displayDetail"/>
   </div>
 </template>
 
 <script>
+import RouteDetail from '../../views/RouteDetail.vue';
 import RouteThumb from "./RouteThumb.vue";
+
 
 
 export default {
@@ -29,12 +33,14 @@ export default {
         ascent: 0,
       },
       showRouteTile: false,
+      displayDetail: true,
       routes: [],
       
     };
   },
   components: {
     RouteThumb,
+    RouteDetail,
     
   },
   computed: {
@@ -44,7 +50,8 @@ export default {
       const routes = this.$store.state.routes;
       if (routeFilter != "") {
         filteredRoutes = routes.filter((route) =>
-          route.routeName.toLowerCase().includes(routeFilter.toLowerCase())
+          route.routeName.toLowerCase()
+          .includes(routeFilter.toLowerCase())
         );
         return filteredRoutes;
       } else return this.$store.state.routes;
