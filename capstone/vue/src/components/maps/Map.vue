@@ -142,7 +142,7 @@ export default {
     },
 
     getDistance(start, end) {
-      axios = require('axios')
+      let axios = require('axios')
       var config = {
         method: 'get',
         url: 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + start + '&destinations=' + end + '&units=imperial&key=AIzaSyDjB5lrCyoXaoU7Lv4RXi909TRAq5Wua9g',
