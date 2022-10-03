@@ -1,29 +1,31 @@
-<template>
+ <template>
+ 
   <div id="app">
     <Map />
     <div id="nav">
       <router-link v-bind:to="{ name: 'home' }"><h3>cicleta</h3></router-link
       >&nbsp;|&nbsp;
-      <router-link
+    
+      <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
+        <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
         >Logout</router-link
       >
-      <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
     </div>
     <router-view />
-    <div class="control-bar">
+    <!-- <div class="control-bar">
       <button class="btn">
         <router-link v-bind:to="{ name: 'home' }">Home</router-link>
       </button>
       <button class="btn">
         <router-link v-bind:to="{ name: 'map' }">Map</router-link>
       </button>
-      <!-- <router-link v-bind:to="{ name: 'home' }">Home</router-link> -->
+    
       <button class="btn">
         <router-link v-bind:to="{ name: 'profile' }">Profile</router-link>
       </button>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -34,18 +36,39 @@ export default {
 };
 </script>
 <style>
+*::-webkit-scrollbar{
+  width:.5em;
+  height:10px;  
+}
+*::-webkit-scrollbar-thumb{
+    background-color: darkgrey;
+    border-radius: 5px;
+  
+}
 @font-face {
   font-family: Inter-Light;
   src: url("../public/static/Inter-Light.ttf");
+}
+html{
+  background-color: black;
+  min-height: 100vh;
+  overflow: hidden;
+}
+body{
+  background-color: red;
+  min-height: 100vh;
+   overflow: hidden;
 }
 
 #nav {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: space-around;
   align-items: center;
   background-color: whitesmoke;
   border: 1px solid lightgray;
+  width: 100vw;
+  height: 5vh;
 }
 
 .control-bar {
@@ -70,25 +93,27 @@ export default {
   border-radius: 6px;
   padding: 10px;
 }
+router-link{
+  padding: 20px;
+}
 
 #app {
+  margin: none;
   font-family: Inter-Light, Arial, Helvetica, sans-serif;
   text-align: center;
   color: black;
   display: flex;
-  flex-grow: auto;
   flex-direction: column;
-  /* background-image: url("../public/mapNY.png"); */
   background-image: url("../public/mapNY.png");
   background-color: darkgray;
-  max-width: 800px;
   background-blend-mode: difference;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-clip: border-box;
-  min-height: 100vh;
+  height: 100vh;
   background-position: center 100%;
-  background-attachment: fixed;
+  /* background-attachment: fixed; */
+  
 }
 </style>
 

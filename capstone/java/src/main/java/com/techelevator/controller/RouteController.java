@@ -64,7 +64,7 @@ public class RouteController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/savetrackpoint", method = RequestMethod.POST)
-    public Trackpoint createTrackpoint(@Valid @RequestBody NewTrackpointDTO newTrackpointDTO){ //what does Valid do here, or what would lack of Valid do -- trackpoints are passed as an object {lat: 111.111, lng: 111.111} so you would save lat and long as one trackpoint and assign it a route ID
+    public Trackpoint createTrackpoint(@Valid @RequestBody NewTrackpointDTO newTrackpointDTO){ //what does Valid do here, or what would lack of Valid do
         Trackpoint newTrackpoint = buildTrackpointFromTrackpointDTO(newTrackpointDTO);
         newTrackpoint = trackpointDao.addTrackpoint(newTrackpoint);
         return newTrackpoint;

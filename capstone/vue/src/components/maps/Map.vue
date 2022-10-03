@@ -43,9 +43,9 @@ export default {
         mapTypeId: window.google.maps.MapTypeId.ROADMAP,
         panControl: true,
         zoomControl: true,
-        zoomControlOptions: {
-          position: window.google.maps.ControlPosition.RIGHT_TOP,
-        },
+          zoomControlOptions: {
+      position: window.google.maps.ControlPosition.RIGHT_TOP,
+    },
         mapTypeControl: true,
         scaleControl: true,
         streetViewControl: true,
@@ -194,9 +194,9 @@ export default {
 </script>
 
 <style scoped>
-.wrapper {
+.wrapper{
   display: flex;
-  position: relative;
+  position:relative;
   height: 100vh;
   width: 100vw;
 }
@@ -244,6 +244,39 @@ export default {
   border-bottom-right-radius: 2px;
 }
 
+.nav-controls{
+  
+  font-weight: bold;
+  display: flex;
+  background-color: #fff;
+  z-index: 1;
+  width:200px;
+  align-self: start;
+  border-radius: 3px;
+  margin-top: 65px;
+  margin-left: 10px;
+  margin-right: 0%;
+  position: absolute;
+ 
+}
+
+
+
+.button{
+  padding: 5px;
+  border-right-style: solid;
+  border-width: 2px;
+  border-color:  rgb(240, 240, 240);
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+
+.last-btn{
+  border: none;
+  padding: 5px;
+  border-top-right-radius: 2px;
+  border-bottom-right-radius: 2px;
+}
 .nav {
   text-align: center;
   position: absolute;
