@@ -49,38 +49,38 @@ export default new Vuex.Store({
     ],
     activity: [
       {
-        route_id: 0,
+        route_id: 125,
         user_id: 0,
         activity_name: "activity",
-        activity_id: 1,
+        activity_id: 99,
         is_public: true,
         photos: "xxxxx",
-        description: "cool",
-        activity_date: "today",
+        description: "active",
+        activity_date: "9/1/21",
         start_time: "morn",
         end_time: "never",
       },
       {
-        route_id: 0,
+        route_id: 123,
         user_id: 0,
         activity_name: "bike ride",
-        activity_id: 1,
+        activity_id: 37,
         is_public: true,
         photos: "xxxxx",
         description: "cool",
-        activity_date: "today",
+        activity_date: "5/5/5",
         start_time: "morn",
         end_time: "never",
       },
       {
-        route_id: 0,
+        route_id: 100,
         user_id: 0,
         activity_name: "run",
-        activity_id: 1,
+        activity_id: 55,
         is_public: true,
         photos: "xxxxx",
-        description: "cool",
-        activity_date: "today",
+        description: "old",
+        activity_date: "0 AD",
         start_time: "morn",
         end_time: "never",
       },
@@ -125,11 +125,13 @@ export default new Vuex.Store({
     SET_ROUTES(state, routes) {
       routes.forEach(route => {
         state.routes.unshift(route)
-      });
-      
+      }); 
     },
     SET_ACTIVITIES(state, activities) {
-      state.activity = activities
-    }
-  }
+      activities.forEach(activity => {
+        state.activity.unshift(activity)
+    });
+  },
+}
 })
+

@@ -61,8 +61,8 @@
 
       <routes-tile v-show="showRouteTile"/>
    
-
-      <div class="route-tile overlay" v-show="showActivitiesTile">
+      <activities-tile v-show="showActivitiesTile"/>
+      <!-- <div class="route-tile overlay" v-show="showActivitiesTile">
         <h3>My Activities</h3>
         <h4>Add Activity</h4>
         <input
@@ -75,7 +75,7 @@
           v-for="activity in filteredActivity"
           v-bind:key="activity.activity_id"
         />
-      </div>
+      </div> -->
 
       <Map class="map"></Map>
     </div>
@@ -89,10 +89,10 @@
 //expand search feature and apply to routes && bikes
 
 import Map from "../components/maps/Map.vue";
-import activity from "../components/tiles/activity.vue";
 import RouteService from "@/services/RouteServices.js"
 import ActivitiesService from "@/services/ActivitiesService.js"
 import RoutesTile from '../components/tiles/RoutesTile.vue';
+import ActivitiesTile from '../components/tiles/ActivitiesTile.vue';
 export default {
   name: "home",
 
@@ -113,13 +113,6 @@ export default {
         start_time: "",
         end_time: "",
       },
-      routeFilter: {
-        routeName: "",
-        description: "",
-        distance: 0,
-        elevation: 0,
-        ascent: 0,
-      },
       showRouteTile: false,
       showActivitiesTile: false,
       routes: [],
@@ -128,10 +121,9 @@ export default {
   },
   components: {
     Map,
-    
-    activity,
     RoutesTile,
-    // Activities,
+    ActivitiesTile,
+
     
   },
   mounted() {
@@ -156,7 +148,7 @@ export default {
         }
       });
       ActivitiesService
-      .getAllActivities()
+      .getActivities()
       .then(response => {
         this.$store.commit("SET_ACTIVITIES", response.data);
       })
@@ -181,17 +173,6 @@ export default {
         );
         return filteredActivity;
       } else return this.$store.state.activity;
-    },
-    filteredRoutes() {
-      let routeFilter = this.routeFilter.routeName;
-      let filteredRoutes = this.routes;
-      const routes = this.$store.state.routes;
-      if (routeFilter != "") {
-        filteredRoutes = routes.filter((route) =>
-          route.routeName.toLowerCase().includes(routeFilter.toLowerCase())
-        );
-        return filteredRoutes;
-      } else return this.$store.state.routes;
     },
     lastRoute() {
       const routes = this.$store.state.routes;

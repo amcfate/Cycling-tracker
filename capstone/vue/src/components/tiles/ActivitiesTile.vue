@@ -1,63 +1,66 @@
 <template>
-  <div class="route-tile overlay" >
-    <h3>Routes</h3>
-    <input type="text" id="route-search" v-model="routeFilter.routeName" />
-    <route-thumb
-      class="route-div"
-      v-for="route in filteredRoutes"
-      v-bind:key="route.route_id"
-      v-bind:route="route"
+  <div class="route-tile overlay">
+    <h3>My Activities</h3>
+    <input
+      type="text"
+      id="route-search"
+      v-model="activityFilter.activityName"
+    />
+    <activity
+      class="activity-div"
+      v-for="activity in filteredActivity"
+      v-bind:key="activity.activity_id"
+      v-bind:activity="activity"
     />
   </div>
 </template>
 
 <script>
-import RouteThumb from "./RouteThumb.vue";
-
-
+import Activity from "./activity.vue";
 export default {
-  name: "routes-tile",
-
+  name: "activities-tile",
+  components: {
+    Activity,
+  },
   data() {
     return {
-     
-      routeFilter: {
-        routeName: "",
+      activityFilter: {
+        route_id: 0,
+        user_id: 0,
+        activityName: "",
+        activity_id: 0,
+        is_public: true,
+        photos: "",
         description: "",
-        distance: 0,
-        elevation: 0,
-        ascent: 0,
+        activity_date: "",
+        start_time: "",
+        end_time: "",
       },
-      showRouteTile: false,
-      routes: [],
-      
+      showActivitiesTile: false,
+      activities: [],
     };
   },
-  components: {
-    RouteThumb,
-    
-  },
   computed: {
-    filteredRoutes() {
-      let routeFilter = this.routeFilter.routeName;
-      let filteredRoutes = this.routes;
-      const routes = this.$store.state.routes;
-      if (routeFilter != "") {
-        filteredRoutes = routes.filter((route) =>
-          route.routeName.toLowerCase().includes(routeFilter.toLowerCase())
+    filteredActivity() {
+      let activityFilter = this.activityFilter.activityName;
+      let filteredActivity = this.activities;
+      const activities = this.$store.state.activity;
+      if (activityFilter != "") {
+        filteredActivity = activities.filter((activity) =>
+          activity.activity_name
+            .toLowerCase()
+            .includes(activityFilter.toLowerCase())
         );
-        return filteredRoutes;
-      } else return this.$store.state.routes;
+        return filteredActivity;
+      } else return this.$store.state.activity;
     },
   },
-  
 };
 </script>
 
 <style>
-@media only screen and (min-width: 700px){
-
- .route-tile {
+@media only screen and (min-width: 700px) {
+  .route-tile {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -82,15 +85,13 @@ export default {
     justify-self: center;
     justify-self: end;
   }
-   #route-search {
+  #route-search {
     margin: 5%;
   }
-
 }
 
 @media only screen and (min-width: 1440px) {
-
-    .route-tile {
+  .route-tile {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -121,8 +122,7 @@ export default {
 }
 
 @media only screen and (max-width: 700px) {
-
-    .route-tile {
+  .route-tile {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -139,7 +139,7 @@ export default {
     overflow: auto;
     margin-bottom: 32%;
   }
-   .route-div {
+  .route-div {
     height: 50%;
     width: 80%;
     margin: 10px;
@@ -149,5 +149,4 @@ export default {
     justify-self: end;
   }
 }
-
 </style>

@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-      <h2 class="header">LastRoute</h2>
+      <h2 class="header">{{activity.activity_name}}</h2>
       <div class="info">
-      <h5>Length</h5>
-      <p>500 miles</p>
-      <h5>Difficulty</h5>
-      <p>easy</p>
+      <h5>Description</h5>
+      <p>{{activity.description}}</p>
+      <h5>Date</h5>
+      <p>{{activity.activity_date}}</p>
       <h5></h5>
       </div>
       <div class="mapDiv"></div>    
@@ -15,19 +15,16 @@
 <script>
 
 export default {
-  name: "home",
+  name: "activity",
+  props: ["activity"],
+
   data() {
     return {
       ActivityClicked: false,
-      activity: [],
+     
     };
   },
-  components: {
-    
-  },
-  created:{
-      
-  }
+
 };
 </script>
 
