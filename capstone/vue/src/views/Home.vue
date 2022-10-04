@@ -1,18 +1,19 @@
 <template>
   <div class="main">
-
     <nav class="desktop-nav" v-if="!isMobile">
-      <h1 class="logo">Velocidad</h1>
+      <h1 class="logo">Velocity</h1>
       <h2></h2>
 
-      <div class="highlighter"><h3
-        @click="
-          showActivitiesTile = false;
-          showRouteTile = !showRouteTile;
-        "
-      >
-        Routes
-      </h3></div>
+      <div class="highlighter">
+        <h3
+          @click="
+            showActivitiesTile = false;
+            showRouteTile = !showRouteTile;
+          "
+        >
+          Routes
+        </h3>
+      </div>
 
       <h3
         @click="
@@ -20,28 +21,33 @@
           showActivitiesTile = !showActivitiesTile;
         "
       >
-      Activities
+        Activities
       </h3>
 
-     <h3> <router-link
-        v-bind:to="{ name: 'profile' }"
-        style="text-decoration: none; color: inherit"
-        class="h3"
-        >Profile</router-link
-      ></h3>
+      <h3>
+        <router-link
+          v-bind:to="{ name: 'profile' }"
+          style="text-decoration: none; color: inherit"
+          class="h3"
+          >Profile</router-link
+        >
+      </h3>
 
-       <router-link
+      <h3>
+        <router-link
+          v-bind:to="{ name: 'leaderboard' }"
+          style="text-decoration: none; color: inherit"
+          class="h3"
+          >Leaderboard</router-link
+        >
+      </h3>
+
+      <router-link
         v-bind:to="{ name: 'logout' }"
         style="text-decoration: none; color: inherit"
-        class="h3"
+        class="logout"
         ><h3>Logout</h3></router-link
       >
-      <h3> <router-link
-        v-bind:to="{ name: 'leaderboard' }"
-        style="text-decoration: none; color: inherit"
-        class="h3"
-        >Leaderboard</router-link
-      ></h3>
     </nav>
 
     <nav class="desktop-nav" v-else>
@@ -69,16 +75,12 @@
         class="h3"
         ><h3>Profile</h3></router-link
       >
-
-     
     </nav>
 
     <div class="view">
+      <routes-tile v-show="showRouteTile" />
 
-      <routes-tile v-show="showRouteTile"/>
-   
-      <activities-tile v-show="showActivitiesTile"/>
-
+      <activities-tile v-show="showActivitiesTile" />
 
       <Map class="map"></Map>
     </div>
@@ -88,17 +90,15 @@
 
 
 <script>
-
 //expand search feature and apply to routes && bikes
 
 import Map from "../components/maps/Map.vue";
-import RouteService from "@/services/RouteServices.js"
-import ActivitiesService from "@/services/ActivitiesService.js"
-import RoutesTile from '../components/tiles/RoutesTile.vue';
-import ActivitiesTile from '../components/tiles/ActivitiesTile.vue';
+import RouteService from "@/services/RouteServices.js";
+import ActivitiesService from "@/services/ActivitiesService.js";
+import RoutesTile from "../components/tiles/RoutesTile.vue";
+import ActivitiesTile from "../components/tiles/ActivitiesTile.vue";
 export default {
   name: "home",
-
 
   data() {
     return {
@@ -114,37 +114,23 @@ export default {
     Map,
     RoutesTile,
     ActivitiesTile,
-
-    
   },
   mounted() {
     this.$nextTick(() => {
       window.addEventListener("resize", this.onResize);
       this.onResize();
     });
+    this.getAllActivities();
+    this.getAllRoutes();
   },
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
+    this.clearData();
   },
-   created(){
-      RouteService
-      .getAllRoutes()
-      .then(response => {
-        this.$store.commit("SET_ROUTES", response.data);
-        this.getAllActivities();
-      })
-      .catch(error => {
-        if (error.response.status == 404) {
-          this.$router.push({name: 'NotFound'});
-        }
-      });
-    
-
-  },
+  created() {},
 
   computed: {
-
     lastRoute() {
       const routes = this.$store.state.routes;
       const lastRoute = routes.pop();
@@ -164,28 +150,35 @@ export default {
         this.isMobile = false;
       }
     },
-    getAllActivities(){
-          ActivitiesService
-      .getActivities()
-      .then(response => {
-        this.$store.commit("SET_ACTIVITIES", response.data);
-      })
-      .catch(error => {
-        if (error.response.status == 404) {
-          this.$router.push({name: 'NotFound'});
-        }
-      });
-    }
-
+    clearData() {
+      this.$store.commit("CLEAR_DATA");
+    },
+    getAllActivities() {
+      ActivitiesService.getActivities()
+        .then((response) => {
+          this.$store.commit("SET_ACTIVITIES", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: "NotFound" });
+          }
+        });
+    },
+    getAllRoutes() {
+      RouteService.getAllRoutes()
+        .then((response) => {
+          this.$store.commit("SET_ROUTES", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: "NotFound" });
+          }
+        });
+    },
   },
 };
-
-
 </script>
-<style>
-
- 
-
+<style >
 @media only screen and (min-width: 700px) {
   .view {
     display: flex;
@@ -202,8 +195,9 @@ export default {
     height: 100vh;
   }
   .logo {
-    padding-top: 6%;
-    padding-bottom: 8%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    border-radius: 4px;
   }
   /* h2 {
     border-bottom: 1px;
@@ -211,29 +205,36 @@ export default {
     border-color: black;
     margin-left: 30%;
     margin-right: 30%;
-  } */
-  .logo:hover {
-    background-color: whitesmoke;
   }
+
   .desktop-nav {
     height: 100%;
     width: 20%;
-    background: lightgray;
+    background: rgb(114, 111, 111);
+   display: flex;
+   flex-flow: column;
   }
+  .logout{
+    margin-top: auto;
+    font-weight: 100;
+  }
+  .logout h3{
+    font-weight: 1;
+  }
+
   h3 {
+    margin: 10px;
     padding-top: 4%;
     padding-bottom: 4%;
+    border-radius: 4px;
+
   }
-  h3:hover {
-    background-color: whitesmoke;
-  }
+
   .h3 {
     padding-top: 4%;
     padding-bottom: 4%;
   }
-  .h3:hover {
-    background-color: whitesmoke;
-  }
+ 
 
   .activity-div {
     height: 50%;
@@ -374,8 +375,6 @@ export default {
     overflow: hidden;
   }
 
- 
-
   .activity {
     height: 50%;
     width: 80%;
@@ -384,7 +383,7 @@ export default {
     justify-self: center;
     justify-self: end;
   }
- 
+
   .activity-div {
     height: 50%;
     width: 90%;
@@ -412,17 +411,17 @@ export default {
     float: inherit;
   }
 
-
-
-  h3, .h3{
+  h3,
+  .h3 {
     text-align: center;
     padding: 1%;
   }
 
-  h3:hover, h3:hover {
-  color: whitesmoke;
+  h3:hover,
+  h3:hover {
+    color: whitesmoke;
   }
- 
+
   /* .h3:hover {
     background-color: whitesmoke;
   } */

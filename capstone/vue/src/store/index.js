@@ -18,6 +18,7 @@ if (currentToken != null) {
 
 export default new Vuex.Store({
   state: {
+    isMobile: true,
     token: currentToken || '',
 
     user: currentUser || {},
@@ -140,5 +141,14 @@ export default new Vuex.Store({
       });
     },
   },
-})
+  CHANGE_IS_MOBILE(state) {
+    state.isMobile = !state.isMobile;
+
+  },
+  CLEAR_DATA(state) {
+    state.activity = [];
+    state.routes = [];
+  }
+}
+)
 

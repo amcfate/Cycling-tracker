@@ -67,12 +67,12 @@ const router = new Router({
       }
     },
     {
-      path: '/route/:id',
-      name: 'route-detail',
+      path: "/route",
+      name: "route-detail",
       component: RouteDetail
     },
     {
-      path: '/activity/{id}',
+      path: '/activity/:id',
       name: 'activity-detail',
       component: ActivityDetail
     },

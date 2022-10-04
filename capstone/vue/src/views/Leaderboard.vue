@@ -1,6 +1,6 @@
 <template>
   <div class = "leaderboard">  
-    <h4>Top Athletes on Cicleta</h4>
+    <h4>Top Athletes on Velocidad</h4>
     <table>
       <tr>
         <th>Position</th>

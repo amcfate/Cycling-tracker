@@ -1,15 +1,13 @@
 <template>
   <div class="route-detail">
-
+      <div>{{route.name}}</div>
   </div>
 </template>
 
 <script>
 export default {
   name: 'route-detail',
-  props:{
-    route: Object
-  }
+  props:["route"]
 
 }
 </script>
