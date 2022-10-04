@@ -18,25 +18,29 @@ CREATE TABLE user_profile (
 	cycling_team varchar,
 	user_weight int,
 	user_age int,
+	photo varchar,
 	CONSTRAINT FK_user_profile FOREIGN KEY (user_id) REFERENCES users (user_id),
 	CONSTRAINT FK_user_profile_username FOREIGN KEY (username) REFERENCES users (username)
 );
 
 CREATE TABLE user_gear (
+    gear_id SERIAL NOT NULL,
 	user_id int NOT NULL,
 	misc_gear varchar,
+	CONSTRAINT PK_gear_id PRIMARY KEY (gear_id),
 	CONSTRAINT FK_user_gear FOREIGN KEY (user_id) REFERENCES users (user_id)
 	
 );
 
 CREATE TABLE user_bikes (
-	type varchar,
-	bike_name varchar,
 	bike_id SERIAL NOT NULL,
 	user_id int,
+	type varchar,
+	bike_name varchar,
 	bike_weight decimal,
 	bike_description varchar,
-	CONSTRAINT PK_bike PRIMARY KEY (bike_id)
+	CONSTRAINT PK_bike PRIMARY KEY (bike_id),
+	CONSTRAINT FK_user_id FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 
 CREATE SEQUENCE seq_route_id
@@ -70,17 +74,24 @@ CREATE TABLE trackpoint (
 );
 
 CREATE TABLE activity (
+<<<<<<< HEAD
     activity_id SERIAL NOT NULL,
+=======
+
+	activity_id SERIAL NOT NULL,
+>>>>>>> main
 	route_id int,
 	user_id int,
 	activity_name varchar,
 	is_public boolean,
 	photos varchar,
 	description varchar,
-	activity_date date NOT NULL DEFAULT CURRENT_DATE,
+	activity_date date DEFAULT CURRENT_DATE,
 	start_time time,
 	end_time time,
+
     CONSTRAINT PK_activity PRIMARY KEY (activity_id),
+
 	CONSTRAINT FK_activity_route FOREIGN KEY (route_id) REFERENCES route (route_id),
 	CONSTRAINT FK_activity_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );

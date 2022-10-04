@@ -1,25 +1,22 @@
 <template>
   <div class="tile">
     <div class="tile-head">
-      <h3>My Gear</h3>
-      <button class="gear-btn" @click="showGearForm = !showGearForm">
-        Add Gear
+      <h3>My Bikes</h3>
+      <button class="bikes-btn" @click="showBikeForm = !showBikeForm">
+        Add Bikes
       </button>
     </div>
-
-    <new-gear-form
+    <new-bike-form
       class="form"
-      v-show="showGearForm"
-      :userId="userGear[0].userId"
+      v-show="showBikeForm"
+      :userId="userBikes[0].userId"
     />
     <div class="tile-content">
-      <div
-        class="display-content"
-        v-for="gear in userGear"
-        v-bind:key="gear.userId"
-      >
-        <div class="gear-tiles">
-          {{ gear.miscGear }}
+      <div class="display-content" v-for="bike in userBikes" :key="bike.userId">
+        <div class="bike-tiles">
+          {{ bike.bikeName }}
+          {{ bike.type }}
+          {{ bike.bikeDescription }}
         </div>
       </div>
     </div>
@@ -27,47 +24,49 @@
 </template>
 
 <script>
-import gearService from "../../services/GearService.js";
-import newGearForm from "../forms/NewGearForm.vue";
+import bikeService from "../../services/BikeService.js";
+import newBikeForm from "../forms/NewBikeForm.vue";
 export default {
-  name: "gear",
+  name: "bikes",
   components: {
-    newGearForm,
+    newBikeForm,
   },
   data() {
     return {
-      showGearForm: false,
-      userGear: [
+      showBikeForm: false,
+      userBikes: [
         {
+          bikeId: "",
           userId: "",
-          miscGear: "",
+          type: "",
+          bikeName: "",
+          bikeWeight: "",
+          bikeDescription: "",
         },
       ],
     };
   },
   methods: {
-    loadGear() {
-      gearService.getUserGear().then((response) => {
-        this.userGear = response.data;
+    loadBikes() {
+      bikeService.getUserBikes().then((response) => {
+        this.userBikes = response.data;
       });
     },
   },
   mounted() {
-    this.loadGear();
-    console.log(this.userGear);
+    this.loadBikes();
+    console.log(this.userBikes);
   },
 };
 </script>
 
 <style>
-.tile-head {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-}
 .tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   margin: 12px;
-  background-color: #9bcea8;
+  background-color: rgba(69, 203, 178, 255);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: blur;
@@ -76,21 +75,19 @@ export default {
   height: auto;
   padding: 6px;
 }
+.tile-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 .tile h3 {
   text-align: left;
   padding: 6px;
 }
-
-.tile-content {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-}
-
 .display-content {
   display: flex;
   flex-direction: row;
-  width: fit-content;
+  /* width: fit-content; */
   flex-wrap: wrap;
   margin: 6px;
   background-color: white;
@@ -107,12 +104,12 @@ export default {
   padding: 6px;
   text-align: left;
 }
-.form {
+/* .form {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-}
-.gear-btn {
+} */
+.bikes-btn {
   margin: 6px;
   background-color: white;
   border-block-style: none;

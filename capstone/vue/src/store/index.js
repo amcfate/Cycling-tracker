@@ -20,7 +20,7 @@ export default new Vuex.Store({
   state: {
     isMobile: true,
     token: currentToken || '',
-    
+
     user: currentUser || {},
     routes: [
       {
@@ -97,13 +97,7 @@ export default new Vuex.Store({
       },
     ],
     user_profile: [
-      // {
-      //   user_id: 5,
-      //   username: "markb",
-      //   cycling_team: "",
-      //   user_weight: "",
-      //   userAge: 25
-      // }
+
     ]
   },
   mutations: {
@@ -123,24 +117,38 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
+    ADD_ROUTE(state, route) {
+      state.routes.unshift(route)
+    },
+    ADD_GEAR(state, gear) {
+      state.user_gear.unshift(gear);
+    },
+    NEW_BIKE(state, newBike) {
+      state.user_gear.unshift(newBike);
+    },
+    ADD_ACTIVITY(state, newActivity) {
+      state.activity.unshift(newActivity);
+    },
+
     SET_ROUTES(state, routes) {
       routes.forEach(route => {
         state.routes.unshift(route)
-      }); 
+      });
     },
     SET_ACTIVITIES(state, activities) {
       activities.forEach(activity => {
         state.activity.unshift(activity)
-    });
+      });
+    },
   },
-  CHANGE_IS_MOBILE(state){
+  CHANGE_IS_MOBILE(state) {
     state.isMobile = !state.isMobile;
-    
+
   },
-  CLEAR_DATA(state){
+  CLEAR_DATA(state) {
     state.activity = [];
     state.routes = [];
   }
 }
-})
+)
 

@@ -56,8 +56,11 @@ public class JdbcRouteDao implements RouteDao{
 
     }
 
+
     @Override
-    public boolean create(int routeId, String routeName, String description, double distanceMiles, double elevation, double ascent) {
+    public boolean delete(int routeId) {
+        String sql = "DELETE FROM route WHERE route_id = ?";
+        jdbcTemplate.update(sql, routeId);
         return false;
     }
 

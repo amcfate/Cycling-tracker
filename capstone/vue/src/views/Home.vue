@@ -1,18 +1,19 @@
 <template>
   <div class="main">
-
     <nav class="desktop-nav" v-if="!isMobile">
       <h1 class="logo">Velocity</h1>
       <h2></h2>
 
-      <div class="highlighter"><h3
-        @click="
-          showActivitiesTile = false;
-          showRouteTile = !showRouteTile;
-        "
-      >
-        Routes
-      </h3></div>
+      <div class="highlighter">
+        <h3
+          @click="
+            showActivitiesTile = false;
+            showRouteTile = !showRouteTile;
+          "
+        >
+          Routes
+        </h3>
+      </div>
 
       <h3
         @click="
@@ -20,25 +21,28 @@
           showActivitiesTile = !showActivitiesTile;
         "
       >
-      Activities
+        Activities
       </h3>
 
-     <h3> <router-link
-        v-bind:to="{ name: 'profile' }"
-        style="text-decoration: none; color: inherit"
-        class="h3"
-        >Profile</router-link
-      ></h3>
+      <h3>
+        <router-link
+          v-bind:to="{ name: 'profile' }"
+          style="text-decoration: none; color: inherit"
+          class="h3"
+          >Profile</router-link
+        >
+      </h3>
 
-      
-      <h3> <router-link
-        v-bind:to="{ name: 'leaderboard' }"
-        style="text-decoration: none; color: inherit"
-        class="h3"
-        >Leaderboard</router-link
-      ></h3>
+      <h3>
+        <router-link
+          v-bind:to="{ name: 'leaderboard' }"
+          style="text-decoration: none; color: inherit"
+          class="h3"
+          >Leaderboard</router-link
+        >
+      </h3>
 
-       <router-link
+      <router-link
         v-bind:to="{ name: 'logout' }"
         style="text-decoration: none; color: inherit"
         class="logout"
@@ -72,16 +76,12 @@
         class="h3"
         ><h3>Profile</h3></router-link
       >
-
-     
     </nav>
 
     <div class="view">
+      <routes-tile v-show="showRouteTile" />
 
-      <routes-tile v-show="showRouteTile"/>
-   
-      <activities-tile v-show="showActivitiesTile"/>
-
+      <activities-tile v-show="showActivitiesTile" />
 
       <Map class="map"></Map>
     </div>
@@ -91,7 +91,6 @@
 
 
 <script>
-
 //expand search feature and apply to routes && bikes
 
 import Map from "../components/maps/Map.vue";
@@ -100,7 +99,6 @@ import RoutesTile from '../components/tiles/RoutesTile.vue';
 import ActivitiesTile from '../components/tiles/ActivitiesTile.vue';
 export default {
   name: "home",
-
 
   data() {
     return {
@@ -116,8 +114,6 @@ export default {
     Map,
     RoutesTile,
     ActivitiesTile,
-
-    
   },
   mounted() {
     this.$nextTick(() => {
@@ -136,9 +132,9 @@ export default {
       
 
   },
+ 
 
   computed: {
-
     lastRoute() {
       const routes = this.$store.state.routes;
       const lastRoute = routes.pop();
@@ -158,23 +154,16 @@ export default {
         this.isMobile = false;
       }
     },
-    clearData(){
-      this.$store.commit('CLEAR_DATA')
+    clearData() {
+      this.$store.commit("CLEAR_DATA");
     },
 
 
   },
 };
-
-
 </script>
 <style >
-
- 
-
 @media only screen and (min-width: 700px) {
-
-  
   .view {
     display: flex;
     margin: 0;
@@ -194,9 +183,8 @@ export default {
     padding-top: 4%;
     padding-bottom: 0%;
     border-radius: 4px;
-  
   }
-  h2 {
+  /* h2 {
     border-bottom: 1px;
     border-style: solid;
     border-color: black;
@@ -299,13 +287,13 @@ transition: 100ms ease-in-out;
     padding-top: 6%;
     padding-bottom: 8%;
   }
-  h2 {
+  /* h2 {
     border-bottom: 1px;
     border-style: solid;
     border-color: black;
     margin-left: 30%;
     margin-right: 30%;
-  }
+  } */
   .logo:hover {
     background-color: whitesmoke;
   }
@@ -385,8 +373,6 @@ transition: 100ms ease-in-out;
     overflow: hidden;
   }
 
- 
-
   .activity {
     height: 50%;
     width: 80%;
@@ -395,7 +381,7 @@ transition: 100ms ease-in-out;
     justify-self: center;
     justify-self: end;
   }
- 
+
   .activity-div {
     height: 50%;
     width: 90%;
@@ -423,17 +409,17 @@ transition: 100ms ease-in-out;
     float: inherit;
   }
 
-
-
-  h3, .h3{
+  h3,
+  .h3 {
     text-align: center;
     padding: 1%;
   }
 
-  h3:hover, h3:hover {
-  color: whitesmoke;
+  h3:hover,
+  h3:hover {
+    color: whitesmoke;
   }
- 
+
   /* .h3:hover {
     background-color: whitesmoke;
   } */

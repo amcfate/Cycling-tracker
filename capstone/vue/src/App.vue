@@ -94,15 +94,15 @@ export default {
   font-family: Inter-Light;
   src: url("../public/static/Inter-Light.ttf");
 }
-html{
+html {
   background-color: black;
   min-height: 100vh;
   overflow: hidden;
 }
-body{
+body {
   background-color: red;
   min-height: 100vh;
-   overflow: hidden;
+  overflow: hidden;
 }
 
 #nav {
@@ -138,7 +138,7 @@ body{
   border-radius: 6px;
   padding: 10px;
 }
-router-link{
+router-link {
   padding: 20px;
 }
 
@@ -158,7 +158,6 @@ router-link{
   height: 100vh;
   background-position: center 100%;
   /* background-attachment: fixed; */
-  
 }
 </style>
 
