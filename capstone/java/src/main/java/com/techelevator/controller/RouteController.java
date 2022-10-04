@@ -35,6 +35,7 @@ public class RouteController {
 
     //GET methods
 
+
     @RequestMapping(value = "/gettrackpoint/{id}", method = RequestMethod.GET)
     public Trackpoint getTrackpointById (@PathVariable int id){
         return trackpointDao.getTrackpointById(id);
@@ -64,13 +65,11 @@ public class RouteController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/savetrackpoint", method = RequestMethod.POST)
-    public Trackpoint createTrackpoint(@Valid @RequestBody NewTrackpointDTO newTrackpointDTO){ //what does Valid do here, or what would lack of Valid do
+    public void createTrackpoint(@Valid @RequestBody NewTrackpointDTO newTrackpointDTO){ //what does Valid do here, or what would lack of Valid do
         Trackpoint newTrackpoint = buildTrackpointFromTrackpointDTO(newTrackpointDTO);
-        newTrackpoint = trackpointDao.addTrackpoint(newTrackpoint);
-        return newTrackpoint;
+        trackpointDao.addTrackpoint(newTrackpoint);
     }
 
-    @ResponseStatus(HttpStatus.CREATED)
     @RequestMapping(value = "/saveroute", method = RequestMethod.POST) // -- A route would simply be a group of trackpoints
     public Route createRoute(@Valid @RequestBody NewRouteDTO newRouteDTO){
         Route newRoute =buildRouteFromRouteDTO(newRouteDTO);
@@ -81,6 +80,7 @@ public class RouteController {
    //Other methods
 
     private Trackpoint buildTrackpointFromTrackpointDTO(NewTrackpointDTO trackpointDTO){
+
         return new Trackpoint(trackpointDTO.getRouteId(),
                               trackpointDTO.getTrackpointId(),
                               trackpointDTO.getLatitude(),
