@@ -45,6 +45,7 @@ public class JdbcUserProfileDao implements UserProfileDao{
         userProfile.setCyclingTeam(rs.getString("cycling_team"));
         userProfile.setUserWeight(rs.getDouble("user_weight"));
         userProfile.setUserAge(rs.getInt("user_age"));
+        userProfile.setPhoto(rs.getString("photo"));
         return userProfile;
     }
 }

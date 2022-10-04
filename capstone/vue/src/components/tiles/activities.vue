@@ -2,10 +2,17 @@
   <div class="tile">
     <div class="tile-head">
       <h3>My Activities</h3>
-      <button class="activity-btn">Add Activity</button>
+      <button id="activity-btn" @click="showActivityForm = !showActivityForm">
+        Add Activity
+      </button>
     </div>
-    <div class="display-content" v-for="activity in activities" :key="activity">
-      <h2>{{ activity.activityName }}</h2>
+    <new-activity-form
+      class="form"
+      v-show="showActivityForm"
+      :userId="activities[0].userId"
+    />
+    <div id="display-content" v-for="activity in activities" :key="activity">
+      <h3>{{ activity.activityName }}</h3>
       <ul class="act-details">
         <li>
           {{ activity.activityDate }} | {{ activity.startTime }} |
@@ -19,15 +26,19 @@
 
 <script>
 import activitiesService from "../../services/ActivitiesService.js";
+import NewActivityForm from "../forms/NewActivityForm.vue";
 export default {
   name: "activities",
-  components: {},
+  components: {
+    NewActivityForm,
+  },
   data() {
     return {
+      showActivityForm: false,
       activities: [
         {
           routeId: "",
-          userId: "int",
+          userId: "",
           activityName: "",
           activityId: "",
           isPublic: "",
@@ -55,8 +66,12 @@ export default {
 
 <style scoped>
 .tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   margin: 12px;
-  background-color: lightgray;
+  background-color: ##9bcea8;
+  /* background-color: rgb(111, 111, 111); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: blur;
@@ -66,30 +81,39 @@ export default {
   padding: 6px;
 }
 
-.display-content {
+#display-content,
+.form {
   margin: 6px;
-  background-color: whitesmoke;
-  border: 1px solid black;
+  background-color: white;
+  padding: 6px;
+  size: auto;
+  /* border: 1px solid black; */
   border-radius: 8px;
-  text-decoration-color: black;
+  box-shadow: 2px 10px 20px darkgray;
   text-align: left;
 }
+
 .tile-head {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 }
+
+.tile-head h3 {
+  color: black;
+}
+
 .tile h3 {
   text-align: left;
   padding: 6px;
 }
 
-.activity-btn {
+#activity-btn {
   margin: 6px;
-  background-color: whitesmoke;
-  border: 1px solid black;
+  background-color: white;
   border-radius: 8px;
-  text-decoration-color: black;
+  border-block-style: none;
+  box-shadow: 2px 10px 20px darkgray;
   text-align: center;
 }
 </style>

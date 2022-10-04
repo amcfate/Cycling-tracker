@@ -3,6 +3,7 @@
     <top-nav v-if="!isMobile"/>
     <user-profile />
     <activities />
+    <bikes />
     <gear />
     
   </div>
@@ -10,6 +11,7 @@
 
 <script>
 import activities from "../components/tiles/activities.vue";
+import Bikes from "../components/tiles/Bikes.vue";
 import Gear from "../components/tiles/Gear.vue";
 import userProfile from "../components/tiles/UserProfile.vue";
 import TopNav from '../components/TopNav.vue';
@@ -20,6 +22,7 @@ export default {
   components: {
     userProfile,
     activities,
+    Bikes,
     Gear,
     TopNav,
    },
@@ -60,5 +63,6 @@ export default {
   display: flex;
   flex-direction: column;
   overflow: auto;
+  align-items: center;
 }
 </style>

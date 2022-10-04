@@ -16,10 +16,17 @@ INSERT INTO user_bikes (type, bike_name, user_id, bike_weight, bike_description)
 
 
 
-
 INSERT INTO user_profile (user_id, username, cycling_team, user_weight, user_age) VALUES (3, 'bob', 'Avg. Joes', 180, 30);
 
 
+INSERT INTO user_gear (user_id, misc_gear)
+	VALUES (3, 'Shoes: Giro Empire');
+
+INSERT INTO user_gear (user_id, misc_gear)
+ 	VALUES (3, 'CPU: Wahoo Bolt');
+
+INSERT INTO user_gear (user_id, misc_gear)
+ 	VALUES (3, 'Saddle: Fi zik Aireon');
 
 
 INSERT INTO user_profile (user_id, cycling_team, user_weight, user_age) VALUES
@@ -27,5 +34,6 @@ INSERT INTO user_profile (user_id, cycling_team, user_weight, user_age) VALUES
 
 INSERT INTO user_gear (user_id, misc_gear) VALUES
 (3, 'Shimano RX8, Size 16');
+
 
 COMMIT TRANSACTION;

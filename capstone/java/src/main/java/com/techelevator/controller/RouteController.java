@@ -77,6 +77,12 @@ public class RouteController {
         return newRoute;
     }
 
+    @ResponseStatus(HttpStatus.OK)
+    @RequestMapping(value = "/deleteroute/{id}", method = RequestMethod.DELETE)
+    public void deleteRoute(@PathVariable int id){
+        routeDao.delete(id);
+    }
+
    //Other methods
 
     private Trackpoint buildTrackpointFromTrackpointDTO(NewTrackpointDTO trackpointDTO){

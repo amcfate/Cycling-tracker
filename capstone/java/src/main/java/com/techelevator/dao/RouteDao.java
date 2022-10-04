@@ -12,7 +12,7 @@ public interface RouteDao {
 
     Route addRoute (Route newRoute);
 
-    boolean create(int routeId, String routeName, String description, double distanceMiles, double elevation, double ascent);
+    boolean delete(int routeId);
 
 
 }
