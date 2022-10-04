@@ -8,17 +8,24 @@
           <input type="checkbox" v-model="newActivity.isPublic" />
         </label>
         <label for="routeId">Select Route: </label>
-        <input
+        <!-- <input
+          class="form-el"
           type="text"
           v-model="newActivity.routeId"
           placeholder="Type routeId FOR NOW..."
-        />
-        <!-- <select
-          class="route-sel"
-          name="routeId"
-          id=""
-          v-model="newActivity.routeId"
-        ></select> -->
+        /> -->
+        <select name="routeId" id="">
+          <option value="routeId" v-for="route in routes" :key="route">
+            {{ route.routeName }}
+          </option>
+        </select>
+        <label for="BikeId">Select your bike: </label>
+        <!-- needs to v model to newactivity.bikeid once db is updated -->
+        <select name="bike" id="">
+          <option value="bikeId" v-for="bike in userBikes" :key="bike">
+            {{ bike.bikeName }}
+          </option>
+        </select>
       </div>
       <div class="container">
         <label class="form-el" for="activityName">Activity Name:</label>
@@ -44,7 +51,9 @@
         <input class="form-el" type="time" v-model="newActivity.startTime" />
         <label class="form-el" for="endTime">End time:</label>
         <input class="form-el" type="time" v-model="newActivity.endTime" />
-        <button class="add-btn" @click="submitForm()">Add Activity</button>
+        <button class="add-btn form-el" @click="submitForm()">
+          Add Activity
+        </button>
       </div>
     </form>
   </div>
@@ -52,10 +61,32 @@
 
 <script>
 import activitiesService from "../../services/ActivitiesService.js";
+import bikeService from "../../services/BikeService.js";
+import RouteService from "../../services/RouteServices.js";
 export default {
-  props: ["userId"],
+  // props: ["userId"],
+  components: {},
   data() {
     return {
+      routes: [
+        {
+          routeName: "",
+          description: "",
+          distance: "",
+          elevation: "",
+          ascent: "",
+        },
+      ],
+      userBikes: [
+        {
+          bikeId: "",
+          userId: "",
+          type: "",
+          bikeName: "",
+          bikeWeight: "",
+          bikeDescription: "",
+        },
+      ],
       newActivity: {
         activityName: "",
         activityDate: "",
@@ -79,8 +110,20 @@ export default {
         }
       });
     },
+    loadBikes() {
+      bikeService.getUserBikes().then((response) => {
+        this.userBikes = response.data;
+      });
+    },
+    loadRoutes() {
+      RouteService.getAllRoutes().then((response) => {
+        this.routes = response.data;
+      });
+    },
   },
   mounted() {
+    this.loadRoutes();
+    this.loadBikes();
     this.newActivity = {
       activityName: this.activityName,
       activityDate: this.activityDate,
@@ -136,5 +179,6 @@ export default {
 .form-el {
   margin: 4px;
   flex-direction: row;
+  /* border-radius: 4px; */
 }
 </style>

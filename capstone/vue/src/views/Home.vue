@@ -3,7 +3,23 @@
     <nav class="desktop-nav" v-if="!isMobile">
       <h1 class="logo">Velocity</h1>
       <h2></h2>
+      <h3>
+        <router-link
+          v-bind:to="{ name: 'profile' }"
+          style="text-decoration: none; color: inherit"
+          class="h3"
+          >{{ userProfile.username }}</router-link
+        >
+      </h3>
 
+      <h3
+        @click="
+          showRouteTile = false;
+          showActivitiesTile = !showActivitiesTile;
+        "
+      >
+        Activities
+      </h3>
       <div class="highlighter">
         <h3
           @click="
@@ -14,24 +30,6 @@
           Routes
         </h3>
       </div>
-
-      <h3
-        @click="
-          showRouteTile = false;
-          showActivitiesTile = !showActivitiesTile;
-        "
-      >
-        Activities
-      </h3>
-
-      <h3>
-        <router-link
-          v-bind:to="{ name: 'profile' }"
-          style="text-decoration: none; color: inherit"
-          class="h3"
-          >Profile</router-link
-        >
-      </h3>
 
       <h3>
         <router-link
@@ -51,15 +49,12 @@
     </nav>
 
     <nav class="desktop-nav" v-else>
-      <h3
-        @click="
-          showActivitiesTile = false;
-          showRouteTile = !showRouteTile;
-        "
+      <router-link
+        v-bind:to="{ name: 'profile' }"
+        style="text-decoration: none; color: inherit"
+        class="h3"
+        ><h3>{{ userProfile.username }}</h3></router-link
       >
-        Routes
-      </h3>
-
       <h3
         @click="
           showRouteTile = false;
@@ -69,12 +64,14 @@
         Activities
       </h3>
 
-      <router-link
-        v-bind:to="{ name: 'profile' }"
-        style="text-decoration: none; color: inherit"
-        class="h3"
-        ><h3>Profile</h3></router-link
+      <h3
+        @click="
+          showActivitiesTile = false;
+          showRouteTile = !showRouteTile;
+        "
       >
+        Routes
+      </h3>
     </nav>
 
     <div class="view">
@@ -97,11 +94,20 @@ import RouteService from "@/services/RouteServices.js";
 import ActivitiesService from "@/services/ActivitiesService.js";
 import RoutesTile from "../components/tiles/RoutesTile.vue";
 import ActivitiesTile from "../components/tiles/ActivitiesTile.vue";
+import profileService from "../services/ProfileService.js";
 export default {
   name: "home",
 
   data() {
     return {
+      userProfile: {
+        id: "",
+        username: "",
+        cyclingTeam: "",
+        userWeight: "",
+        uerAge: "",
+        photo: "",
+      },
       isMobile: false,
       windowWidth: window.innerWidth,
       showRouteTile: false,
@@ -122,6 +128,7 @@ export default {
     });
     this.getAllActivities();
     this.getAllRoutes();
+    this.profileButton();
   },
 
   beforeDestroy() {
@@ -138,6 +145,11 @@ export default {
     },
   },
   methods: {
+    profileButton() {
+      profileService.getProfileDetails().then((response) => {
+        this.userProfile = response.data;
+      });
+    },
     hideOtherTiles() {
       this.showRouteTile = false;
       this.showActivitiesTile = false;

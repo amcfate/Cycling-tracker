@@ -6,16 +6,12 @@
         Add Bikes
       </button>
     </div>
-    <new-bike-form
-      class="form"
-      v-show="showBikeForm"
-      :userId="userBikes[0].userId"
-    />
+    <new-bike-form class="form" v-show="showBikeForm" />
+    <!-- :userId="userBikes[0].userId" -->
     <div class="tile-content">
       <div class="display-content" v-for="bike in userBikes" :key="bike.userId">
         <div class="bike-tiles">
-          {{ bike.bikeName }}
-          {{ bike.type }}
+          {{ bike.bikeName }} | {{ bike.type }} |
           {{ bike.bikeDescription }}
         </div>
       </div>

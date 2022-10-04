@@ -6,16 +6,13 @@
         Add Activity
       </button>
     </div>
-    <new-activity-form
-      class="form"
-      v-show="showActivityForm"
-      :userId="activities[0].userId"
-    />
+    <new-activity-form class="form" v-show="showActivityForm" />
+    <!-- :userId="activities[0].userId" -->
     <div id="display-content" v-for="activity in activities" :key="activity">
       <h3>{{ activity.activityName }}</h3>
       <ul class="act-details">
         <li>
-          {{ activity.activityDate }} | {{ activity.startTime }} |
+          {{ activity.activityDate }} | {{ activity.startTime }} -
           {{ activity.endTime }}
         </li>
         <li>{{ activity.description }}</li>
@@ -70,7 +67,7 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   margin: 12px;
-  background-color: ##9bcea8;
+  background-color: #9bcea8;
   /* background-color: rgb(111, 111, 111); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
