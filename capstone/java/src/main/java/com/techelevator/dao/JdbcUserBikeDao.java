@@ -30,6 +30,16 @@ public class JdbcUserBikeDao implements UserBikeDao{
         return userBikeList;
     }
 
+    @Override
+    public void addNewBike(UserBike userBike) {
+        String sql = "INSERT INTO user_bikes (user_id, type," +
+                " bike_name, bike_weight, bike_description) " +
+                "VALUES (?, ?, ?, ?, ?)";
+        jdbcTemplate.update(sql, userBike.getUserId(), userBike.getType(),
+                userBike.getBikeName(), userBike.getBikeWeight(),
+                userBike.getBikeDescription());
+    }
+
     private UserBike mapRowToUserBike(SqlRowSet rs){
         UserBike userBike = new UserBike();
         userBike.setBikeId(rs.getInt("bike_id"));

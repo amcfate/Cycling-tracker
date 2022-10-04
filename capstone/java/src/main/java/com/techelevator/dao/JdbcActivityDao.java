@@ -56,8 +56,8 @@ public class JdbcActivityDao implements ActivityDao{
         activity.setPhotos(rs.getString("photos"));
         activity.setDescription(rs.getString("description"));
         activity.setActivityDate(rs.getDate("activity_date"));
-        activity.setStartTime(rs.getTime("start_time"));
-        activity.setEndTime(rs.getTime("end_time"));
+        activity.setStartTime(rs.getTime("start_time").toLocalTime());
+        activity.setEndTime(rs.getTime("end_time").toLocalTime());
         return activity;
     }
 }

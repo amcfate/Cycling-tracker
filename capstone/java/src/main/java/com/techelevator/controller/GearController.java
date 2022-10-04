@@ -26,8 +26,9 @@ public class GearController{
     }
 
     @RequestMapping(path = "/addGear", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addNewGear(@RequestBody Gear newGear) {
+   // @ResponseStatus(HttpStatus.CREATED)
+    public void addNewGear(@RequestBody Gear newGear, Principal principal) {
+        newGear.setUserId(userDao.findIdByUsername(principal.getName()));
         gearDao.addNewGear(newGear);
     }
 }

@@ -22,4 +22,11 @@ public class UserBikeController {
     public List<UserBike> getBikesByUserId(Principal principal) {
         return userBikeDao.getBikesByUserId(userDao.findIdByUsername(principal.getName()));
     }
+
+    @RequestMapping(path = "/addBike", method = RequestMethod.POST)
+    public void addNewBike(@RequestBody UserBike userBike, Principal principal) {
+        userBike.setUserId(userDao.findIdByUsername(principal.getName()));
+        userBikeDao.addNewBike(userBike);
+    }
+
 }

@@ -122,6 +122,9 @@ export default new Vuex.Store({
     ADD_GEAR(state, gear) {
       state.user_gear.unshift(gear);
     },
+    NEW_BIKE(state, newBike) {
+      state.user_gear.unshift(newBike);
+    },
     ADD_ACTIVITY(state, newActivity) {
       state.activity.unshift(newActivity);
     },

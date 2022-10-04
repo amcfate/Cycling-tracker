@@ -6,12 +6,8 @@ export default {
     return axios.get(`/bikes`);
   },
 
-  // getBike(bikeName) {
-  //   return axios.get('/bikes', bikeName)
-  // },
-
-  // postBike(bike) {
-  //   return axios.post('/bikes', bike)
-  // }
+  addNewBike(newBike) {
+    return axios.post('/addBike', newBike);
+  }
 
 }

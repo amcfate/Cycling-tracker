@@ -35,6 +35,7 @@ export default {
           this.$router.push("/gear");
           console.log(this.newGear);
         }
+        location.reload();
       });
     },
   },

@@ -2,18 +2,23 @@
   <div id="activity-form">
     <form action="" class="new-activity-form">
       <div class="left-form-container">
-        <h2>New Activity</h2>
+        <h3>New Activity</h3>
         <label class="public" for="isPublic"
           >Public:
           <input type="checkbox" v-model="newActivity.isPublic" />
         </label>
         <label for="routeId">Select Route: </label>
-        <select
+        <input
+          type="text"
+          v-model="newActivity.routeId"
+          placeholder="Type routeId FOR NOW..."
+        />
+        <!-- <select
           class="route-sel"
           name="routeId"
           id=""
           v-model="newActivity.routeId"
-        ></select>
+        ></select> -->
       </div>
       <div class="container">
         <label class="form-el" for="activityName">Activity Name:</label>
@@ -92,9 +97,16 @@ export default {
 </script>
 
 <style>
+#activity-form {
+  display: flex;
+  flex-direction: row;
+  width: auto;
+  flex-wrap: wrap;
+}
 .new-activity-form {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 .left-form-container {
   display: flex;

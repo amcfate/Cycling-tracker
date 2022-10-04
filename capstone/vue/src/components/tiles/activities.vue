@@ -12,7 +12,7 @@
       :userId="activities[0].userId"
     />
     <div id="display-content" v-for="activity in activities" :key="activity">
-      <h2>{{ activity.activityName }}</h2>
+      <h3>{{ activity.activityName }}</h3>
       <ul class="act-details">
         <li>
           {{ activity.activityDate }} | {{ activity.startTime }} |
@@ -70,7 +70,8 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   margin: 12px;
-  background-color: lightgray;
+  background-color: ##9bcea8;
+  /* background-color: rgb(111, 111, 111); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: blur;
@@ -83,8 +84,9 @@ export default {
 #display-content,
 .form {
   margin: 6px;
-  background-color: whitesmoke;
+  background-color: white;
   padding: 6px;
+  size: auto;
   /* border: 1px solid black; */
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgray;
@@ -96,6 +98,11 @@ export default {
   flex-direction: row;
   justify-content: space-between;
 }
+
+.tile-head h3 {
+  color: black;
+}
+
 .tile h3 {
   text-align: left;
   padding: 6px;
@@ -103,7 +110,7 @@ export default {
 
 #activity-btn {
   margin: 6px;
-  background-color: whitesmoke;
+  background-color: white;
   border-radius: 8px;
   border-block-style: none;
   box-shadow: 2px 10px 20px darkgray;

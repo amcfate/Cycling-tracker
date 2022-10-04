@@ -54,6 +54,7 @@ export default {
   },
   mounted() {
     this.loadGear();
+    console.log(this.userGear);
   },
 };
 </script>
@@ -66,7 +67,7 @@ export default {
 }
 .tile {
   margin: 12px;
-  background-color: lightgray;
+  background-color: #9bcea8;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: blur;
@@ -83,6 +84,7 @@ export default {
 .tile-content {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .display-content {
@@ -91,7 +93,7 @@ export default {
   width: fit-content;
   flex-wrap: wrap;
   margin: 6px;
-  background-color: whitesmoke;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgray;
   padding: 6px;
@@ -99,7 +101,7 @@ export default {
 }
 .form {
   margin: 6px;
-  background-color: whitesmoke;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgray;
   padding: 6px;
@@ -112,7 +114,7 @@ export default {
 }
 .gear-btn {
   margin: 6px;
-  background-color: whitesmoke;
+  background-color: white;
   border-block-style: none;
   box-shadow: 2px 10px 20px darkgray;
   border-radius: 8px;

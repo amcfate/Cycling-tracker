@@ -12,7 +12,7 @@
       :userId="userBikes[0].userId"
     />
     <div class="tile-content">
-      <div class="display-content" v-for="bike in userBikes" :key="bike">
+      <div class="display-content" v-for="bike in userBikes" :key="bike.userId">
         <div class="bike-tiles">
           {{ bike.bikeName }}
           {{ bike.type }}
@@ -44,17 +44,18 @@ export default {
           bikeDescription: "",
         },
       ],
-      methods: {
-        loadBikes() {
-          bikeService.getUserBikes().then((response) => {
-            this.userBikes = response.data;
-          });
-        },
-      },
-      mounted() {
-        this.loadBikes();
-      },
     };
+  },
+  methods: {
+    loadBikes() {
+      bikeService.getUserBikes().then((response) => {
+        this.userBikes = response.data;
+      });
+    },
+  },
+  mounted() {
+    this.loadBikes();
+    console.log(this.userBikes);
   },
 };
 </script>
@@ -65,7 +66,7 @@ export default {
   flex-direction: column;
   justify-content: space-around;
   margin: 12px;
-  background-color: lightgray;
+  background-color: rgba(69, 203, 178, 255);
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: blur;
@@ -89,7 +90,7 @@ export default {
   /* width: fit-content; */
   flex-wrap: wrap;
   margin: 6px;
-  background-color: whitesmoke;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgray;
   padding: 6px;
@@ -97,20 +98,20 @@ export default {
 }
 .form {
   margin: 6px;
-  background-color: whitesmoke;
+  background-color: white;
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgray;
   padding: 6px;
   text-align: left;
 }
-.form {
+/* .form {
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
-}
+} */
 .bikes-btn {
   margin: 6px;
-  background-color: whitesmoke;
+  background-color: white;
   border-block-style: none;
   box-shadow: 2px 10px 20px darkgray;
   border-radius: 8px;

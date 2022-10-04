@@ -6,6 +6,6 @@ export default {
     },
 
     addGear(newGear) {
-        return axios.post(`/addGear`, newGear);
+        return axios.post('/addGear', newGear);
     }
 }

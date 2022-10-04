@@ -26,8 +26,8 @@ public class ActivityController {
     }
 
     @RequestMapping(path = "/addActivity", method = RequestMethod.POST)
-    @ResponseStatus(HttpStatus.CREATED)
-    public void addNewGear(@RequestBody Activity newActivity) {
+    public void addNewGear(@RequestBody Activity newActivity, Principal principal) {
+        newActivity.setUserId(userDao.findIdByUsername(principal.getName()));
         activityDao.addNewActivity(newActivity);
     }
 

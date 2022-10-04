@@ -15,12 +15,13 @@
         name="description"
         v-model="newBike.bikeDescription"
       />
-      <!-- <button class="add-btn" @click="submitForm()">Add Gear</button> -->
+      <button class="add-btn" @click="submitForm()">Add Gear</button>
     </form>
   </div>
 </template>
 
 <script>
+import bikeService from "../../services/BikeService.js";
 export default {
   name: "new-bike-form",
   props: ["userId"],
@@ -37,6 +38,26 @@ export default {
       },
     };
   },
+  methods: {
+    submitForm() {
+      console.log(this.newGear);
+      bikeService.addNewBike(this.newBike).then((response) => {
+        if (response.status === 201) {
+          this.$store.commit("ADD_NEW_BIKE", this.newBike);
+          this.$router.push("/bikes");
+          console.log(this.newBike);
+        }
+        location.reload();
+      });
+    },
+  },
+  mounted() {
+    this.newGear = {
+      userId: this.userId,
+      miscGear: this.miscGear,
+    };
+    console.log(this.newGear);
+  },
 };
 </script>
 
@@ -47,9 +68,10 @@ export default {
   border-radius: 8px;
   padding-left: 5px;
   margin-left: 10px;
-  background: whitesmoke;
+  background: white;
   z-index: 5;
   align-self: flex-start;
+  size: auto;
 }
 .new-bike-form {
   display: flex;
