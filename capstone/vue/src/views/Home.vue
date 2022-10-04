@@ -2,7 +2,7 @@
   <div class="main">
 
     <nav class="desktop-nav" v-if="!isMobile">
-      <h1 class="logo">Velocidad</h1>
+      <h1 class="logo">Velocity</h1>
       <h2></h2>
 
       <div class="highlighter"><h3
@@ -30,18 +30,20 @@
         >Profile</router-link
       ></h3>
 
-       <router-link
-        v-bind:to="{ name: 'logout' }"
-        style="text-decoration: none; color: inherit"
-        class="h3"
-        ><h3>Logout</h3></router-link
-      >
+      
       <h3> <router-link
         v-bind:to="{ name: 'leaderboard' }"
         style="text-decoration: none; color: inherit"
         class="h3"
         >Leaderboard</router-link
       ></h3>
+
+       <router-link
+        v-bind:to="{ name: 'logout' }"
+        style="text-decoration: none; color: inherit"
+        class="logout"
+        ><h3>Logout</h3></router-link
+      >
     </nav>
 
     <nav class="desktop-nav" v-else>
@@ -122,24 +124,17 @@ export default {
       window.addEventListener("resize", this.onResize);
       this.onResize();
     });
+      this.getAllActivities();
+     this.getAllRoutes()
   },
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
+     this.clearData();
+
   },
    created(){
-      RouteService
-      .getAllRoutes()
-      .then(response => {
-        this.$store.commit("SET_ROUTES", response.data);
-        this.getAllActivities();
-      })
-      .catch(error => {
-        if (error.response.status == 404) {
-          this.$router.push({name: 'NotFound'});
-        }
-      });
-    
+     
 
   },
 
@@ -164,11 +159,26 @@ export default {
         this.isMobile = false;
       }
     },
+    clearData(){
+      this.$store.commit('CLEAR_DATA')
+    },
     getAllActivities(){
           ActivitiesService
       .getActivities()
       .then(response => {
         this.$store.commit("SET_ACTIVITIES", response.data);
+      })
+      .catch(error => {
+        if (error.response.status == 404) {
+          this.$router.push({name: 'NotFound'});
+        }
+      });
+    },
+    getAllRoutes(){
+         RouteService
+      .getAllRoutes()
+      .then(response => {
+        this.$store.commit("SET_ROUTES", response.data);
       })
       .catch(error => {
         if (error.response.status == 404) {
@@ -182,11 +192,13 @@ export default {
 
 
 </script>
-<style>
+<style >
 
  
 
 @media only screen and (min-width: 700px) {
+
+  
   .view {
     display: flex;
     margin: 0;
@@ -202,8 +214,10 @@ export default {
     height: 100vh;
   }
   .logo {
-    padding-top: 6%;
-    padding-bottom: 8%;
+   padding-top: 4%;
+    padding-bottom: 4%;
+    border-radius: 4px;
+  
   }
   h2 {
     border-bottom: 1px;
@@ -212,28 +226,35 @@ export default {
     margin-left: 30%;
     margin-right: 30%;
   }
-  .logo:hover {
-    background-color: whitesmoke;
-  }
+
   .desktop-nav {
     height: 100%;
     width: 20%;
-    background: lightgray;
+    background: rgb(114, 111, 111);
+   display: flex;
+   flex-flow: column;
   }
+  .logout{
+    margin-top: auto;
+    font-weight: 100;
+  }
+  .logout h3{
+    font-weight: 1;
+  }
+
   h3 {
+    margin: 10px;
     padding-top: 4%;
     padding-bottom: 4%;
+    border-radius: 4px;
+
   }
-  h3:hover {
-    background-color: whitesmoke;
-  }
+
   .h3 {
     padding-top: 4%;
     padding-bottom: 4%;
   }
-  .h3:hover {
-    background-color: whitesmoke;
-  }
+ 
 
   .activity-div {
     height: 50%;

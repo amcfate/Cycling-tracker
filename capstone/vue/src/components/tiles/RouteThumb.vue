@@ -1,6 +1,6 @@
 <template>
 <router-link class="home route-thumb" 
-v-bind:to="{name: 'route-detail', params: {id: route_id}}" 
+v-bind:to="{path: 'route', params: {id: route.routeId}}" 
 v-bind:route="route"
  style="text-decoration: none; color: inherit">
       <h2 class="header">{{route.routeName}}</h2>
@@ -9,7 +9,7 @@ v-bind:route="route"
       <p>{{route.distance}} miles</p>
       <h5>elevation gain</h5>
       <p>{{route.ascent}} feet</p>
-      <h5></h5>
+      <h5>{{route.routeId}}</h5>
       </div>
       <div class="mapDiv"></div>    
   </router-link>

@@ -72,7 +72,7 @@ export default {
     padding-top: 30px;
     height: 76%;
     width: 35%;
-    background: lightgray;
+      background: rgb(136, 128, 128);
     z-index: 5;
     align-self: center;
     overflow: auto;

@@ -4,7 +4,7 @@
     <Map />
     <div id="nav" v-if="isMobile">
       
-      <router-link v-bind:to="{ name: 'home' }"><h3>Velocidad</h3></router-link
+      <router-link v-bind:to="{ name: 'home' }"><h3>Velocity</h3></router-link
       >&nbsp;|&nbsp;
     
       <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
@@ -44,12 +44,13 @@ export default {
       this.windowWidth = window.innerWidth;
       if (this.windowWidth < 700) {
         this.isMobile = true;
+        this.$store.state.commit('SET_IS_MOBILE')
       } else {
         this.isMobile = false;
       }
     },
-  }
-};
+}
+}
 </script>
 <style>
 *::-webkit-scrollbar{
