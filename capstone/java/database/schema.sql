@@ -18,6 +18,7 @@ CREATE TABLE user_profile (
 	cycling_team varchar,
 	user_weight int,
 	user_age int,
+	photo varchar,
 	CONSTRAINT FK_user_profile FOREIGN KEY (user_id) REFERENCES users (user_id),
 	CONSTRAINT FK_user_profile_username FOREIGN KEY (username) REFERENCES users (username)
 );

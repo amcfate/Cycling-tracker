@@ -7,6 +7,7 @@ public class UserProfile {
     private String cyclingTeam;
     private double userWeight;
     private int userAge;
+    private String photo;
 
     public UserProfile(){}
 
@@ -14,12 +15,13 @@ public class UserProfile {
         this.id = id;
     }
 
-    public UserProfile(int id, String username, String cyclingTeam, double userWeight, int userAge) {
+    public UserProfile(int id, String username, String cyclingTeam, double userWeight, int userAge, String photo) {
         this.id = id;
         this.username = username;
         this.cyclingTeam = cyclingTeam;
         this.userWeight = userWeight;
         this.userAge = userAge;
+        this.photo = photo;
     }
 
     public int getId() {
@@ -60,5 +62,13 @@ public class UserProfile {
 
     public void setUserAge(int userAge) {
         this.userAge = userAge;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }
