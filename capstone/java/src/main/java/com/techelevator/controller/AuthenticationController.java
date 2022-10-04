@@ -2,6 +2,8 @@ package com.techelevator.controller;
 
 import javax.validation.Valid;
 
+import com.techelevator.dao.UserProfileDao;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -28,6 +30,8 @@ public class    AuthenticationController {
     private final TokenProvider tokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private UserDao userDao;
+    @Autowired
+    private UserProfileDao userProfileDao;
 
     public AuthenticationController(TokenProvider tokenProvider, AuthenticationManagerBuilder authenticationManagerBuilder, UserDao userDao) {
         this.tokenProvider = tokenProvider;
@@ -59,7 +63,11 @@ public class    AuthenticationController {
             User user = userDao.findByUsername(newUser.getUsername());
             throw new UserAlreadyExistsException();
         } catch (UsernameNotFoundException e) {
-            userDao.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole());
+           userDao.create(newUser.getUsername(),newUser.getPassword(), newUser.getRole());
+           int newUserId = userDao.findIdByUsername(newUser.getUsername());
+           userProfileDao.create(newUserId, (newUser.getUsername()));
+            //need to get the id of  the new user
+            //use that to create a new user profile
         }
     }
 

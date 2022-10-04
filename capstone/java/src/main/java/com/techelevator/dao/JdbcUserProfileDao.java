@@ -3,6 +3,7 @@ package com.techelevator.dao;
 import com.techelevator.model.User;
 import com.techelevator.model.UserNotFoundException;
 import com.techelevator.model.UserProfile;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
@@ -10,6 +11,7 @@ import org.springframework.stereotype.Component;
 import java.util.Objects;
 
 @Component
+
 public class JdbcUserProfileDao implements UserProfileDao{
 
     private final JdbcTemplate jdbcTemplate;
@@ -27,6 +29,13 @@ public class JdbcUserProfileDao implements UserProfileDao{
         } else {
             throw new UserNotFoundException();
         }
+    }
+
+    @Override
+    public boolean create(int id, String username) {
+        String sql = "INSERT INTO user_profile(user_id, username) " +
+                "VALUES (?, ?)";
+        return jdbcTemplate.update(sql, id, username) == 1;
     }
 
     private UserProfile mapRowToUserProfile(SqlRowSet rs) {
