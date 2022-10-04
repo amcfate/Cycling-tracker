@@ -70,7 +70,7 @@ CREATE TABLE trackpoint (
 );
 
 CREATE TABLE activity (
-    activity_id SERIAL,
+    activity_id SERIAL NOT NULL,
 	route_id int,
 	user_id int,
 	activity_name varchar,

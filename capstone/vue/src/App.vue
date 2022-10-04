@@ -14,11 +14,13 @@
         >Logout</router-link
       >
     </div>
-    <router-view />
+   <router-view />
   </div>
 </template>
 
 <script>
+import RouteService from "@/services/RouteServices.js"
+import ActivitiesService from "@/services/ActivitiesService.js"
 export default {
   name: "App",
    data() {
@@ -33,6 +35,8 @@ export default {
       window.addEventListener("resize", this.onResize);
       this.onResize();
     });
+    this.getAllActivities();
+     this.getAllRoutes();
   },
 
   beforeDestroy() {
@@ -49,6 +53,30 @@ export default {
         this.isMobile = false;
       }
     },
+        getAllActivities(){
+          ActivitiesService
+      .getActivities()
+      .then(response => {
+        this.$store.commit("SET_ACTIVITIES", response.data);
+      })
+      .catch(error => {
+        if (error.response.status == 404) {
+          this.$router.push({name: 'NotFound'});
+        }
+      });
+    },
+    getAllRoutes(){
+         RouteService
+      .getAllRoutes()
+      .then(response => {
+        this.$store.commit("SET_ROUTES", response.data);
+      })
+      .catch(error => {
+        if (error.response.status == 404) {
+          this.$router.push({name: 'NotFound'});
+        }
+      });
+    }
 }
 }
 </script>

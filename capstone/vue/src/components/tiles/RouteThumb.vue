@@ -1,6 +1,6 @@
 <template>
 <router-link class="home route-thumb" 
-v-bind:to="{path: 'route', params: {id: route.routeId}}" 
+v-bind:to="{name: 'route-detail', params: {id: route.routeName}}" 
 v-bind:route="route"
  style="text-decoration: none; color: inherit">
       <h2 class="header">{{route.routeName}}</h2>

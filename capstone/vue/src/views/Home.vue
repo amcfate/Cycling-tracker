@@ -45,9 +45,10 @@
         ><h3>Logout</h3></router-link
       >
     </nav>
-
+ <!--try to change this to focus event-->
     <nav class="desktop-nav" v-else>
       <h3
+      
         @click="
           showActivitiesTile = false;
           showRouteTile = !showRouteTile;
@@ -94,8 +95,7 @@
 //expand search feature and apply to routes && bikes
 
 import Map from "../components/maps/Map.vue";
-import RouteService from "@/services/RouteServices.js"
-import ActivitiesService from "@/services/ActivitiesService.js"
+
 import RoutesTile from '../components/tiles/RoutesTile.vue';
 import ActivitiesTile from '../components/tiles/ActivitiesTile.vue';
 export default {
@@ -124,17 +124,16 @@ export default {
       window.addEventListener("resize", this.onResize);
       this.onResize();
     });
-      this.getAllActivities();
-     this.getAllRoutes()
+     
   },
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
-     this.clearData();
+    //  this.clearData();
 
   },
    created(){
-     
+      
 
   },
 
@@ -162,30 +161,7 @@ export default {
     clearData(){
       this.$store.commit('CLEAR_DATA')
     },
-    getAllActivities(){
-          ActivitiesService
-      .getActivities()
-      .then(response => {
-        this.$store.commit("SET_ACTIVITIES", response.data);
-      })
-      .catch(error => {
-        if (error.response.status == 404) {
-          this.$router.push({name: 'NotFound'});
-        }
-      });
-    },
-    getAllRoutes(){
-         RouteService
-      .getAllRoutes()
-      .then(response => {
-        this.$store.commit("SET_ROUTES", response.data);
-      })
-      .catch(error => {
-        if (error.response.status == 404) {
-          this.$router.push({name: 'NotFound'});
-        }
-      });
-    }
+
 
   },
 };
@@ -214,8 +190,9 @@ export default {
     height: 100vh;
   }
   .logo {
-   padding-top: 4%;
-    padding-bottom: 4%;
+    font-size: 40px;
+    padding-top: 4%;
+    padding-bottom: 0%;
     border-radius: 4px;
   
   }
@@ -230,29 +207,42 @@ export default {
   .desktop-nav {
     height: 100%;
     width: 20%;
-    background: rgb(114, 111, 111);
+    background: #9bcea8;
    display: flex;
    flex-flow: column;
   }
   .logout{
     margin-top: auto;
-    font-weight: 100;
+    
   }
   .logout h3{
     font-weight: 1;
+    box-shadow: none;
   }
 
   h3 {
     margin: 10px;
     padding-top: 4%;
     padding-bottom: 4%;
-    border-radius: 4px;
-
+    border-radius: 2px;
+   box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
+-webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+-moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+transition: 100ms ease-in-out;
   }
 
   .h3 {
     padding-top: 4%;
     padding-bottom: 4%;
+  }
+  h3:hover{
+    background-color: #97cea4;
+     box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
+-webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+-moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52),
+			inset -1px -1px 9px rgba(97, 104, 104, 0.52),
+			inset 4px 4px 24px rgba(97, 104, 104, 0.52);
+		transform: scale(1.01);
   }
  
 
