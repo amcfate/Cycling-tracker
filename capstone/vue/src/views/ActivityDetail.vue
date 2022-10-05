@@ -1,83 +1,78 @@
 <template>
-<div class="main">
-  <activities-tile v-show="clicked"/>
-  <nav-menu class="nav-menu"></nav-menu>
-  <div class="tile">
-    <div class="tile-head">
-      <div class="map-cage"><Map class="map"></Map></div>
+  <div class="main">
+    <nav-menu class="nav-menu"></nav-menu>
+    <div class="tile">
+      <div class="tile-head">
+        <div class="map-cage"><Map class="map"></Map></div>
+      </div>
+      <div class="route-detail">
+        <h3>Activity Details</h3>
+        <h3>{{ getActivityDetails.activityName }}</h3>
+        <ul class="act-details">
+          <li>
+            {{ getActivityDetails.activityDate }} |
+            {{ getActivityDetails.startTime }} |
+            {{ getActivityDetails.endTime }}
+          </li>
+          <li class="last">{{ getActivityDetails.description }}</li>
+        </ul>
+      </div>
+      <div class="route-detail">
+        <h3>Route Details</h3>
+        <h3>{{ getRouteDetails.routeName }}</h3>
+        <ul class="act-details">
+          <li>Length | {{ getRouteDetails.distanceMiles }} miles</li>
+          <li>Starting | {{ getRouteDetails.elevation }} feet</li>
+          <li>Elevation Gain | {{ getRouteDetails.ascent }} feet</li>
+          <li class="last">{{ getRouteDetails.description }}</li>
+        </ul>
+      </div>
     </div>
-    <div class="route-detail">
-      <h3>Activity Details</h3>
-      <h3>{{ getActivityDetails.activityName }}</h3>
-      <ul class="act-details">
-        <li>
-          {{ getActivityDetails.activityDate }} |
-          {{ getActivityDetails.startTime }} |
-          {{ getActivityDetails.endTime }}
-        </li>
-        <li>{{ getActivityDetails.description }}</li>
-      </ul>
-    </div>
-    <div class="route-detail">
-      <h3>Route Details</h3>
-      <h3>{{ getActivityDetails.activityName }}</h3>
-      <ul class="act-details">
-        <li>
-          {{ getActivityDetails.activityDate }} |
-          {{ getActivityDetails.startTime }} |
-          {{ getActivityDetails.endTime }}
-        </li>
-        <li>{{ getActivityDetails.description }}</li>
-      </ul>
-    </div>
-  </div>
   </div>
 </template>
 
 
 <script>
 import Map from "../components/maps/Map.vue";
-import NavMenu from '../components/NavMenu.vue';
-import ActivitiesTile from '../components/tiles/ActivitiesTile.vue';
+import NavMenu from "../components/NavMenu.vue";
 export default {
   name: "activity-detail",
   props: {
     activity: Object,
   },
-  components: { 
+  components: {
     Map,
     NavMenu,
-    ActivitiesTile
-    },
-    data(){
-      return{
-        activitiesTab: false,
-        clicked: false,
-      }
-    },
+  },
+  data() {
+    return {
+      activitiesTab: false,
+      clicked: false,
+    };
+  },
   computed: {
     getActivityDetails() {
       return this.$store.state.activity.find((activity) => {
         return activity.activityId == this.$route.params.id;
       });
     },
-      mounted(){
-        
-       const e = document.querySelector("Map");
-       return e.remove();
-
-  },
+    getRouteDetails() {
+      return this.$store.state.routes.find((route) => {
+        return route.routeId == this.getActivityDetails.routeId;
+      });
+    },
   },
 };
 </script>
 
-<style>
-.main{
+<style scoped>
+.main {
   display: flex;
-  width: 100vw;
+  width: 98vw;
+  height: 100vh;
 }
-.nav-menu{
- width: 100%;
+.nav-menu {
+  width: 100%;
 }
 .tile {
   align-self: center;
@@ -85,19 +80,25 @@ export default {
   display: flex;
   flex-direction: column;
   align-content: center;
-  padding: 1px;
-
+  padding: 20px;
+  
   height: 93vh;
-  width: 70vw;
+  width: 70%;
+  margin-bottom: 20px;
 }
 .route-detail {
-  margin-right: 8px;
   display: flex;
+  justify-content: left;
+  margin: 6px;
+  background-color: whitesmoke;
+  padding: 6px;
+  size: auto;
   border-radius: 8px;
-  height: 25%;
-  width: 95%;
-  background: lightgray;
-  overflow: auto;
+  box-shadow: 2px 10px 20px darkgray;
+  text-align: left;
+}
+.last {
+  padding-top: 10px;
 }
 .tile-head {
   display: flex;
@@ -121,9 +122,24 @@ export default {
 Map {
   height: 100%;
   width: 100%;
-  margin-bottom: 300px
+  margin-bottom: 300px;
 }
-.map .nav-controls .btn{
+.map .nav-controls .btn {
   display: none;
+}
+@media only screen and (max-width: 700px) {
+  
+  .tile {
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding: 20px;
+  
+  height: 79vh;
+  width: 98%;
+  margin-bottom: 20%;
+}
 }
 </style>

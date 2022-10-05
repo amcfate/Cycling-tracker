@@ -57,7 +57,7 @@ export default new Vuex.Store({
         photos: "xxxxx",
         description: "cool",
         activity_date: "today",
-        start_time: "morn",
+        startTime: "morn",
         end_time: "never",
       },
       {
@@ -69,7 +69,7 @@ export default new Vuex.Store({
         photos: "xxxxx",
         description: "cool",
         activity_date: "today",
-        start_time: "morn",
+        startTime: "morn",
         end_time: "never",
       },
       {
@@ -81,7 +81,7 @@ export default new Vuex.Store({
         photos: "xxxxx",
         description: "cool",
         activity_date: "today",
-        start_time: "morn",
+        startTime: "morn",
         end_time: "never",
       },
     ],
