@@ -1,7 +1,11 @@
 package com.techelevator.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.sql.Date;
 import java.sql.Time;
+import java.time.LocalTime;
+
 
 public class Activity {
 
@@ -14,18 +18,34 @@ public class Activity {
     private String photos;
     private String description;
     private Date activityDate;
-    private Time startTime;
-    private Time endTime;
+   // @JsonFormat(shape= JsonFormat.Shape.STRING, pattern="HH:mm")
+    private LocalTime startTime;
+   // @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="HH:mm")
+    private LocalTime endTime;
 
     public Activity(){}
 
+    //constructor w/ no image
+    public Activity(/*int routeId,*/ int userId,  String activityName,
+                    boolean isPublic, String description,
+                    Date activityDate, LocalTime startTime, LocalTime endTime) {
+       /* this.routeId = routeId;*/
+        this.userId = userId;
+        this.activityName = activityName;
+        this.isPublic = isPublic;
+        this.description = description;
+        this.activityDate = activityDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    //constructor to make activity w/ all properties
     public Activity(int routeId, int userId, int activityId,  String activityName,
                     boolean isPublic, String photos, String description,
-                    Date activityDate, Time startTime, Time endTime) {
+                    Date activityDate, LocalTime startTime, LocalTime endTime) {
         this.routeId = routeId;
         this.userId = userId;
         this.activityId = activityId;
-
         this.activityName = activityName;
         this.isPublic = isPublic;
         this.photos = photos;
@@ -37,11 +57,10 @@ public class Activity {
 
     public Activity(int routeId, int userId, int activityId,  String activityName,
                     boolean isPublic, String description,
-                    Date activityDate, Time startTime, Time endTime) {
+                    Date activityDate, LocalTime startTime, LocalTime endTime) {
         this.routeId = routeId;
         this.userId = userId;
         this.activityId = activityId;
-
         this.activityName = activityName;
         this.isPublic = isPublic;
         this.description = description;
@@ -116,19 +135,19 @@ public class Activity {
         this.activityDate = activityDate;
     }
 
-    public Time getStartTime() {
+    public LocalTime getStartTime() {
         return startTime;
     }
 
-    public void setStartTime(Time startTime) {
+    public void setStartTime(LocalTime startTime) {
         this.startTime = startTime;
     }
 
-    public Time getEndTime() {
+    public LocalTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Time endTime) {
+    public void setEndTime(LocalTime endTime) {
         this.endTime = endTime;
     }
 }

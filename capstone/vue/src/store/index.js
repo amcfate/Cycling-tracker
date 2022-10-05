@@ -127,6 +127,19 @@ export default new Vuex.Store({
       state.user = {};
       axios.defaults.headers.common = {};
     },
+    ADD_ROUTE(state, route) {
+      state.routes.unshift(route)
+    },
+    ADD_GEAR(state, gear) {
+      state.user_gear.unshift(gear);
+    },
+    NEW_BIKE(state, newBike) {
+      state.user_gear.unshift(newBike);
+    },
+    ADD_ACTIVITY(state, newActivity) {
+      state.activity.unshift(newActivity);
+    },
+
     SET_ROUTES(state, routes) {
       routes.forEach(route => {
         state.routes.unshift(route)
