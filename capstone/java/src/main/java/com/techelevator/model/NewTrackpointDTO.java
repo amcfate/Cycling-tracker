@@ -7,8 +7,8 @@ public class NewTrackpointDTO {
     //are there any constraints that should go here
     private int routeId;
     private int trackpointId;
-    private BigDecimal latitude;
-    private BigDecimal longitude;
+    private BigDecimal lat;
+    private BigDecimal lng;
     private double elevation;
 
     //isValidTrackpointType?
@@ -29,20 +29,20 @@ public class NewTrackpointDTO {
         this.trackpointId = trackpointId;
     }
 
-    public BigDecimal getLatitude() {
-        return latitude;
+    public BigDecimal getLat() {
+        return lat;
     }
 
-    public void setLatitude(BigDecimal latitude) {
-        this.latitude = latitude;
+    public void setLat(BigDecimal lat) {
+        this.lat = lat;
     }
 
-    public BigDecimal getLongitude() {
-        return longitude;
+    public BigDecimal getLng() {
+        return lng;
     }
 
-    public void setLongitude(BigDecimal longitude) {
-        this.longitude = longitude;
+    public void setLng(BigDecimal lng) {
+        this.lng = lng;
     }
 
     public double getElevation() {
