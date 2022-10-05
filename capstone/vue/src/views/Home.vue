@@ -93,7 +93,7 @@ import Map from "../components/maps/Map.vue";
 import RoutesTile from "../components/tiles/RoutesTile.vue";
 import ActivitiesTile from "../components/tiles/ActivitiesTile.vue";
 import profileService from "../services/ProfileService.js";
-import ActivitiesService from "../services/ActivityService.js";
+import ActivitiesService from "../services/ActivitiesService.js";
 import RouteService from "../services/RouteServices";
 export default {
   name: "home",
@@ -166,7 +166,7 @@ export default {
     clearData() {
       this.$store.commit("CLEAR_DATA");
     },
-    getAllActivities() {
+    getActivities() {
       ActivitiesService.getAllActivities()
         .then((response) => {
           this.$store.commit("SET_ACTIVITIES", response.data);

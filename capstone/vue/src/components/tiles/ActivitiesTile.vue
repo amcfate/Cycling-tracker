@@ -4,6 +4,7 @@
     <input
       type="text"
       id="route-search"
+      placeholder = "Search by activity name..."
       v-model="activityFilter.activityName"
     />
     <activity-thumb
@@ -134,13 +135,13 @@ export default {
     padding-left: 5px;
     margin-left: 10px;
     padding-top: 30px;
-    height: 80%;
+    height: 65%;
     width: 80%;
     background: lightgray;
     z-index: 5;
     align-self: flex-end;
     overflow: auto;
-    margin-bottom: 32%;
+    margin-bottom: 40%;
   }
   .route-div {
     height: 50%;
