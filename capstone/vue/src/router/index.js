@@ -67,7 +67,7 @@ const router = new Router({
       }
     },
     {
-      path: "/route",
+      path: "/route/:id",
       name: "route-detail",
       component: RouteDetail
     },

@@ -75,7 +75,7 @@ export default {
     padding-top: 30px;
     height: 76%;
     width: 35%;
-    background: lightgray;
+    background: #9BCEA8;
     z-index: 5;
     align-self: center;
     overflow: auto;
@@ -108,7 +108,7 @@ export default {
     padding-top: 30px;
     height: 76%;
     width: 35%;
-    background: lightgray;
+    background: #9BCEA8;
     z-index: 5;
     align-self: center;
     overflow: auto;
@@ -140,7 +140,7 @@ export default {
     padding-top: 30px;
     height: 30%;
     width: 80%;
-    background: lightgray;
+    background: #9BCEA8;
     z-index: 5;
     align-self: flex-end;
     overflow: auto;

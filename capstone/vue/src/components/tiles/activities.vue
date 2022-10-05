@@ -69,7 +69,6 @@ export default {
   justify-content: space-around;
   margin: 12px;
   background-color: #9bcea8;
-  /* background-color: rgb(111, 111, 111); */
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: blur;

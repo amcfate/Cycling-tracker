@@ -1,18 +1,18 @@
 <template>
   <div class="main">
     <nav class="desktop-nav" v-if="!isMobile">
-      <h1 class="logo">Velocity</h1>
-      <h2></h2>
-      <h3>
+      <h1 class="logo">VELOcity</h1>
+      <h2 class = hbar></h2>
+      <h3 class="h3">
         <router-link
           v-bind:to="{ name: 'profile' }"
           style="text-decoration: none; color: inherit"
-          class="h3"
+          
           >{{ userProfile.username }}</router-link
         >
       </h3>
 
-      <h3
+      <h3 class="h3"
         @click="
           showRouteTile = false;
           showActivitiesTile = !showActivitiesTile;
@@ -21,7 +21,7 @@
         Activities
       </h3>
       <div class="highlighter">
-        <h3
+        <h3 class="h3"
           @click="
             showActivitiesTile = false;
             showRouteTile = !showRouteTile;
@@ -31,11 +31,11 @@
         </h3>
       </div>
 
-      <h3>
+      <h3 class="h3">
         <router-link
           v-bind:to="{ name: 'leaderboard' }"
           style="text-decoration: none; color: inherit"
-          class="h3"
+  
           >Leaderboard</router-link
         >
       </h3>
@@ -44,10 +44,10 @@
         v-bind:to="{ name: 'logout' }"
         style="text-decoration: none; color: inherit"
         class="logout"
-        ><h3>Logout</h3></router-link
+        ><h3 class="h3">Logout</h3></router-link
       >
     </nav>
-
+ <!--try to change this to focus event-->
     <nav class="desktop-nav" v-else>
       <router-link
         v-bind:to="{ name: 'profile' }"
@@ -90,11 +90,11 @@
 //expand search feature and apply to routes && bikes
 
 import Map from "../components/maps/Map.vue";
-import RouteService from "@/services/RouteServices.js";
-import ActivitiesService from "@/services/ActivitiesService.js";
 import RoutesTile from "../components/tiles/RoutesTile.vue";
 import ActivitiesTile from "../components/tiles/ActivitiesTile.vue";
 import profileService from "../services/ProfileService.js";
+import ActivitiesService from "../services/ActivityService.js";
+import RouteService from "../services/RouteServices";
 export default {
   name: "home",
 
@@ -125,17 +125,18 @@ export default {
     this.$nextTick(() => {
       window.addEventListener("resize", this.onResize);
       this.onResize();
+      this.profileButton();
     });
-    this.getAllActivities();
-    this.getAllRoutes();
-    this.profileButton();
+     
   },
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
-    this.clearData();
+    //  this.clearData();
+
   },
-  created() {},
+ 
+ 
 
   computed: {
     lastRoute() {
@@ -187,10 +188,11 @@ export default {
           }
         });
     },
+
   },
 };
 </script>
-<style >
+<style scoped >
 @media only screen and (min-width: 700px) {
   .view {
     display: flex;
@@ -207,11 +209,12 @@ export default {
     height: 100vh;
   }
   .logo {
+    font-size: 40px;
     padding-top: 4%;
-    padding-bottom: 4%;
+    padding-bottom: 0%;
     border-radius: 4px;
   }
-  h2 {
+  .hbar {
     border-bottom: 1px;
     border-style: solid;
     border-color: black;
@@ -222,29 +225,42 @@ export default {
   .desktop-nav {
     height: 100%;
     width: 20%;
-    background: rgb(114, 111, 111);
+    background: #9bcea8;
    display: flex;
    flex-flow: column;
   }
   .logout{
     margin-top: auto;
-    font-weight: 100;
+    
   }
   .logout h3{
     font-weight: 1;
+    box-shadow: none;
   }
 
-  h3 {
+  .h3 {
     margin: 10px;
     padding-top: 4%;
     padding-bottom: 4%;
-    border-radius: 4px;
-
+    border-radius: 2px;
+   box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
+-webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+-moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+transition: 100ms ease-in-out;
   }
 
   .h3 {
     padding-top: 4%;
     padding-bottom: 4%;
+  }
+  .h3:hover{
+    background-color: #97cea4;
+     box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
+-webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+-moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52),
+			inset -1px -1px 9px rgba(97, 104, 104, 0.52),
+			inset 4px 4px 24px rgba(97, 104, 104, 0.52);
+		transform: scale(1.01);
   }
  
 
@@ -261,7 +277,7 @@ export default {
     display: flex;
     justify-content: space-evenly;
   }
-  h4 {
+  .h4 {
     margin: 50px;
     margin-bottom: 10px;
   }
@@ -301,7 +317,7 @@ export default {
     padding-top: 6%;
     padding-bottom: 8%;
   }
-  h2 {
+   .h2 {
     border-bottom: 1px;
     border-style: solid;
     border-color: black;
@@ -314,13 +330,13 @@ export default {
   .desktop-nav {
     height: 100%;
     width: 15%;
-    background: lightgray;
+    background: #9bcea8;
   }
-  h3 {
+  .h3 {
     padding-top: 4%;
     padding-bottom: 4%;
   }
-  h3:hover {
+  .h3:hover {
     background-color: whitesmoke;
   }
   .h3 {
@@ -344,7 +360,7 @@ export default {
     display: flex;
     justify-content: space-evenly;
   }
-  h4 {
+  .h4 {
     margin: 50px;
     margin-bottom: 10px;
   }
@@ -418,12 +434,12 @@ export default {
     bottom: 0;
     height: 90px;
     width: 96.5%;
-    background: lightgray;
+    background: #9bcea8;
     z-index: 4;
     float: inherit;
   }
 
-  h3,
+  .h3,
   .h3 {
     text-align: center;
     padding: 1%;

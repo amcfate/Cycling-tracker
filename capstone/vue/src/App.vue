@@ -1,23 +1,26 @@
  <template>
  
   <div id="app">
-    <Map />
+    
     <div id="nav" v-if="isMobile">
       
-      <router-link v-bind:to="{ name: 'home' }"><h3>Velocity</h3></router-link
+      <router-link v-bind:to="{ name: 'home' }" style="text-decoration: none; color: inherit"><h3>Velocity</h3></router-link
       >&nbsp;|&nbsp;
-
+    
+      <router-link v-bind:to="{ name: 'maptesting' }" style="text-decoration: none; color: inherit">Map Test!</router-link>
         <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
-        >Logout</router-link
+        style="text-decoration: none; color: inherit">Logout</router-link
       >
     </div>
-    <router-view />
+   <router-view />
   </div>
 </template>
 
 <script>
+import RouteService from "@/services/RouteServices.js"
+import ActivitiesService from "@/services/ActivitiesService.js"
 export default {
   name: "App",
    data() {
@@ -32,6 +35,9 @@ export default {
       window.addEventListener("resize", this.onResize);
       this.onResize();
     });
+    this.getAllActivities();
+     this.getAllRoutes();
+     
   },
 
   beforeDestroy() {
@@ -48,6 +54,30 @@ export default {
         this.isMobile = false;
       }
     },
+        getAllActivities(){
+          ActivitiesService
+      .getActivities()
+      .then(response => {
+        this.$store.commit("SET_ACTIVITIES", response.data);
+      })
+      .catch(error => {
+        if (error.response.status == 404) {
+          this.$router.push({name: 'NotFound'});
+        }
+      });
+    },
+    getAllRoutes(){
+         RouteService
+      .getAllRoutes()
+      .then(response => {
+        this.$store.commit("SET_ROUTES", response.data);
+      })
+      .catch(error => {
+        if (error.response.status == 404) {
+          this.$router.push({name: 'NotFound'});
+        }
+      });
+    }
 }
 }
 </script>
@@ -128,7 +158,7 @@ router-link {
   background-clip: border-box;
   height: 100vh;
   background-position: center 100%;
-  /* background-attachment: fixed; */
+ 
 }
 </style>
 

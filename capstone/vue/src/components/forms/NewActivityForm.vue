@@ -47,8 +47,8 @@
         />
       </div>
       <div class="container">
-        <label class="form-el" for="startTime">Start time:</label>
-        <input class="form-el" type="time" v-model="newActivity.startTime" />
+        <label class="form-el" for="startTime" >Start time:</label>
+        <input class="form-el" type="time" value="12:30" v-model="newActivity.startTime" />
         <label class="form-el" for="endTime">End time:</label>
         <input class="form-el" type="time" v-model="newActivity.endTime" />
         <button class="add-btn form-el" @click="submitForm()">
