@@ -12,7 +12,7 @@
       </div>
       <div class="right-container">
         <button class="edit-profile-btn" @click="showEditForm = !showEditForm">
-          Edit Profile
+          <img src="../../assets/gear.png" />
         </button>
       </div>
     </div>
@@ -113,5 +113,9 @@ export default {
   border-block-style: none;
   box-shadow: 2px 10px 20px darkgray;
   text-align: center;
+}
+
+.edit-profile-btn img {
+  max-height: 30px;
 }
 </style>

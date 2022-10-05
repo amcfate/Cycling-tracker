@@ -149,11 +149,11 @@ export default new Vuex.Store({
     SET_ACTIVITIES(state, activities) {
       state.activity = activities
     },
-    ADD_TRACKPOINT(state, trackpoint){
+    ADD_TRACKPOINT(state, trackpoint) {
       state.trackpoint.unshift(trackpoint)
     },
-    ADD_ROUTE(state, route){
-      state.routes.unshift(route)
-    }
+    // ADD_ROUTE(state, route){
+    //   state.routes.unshift(route)
+    // }
   }
 })

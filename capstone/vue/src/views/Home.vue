@@ -217,20 +217,20 @@ export default {
     border-color: black;
     margin-left: 30%;
     margin-right: 30%;
-  }
+  } */
 
   .desktop-nav {
     height: 100%;
     width: 20%;
     background: rgb(114, 111, 111);
-   display: flex;
-   flex-flow: column;
+    display: flex;
+    flex-flow: column;
   }
-  .logout{
+  .logout {
     margin-top: auto;
     font-weight: 100;
   }
-  .logout h3{
+  .logout h3 {
     font-weight: 1;
   }
 
@@ -239,14 +239,12 @@ export default {
     padding-top: 4%;
     padding-bottom: 4%;
     border-radius: 4px;
-
   }
 
   .h3 {
     padding-top: 4%;
     padding-bottom: 4%;
   }
- 
 
   .activity-div {
     height: 50%;
@@ -383,7 +381,7 @@ export default {
   }
   .map {
     height: 100%;
-    width: 10%;
+    width: 100%;
     overflow: hidden;
   }
 
