@@ -1,83 +1,81 @@
 <template>
-<div class="main">
-  <activities-tile v-show="clicked"/>
-  <nav-menu class="nav-menu"></nav-menu>
-  <div class="tile">
-    <div class="tile-head">
-      <div class="map-cage"><Map class="map"></Map></div>
+  <div class="main">
+    <activities-tile v-show="clicked" />
+    <nav-menu class="nav-menu"></nav-menu>
+    <div class="tile">
+      <div class="tile-head">
+        <div class="map-cage"><Map class="map"></Map></div>
+      </div>
+      <div class="route-detail">
+        <h3>Activity Details</h3>
+        <h3>{{ getActivityDetails.activityName }}</h3>
+        <ul class="act-details">
+          <li>
+            {{ getActivityDetails.activityDate }} |
+            {{ getActivityDetails.startTime }} |
+            {{ getActivityDetails.endTime }}
+          </li>
+          <li>{{ getActivityDetails.description }}</li>
+        </ul>
+      </div>
+      <div class="route-detail">
+        <h3>Route Details</h3>
+        <h3>{{ getActivityDetails.activityName }}</h3>
+        <ul class="act-details">
+          <li>
+            {{ getActivityDetails.activityDate }} |
+            {{ getActivityDetails.startTime }} |
+            {{ getActivityDetails.endTime }}
+          </li>
+          <li>{{ getActivityDetails.description }}</li>
+        </ul>
+      </div>
     </div>
-    <div class="route-detail">
-      <h3>Activity Details</h3>
-      <h3>{{ getActivityDetails.activityName }}</h3>
-      <ul class="act-details">
-        <li>
-          {{ getActivityDetails.activityDate }} |
-          {{ getActivityDetails.startTime }} |
-          {{ getActivityDetails.endTime }}
-        </li>
-        <li>{{ getActivityDetails.description }}</li>
-      </ul>
-    </div>
-    <div class="route-detail">
-      <h3>Route Details</h3>
-      <h3>{{ getActivityDetails.activityName }}</h3>
-      <ul class="act-details">
-        <li>
-          {{ getActivityDetails.activityDate }} |
-          {{ getActivityDetails.startTime }} |
-          {{ getActivityDetails.endTime }}
-        </li>
-        <li>{{ getActivityDetails.description }}</li>
-      </ul>
-    </div>
-  </div>
   </div>
 </template>
 
 
 <script>
 import Map from "../components/maps/Map.vue";
-import NavMenu from '../components/NavMenu.vue';
-import ActivitiesTile from '../components/tiles/ActivitiesTile.vue';
+import NavMenu from "../components/NavMenu.vue";
+import ActivitiesTile from "../components/tiles/ActivitiesTile.vue";
 export default {
   name: "activity-detail",
   props: {
     activity: Object,
   },
-  components: { 
+  components: {
     Map,
     NavMenu,
-    ActivitiesTile
-    },
-    data(){
-      return{
-        activitiesTab: false,
-        clicked: false,
-      }
-    },
+    ActivitiesTile,
+  },
+  data() {
+    return {
+      activitiesTab: false,
+      clicked: false,
+    };
+  },
   computed: {
     getActivityDetails() {
       return this.$store.state.activity.find((activity) => {
         return activity.activityId == this.$route.params.id;
       });
     },
-      mounted(){
-        
-       const e = document.querySelector("Map");
-       return e.remove();
-
-  },
+    mounted() {
+      const e = document.querySelector("Map");
+      return e.remove();
+    },
   },
 };
 </script>
 
-<style>
-.main{
+<style scoped>
+.main {
   display: flex;
   width: 100vw;
 }
-.nav-menu{
- width: 100%;
+.nav-menu {
+  width: 100%;
 }
 .tile {
   align-self: center;
@@ -121,9 +119,9 @@ export default {
 Map {
   height: 100%;
   width: 100%;
-  margin-bottom: 300px
+  margin-bottom: 300px;
 }
-.map .nav-controls .btn{
+.map .nav-controls .btn {
   display: none;
 }
 </style>

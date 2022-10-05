@@ -16,16 +16,15 @@
         /> -->
         <select name="routeId" id="" v-model="newActivity.routeId">
           <option v-for="route in routes" :key="route.routeName">
-            {{ route.routeId }}
-            <!-- {{ route.routeName }} -->
+            {{ route.routeName }}
           </option>
         </select>
         <label for="bikeId">Select your bike: </label>
 
         <select name="bike" id="" v-model="newActivity.bikeId">
           <option v-for="bike in userBikes" :key="bike.bikeId">
-            {{ bike.bikeId }}
-            <!-- {{ bike.bikeName }} -->
+            <!-- {{ bike.bikeId }} -->
+            {{ bike.bikeName }}
           </option>
         </select>
       </div>
@@ -49,8 +48,13 @@
         />
       </div>
       <div class="container">
-        <label class="form-el" for="startTime" >Start time:</label>
-        <input class="form-el" type="time" value="12:30" v-model="newActivity.startTime" />
+        <label class="form-el" for="startTime">Start time:</label>
+        <input
+          class="form-el"
+          type="time"
+          value="12:30"
+          v-model="newActivity.startTime"
+        />
         <label class="form-el" for="endTime">End time:</label>
         <input class="form-el" type="time" v-model="newActivity.endTime" />
         <button class="add-btn form-el" @click="submitForm()">
