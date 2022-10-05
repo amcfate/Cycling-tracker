@@ -19,6 +19,19 @@ public class JdbcActivityDao implements ActivityDao{
 
 
     @Override
+    public List<Activity> getAllActivities() {
+        String sql = "SELECT * FROM activity WHERE is_public = true";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        List<Activity> allActivities = new ArrayList<>();
+        while (results.next()){
+            Activity activity = mapRowToActivity(results);
+            allActivities.add(activity);
+        }
+        return allActivities;
+
+    }
+
+    @Override
     public List<Activity> getActivitiesByUserId(int userId) {
         String sql = "SELECT * FROM activity WHERE user_id =?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);
@@ -32,9 +45,9 @@ public class JdbcActivityDao implements ActivityDao{
 
     @Override
     public void addNewActivity(Activity activity) {
-        String sql = "INSERT INTO activity (route_id, user_id, activity_name, " +
+        String sql = "INSERT INTO activity (route_id, user_id, bike_id, activity_name, " +
                 "is_public, description, activity_date, start_time, end_time) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, activity.getRouteId(), activity.getUserId(),
                 activity.getActivityName(), activity.isPublic(),
                 activity.getDescription(), activity.getActivityDate(),
@@ -50,6 +63,7 @@ public class JdbcActivityDao implements ActivityDao{
         Activity activity = new Activity();
         activity.setRouteId(rs.getInt("route_id"));
         activity.setUserId(rs.getInt("user_id"));
+        activity.setBikeId(rs.getInt("bike_id"));
         activity.setActivityName(rs.getString("activity_name"));
         activity.setActivityId(rs.getInt("activity_id"));
         activity.setPublic(rs.getBoolean("is_public"));

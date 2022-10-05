@@ -36,6 +36,7 @@ export default {
         {
           routeId: "",
           userId: "",
+          bikeId: "",
           activityName: "",
           activityId: "",
           isPublic: "",

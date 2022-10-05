@@ -40,6 +40,8 @@
         >
       </h3>
 
+      <!-- show current bike -->
+
       <router-link
         v-bind:to="{ name: 'logout' }"
         style="text-decoration: none; color: inherit"
@@ -93,6 +95,8 @@ import Map from "../components/maps/Map.vue";
 import RoutesTile from "../components/tiles/RoutesTile.vue";
 import ActivitiesTile from "../components/tiles/ActivitiesTile.vue";
 import profileService from "../services/ProfileService.js";
+import ActivitiesService from "../services/ActivitiesService.js";
+import RouteService from "../services/RouteServices";
 export default {
   name: "home",
 
@@ -164,7 +168,28 @@ export default {
     clearData() {
       this.$store.commit("CLEAR_DATA");
     },
-
+    getAllActivities() {
+      ActivitiesService.getAllActivities()
+        .then((response) => {
+          this.$store.commit("SET_ACTIVITIES", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: "NotFound" });
+          }
+        });
+    },
+    getAllRoutes() {
+      RouteService.getAllRoutes()
+        .then((response) => {
+          this.$store.commit("SET_ROUTES", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: "NotFound" });
+          }
+        });
+    },
 
   },
 };

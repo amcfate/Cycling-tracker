@@ -7,7 +7,6 @@
       <router-link v-bind:to="{ name: 'home' }" style="text-decoration: none; color: inherit"><h3>Velocity</h3></router-link
       >&nbsp;|&nbsp;
     
-      <router-link v-bind:to="{ name: 'maptesting' }" style="text-decoration: none; color: inherit">Map Test!</router-link>
         <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
@@ -111,7 +110,7 @@ body {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: whitesmoke;
+  background-color: #9bcea8;
   border: 1px solid lightgray;
   width: 100vw;
   height: 5vh;
@@ -121,8 +120,8 @@ body {
   display: flex;
   flex-direction: row;
   justify-self: center;
-  background-color: whitesmoke;
-  border: 1px solid lightgray;
+  background-color: #9bcea8;
+  border: 1px solid #9bcea8;
   padding: 18px;
   margin: 10px;
   border-radius: 10px;
