@@ -28,6 +28,7 @@ export default {
       activityFilter: {
         route_id: 0,
         user_id: 0,
+        bike_id: "",
         activityName: "",
         activity_id: 0,
         is_public: true,

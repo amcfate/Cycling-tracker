@@ -1,4 +1,4 @@
-BEGIN TRANSACTION;
+
 
 INSERT INTO route (route_name, description, distance_miles, elevation, ascent) VALUES 
 ('Highline Canal Trail: Eisenhower Park to East Orchard Road', 'There are beautiful trees on one side of the trail and gorgeous houses on the other side. This trail starts in Denver, heads south through Cherry Hills and Greenwood Villages, and back north. There is another trailhead at the south end of the route off of Orchard Road. Accessibility: There are 3 designated accessible spaces in the paved parking lot off of East Dartmouth Avenue at the north end of the trail. All of them are van-accessible with striped access aisles. The trail surface is pavement (with railings at bridges) or packed gravel and typically at least 5 to 8 feet wide. The estimated grade is mostly gentle (5% or less). All-terrain tires or motorized equipment may be needed for the unpaved sections. There are benches and picnic tables along the route for resting. ', '7.7', 5472, 124);
@@ -22,12 +22,9 @@ INSERT INTO trackpoint (route_id, latitude, longitude, elevation) VALUES
 INSERT INTO trackpoint (route_id, latitude, longitude, elevation) VALUES
 (1, 39.60996000, -104.941380, 1680.0);
 
-INSERT INTO activity(route_id, user_id, activity_name, is_public, photos, description, activity_date, start_time, end_time) VALUES
-(1, 3, 'pre-beer ride', 1, true, 'Fun ride', '09/20/2002', '07:00:00', '08:00:00');
+INSERT INTO activity(route_id, user_id, bike_id, activity_name, is_public, photos, description, activity_date, start_time, end_time) VALUES
+(1, 3, '', 'pre-beer ride', 1, true, 'Fun ride', '09/20/2002', '07:00:00', '08:00:00');
 
-INSERT INTO activity(route_id, user_id, activity_name, is_public, photos, description, activity_date, start_time, end_time) VALUES
-(1, 6, 'pretzel ride', 1, true, 'Fun ride', '09/20/2002', '07:00:00', '08:00:00');
+INSERT INTO activity(route_id, user_id, bike_id, activity_name, is_public, photos, description, activity_date, start_time, end_time) VALUES
+(1, 5, '', 'pretzel ride', 1, true, 'Fun ride', '09/20/2002', '07:00:00', '08:00:00');
 
-
-
-COMMIT TRANSACTION;

@@ -11,6 +11,7 @@ public class Activity {
 
     private int routeId;
     private int userId;
+    private int bikeId;
     private int activityId;
 
     private String activityName;
@@ -25,8 +26,8 @@ public class Activity {
 
     public Activity(){}
 
-    //constructor w/ no image
-    public Activity(/*int routeId,*/ int userId,  String activityName,
+    //constructor w/ no image and no bike
+    public Activity(/*int routeId,*/ int userId, String activityName,
                     boolean isPublic, String description,
                     Date activityDate, LocalTime startTime, LocalTime endTime) {
        /* this.routeId = routeId;*/
@@ -39,12 +40,28 @@ public class Activity {
         this.endTime = endTime;
     }
 
+    //constructor w/ no image
+    public Activity(/*int routeId,*/ int userId, int bikeId, String activityName,
+                                     boolean isPublic, String description,
+                                     Date activityDate, LocalTime startTime, LocalTime endTime) {
+        /* this.routeId = routeId;*/
+        this.userId = userId;
+        this.bikeId = bikeId;
+        this.activityName = activityName;
+        this.isPublic = isPublic;
+        this.description = description;
+        this.activityDate = activityDate;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
     //constructor to make activity w/ all properties
-    public Activity(int routeId, int userId, int activityId,  String activityName,
+    public Activity(int routeId, int userId, int bikeId, int activityId,  String activityName,
                     boolean isPublic, String photos, String description,
                     Date activityDate, LocalTime startTime, LocalTime endTime) {
         this.routeId = routeId;
         this.userId = userId;
+        this.bikeId = bikeId;
         this.activityId = activityId;
         this.activityName = activityName;
         this.isPublic = isPublic;
@@ -93,7 +110,13 @@ public class Activity {
         this.activityId = activityId;
     }
 
+    public int getBikeId() {
+        return bikeId;
+    }
 
+    public void setBikeId(int bikeId) {
+        this.bikeId = bikeId;
+    }
 
     public String getActivityName() {
         return activityName;

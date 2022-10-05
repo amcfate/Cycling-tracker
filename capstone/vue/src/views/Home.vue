@@ -166,7 +166,7 @@ export default {
       this.$store.commit("CLEAR_DATA");
     },
     getAllActivities() {
-      ActivitiesService.getActivities()
+      ActivitiesService.getAllActivities()
         .then((response) => {
           this.$store.commit("SET_ACTIVITIES", response.data);
         })
