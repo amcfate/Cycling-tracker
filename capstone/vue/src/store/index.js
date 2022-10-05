@@ -152,5 +152,8 @@ export default new Vuex.Store({
     ADD_TRACKPOINT(state, trackpoint) {
       state.trackpoint.unshift(trackpoint)
     },
+    UPDATE_PROFILE(state, updateInfo) {
+      state.user_profile = updateInfo;
+    }
   }
 })

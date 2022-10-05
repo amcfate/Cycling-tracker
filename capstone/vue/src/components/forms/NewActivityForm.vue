@@ -14,16 +14,18 @@
           v-model="newActivity.routeId"
           placeholder="Type routeId FOR NOW..."
         /> -->
-        <select name="routeId" id="">
-          <option value="routeId" v-for="route in routes" :key="route">
-            {{ route.routeName }}
+        <select name="routeId" id="" v-model="newActivity.routeId">
+          <option v-for="route in routes" :key="route.routeName">
+            {{ route.routeId }}
+            <!-- {{ route.routeName }} -->
           </option>
         </select>
-        <label for="BikeId">Select your bike: </label>
-        <!-- needs to v model to newactivity.bikeid once db is updated -->
-        <select name="bike" id="">
-          <option value="bikeId" v-for="bike in userBikes" :key="bike">
-            {{ bike.bikeName }}
+        <label for="bikeId">Select your bike: </label>
+
+        <select name="bike" id="" v-model="newActivity.bikeId">
+          <option v-for="bike in userBikes" :key="bike.bikeId">
+            {{ bike.bikeId }}
+            <!-- {{ bike.bikeName }} -->
           </option>
         </select>
       </div>
@@ -64,13 +66,14 @@ import activitiesService from "../../services/ActivitiesService.js";
 import bikeService from "../../services/BikeService.js";
 import RouteService from "../../services/RouteServices.js";
 export default {
-  // props: ["userId"],
   components: {},
   data() {
     return {
+      //routeName: "",
       routes: [
         {
           routeName: "",
+          routeId: "",
           description: "",
           distance: "",
           elevation: "",
@@ -91,6 +94,7 @@ export default {
         activityName: "",
         activityDate: "",
         userId: "",
+        bikeId: "",
         startTime: "",
         endTime: "",
         description: "",
@@ -99,13 +103,20 @@ export default {
       },
     };
   },
+  // computed: {
+  //   getRouteId() {
+  //     return this.$store.state.routes.find((route) => {
+  //       route.routeName == this.routeName;
+  //     });
+  //   },
+  // },
   methods: {
     submitForm() {
       console.log(this.newActivity);
       activitiesService.addNewActivity(this.newActivity).then((response) => {
         if (response.status === 201) {
           this.$store.commit("ADD_ACTIVITY", this.newActivity);
-          this.$router.push("/activity");
+          // this.$router.push("/activity");
           console.log(this.newActivity);
         }
       });
@@ -143,6 +154,7 @@ export default {
 #activity-form {
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
   width: auto;
   flex-wrap: wrap;
 }

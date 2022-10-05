@@ -32,11 +32,11 @@ public class JdbcActivityDao implements ActivityDao{
 
     @Override
     public void addNewActivity(Activity activity) {
-        String sql = "INSERT INTO activity (route_id, user_id, activity_name, " +
+        String sql = "INSERT INTO activity (route_id, user_id, bike_id, activity_name, " +
                 "is_public, description, activity_date, start_time, end_time) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, activity.getRouteId(), activity.getUserId(),
-                activity.getActivityName(), activity.isPublic(),
+                activity.getBikeId(), activity.getActivityName(), activity.isPublic(),
                 activity.getDescription(), activity.getActivityDate(),
                 activity.getStartTime(), activity.getEndTime());
     }
@@ -50,6 +50,7 @@ public class JdbcActivityDao implements ActivityDao{
         Activity activity = new Activity();
         activity.setRouteId(rs.getInt("route_id"));
         activity.setUserId(rs.getInt("user_id"));
+        activity.setBikeId(rs.getInt("bike_id"));
         activity.setActivityName(rs.getString("activity_name"));
         activity.setActivityId(rs.getInt("activity_id"));
         activity.setPublic(rs.getBoolean("is_public"));

@@ -1,14 +1,10 @@
 package com.techelevator.dao;
 
-import com.techelevator.model.User;
 import com.techelevator.model.UserNotFoundException;
 import com.techelevator.model.UserProfile;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Component;
-
-import java.util.Objects;
 
 @Component
 
@@ -38,9 +34,17 @@ public class JdbcUserProfileDao implements UserProfileDao{
         return jdbcTemplate.update(sql, id, username) == 1;
     }
 
+    @Override
+    public void updateUserProfile(UserProfile userProfile) {
+        String sql = " UPDATE user_profile SET cycling_team = ?, user_age = ?, photo = ?" +
+                "WHERE user_id = ?";
+        jdbcTemplate.update(sql, userProfile.getCyclingTeam(), userProfile.getUserAge(),
+                userProfile.getPhoto(), userProfile.getUserId());
+    }
+
     private UserProfile mapRowToUserProfile(SqlRowSet rs) {
         UserProfile userProfile = new UserProfile();
-        userProfile.setId(rs.getInt("user_id"));
+        userProfile.setUserId(rs.getInt("user_id"));
         userProfile.setUsername(rs.getString("username"));
         userProfile.setCyclingTeam(rs.getString("cycling_team"));
         userProfile.setUserWeight(rs.getDouble("user_weight"));

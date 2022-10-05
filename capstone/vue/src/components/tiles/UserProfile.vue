@@ -32,7 +32,7 @@ export default {
     return {
       showEditForm: false,
       userProfile: {
-        id: "",
+        userId: "",
         username: "",
         cyclingTeam: "",
         userWeight: "",
