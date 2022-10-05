@@ -17,6 +17,9 @@ export default {
   },
   saveRoute(route) {
     return axios.post("/saveroute", route)
+  },
+  deleteRoute(id){
+    return axios.delete(`/deleteroute/${id}`)
   }
 }
 

@@ -20,6 +20,11 @@ public class ActivityController {
     @Autowired
     private UserDao userDao;
 
+    @RequestMapping(path = "/allActivities", method=RequestMethod.GET)
+    public List<Activity> getAllActivities(){
+        return activityDao.getAllActivities();
+    }
+
     @RequestMapping(path = "/activity", method = RequestMethod.GET)
     public List<Activity> getActivitiesByUserId(Principal principal){
         return activityDao.getActivitiesByUserId(userDao.findIdByUsername(principal.getName()));

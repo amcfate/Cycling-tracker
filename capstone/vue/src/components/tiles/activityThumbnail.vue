@@ -1,6 +1,6 @@
 <template>
   <router-link class="home"
-  v-bind:to="{name: 'activity-detail', params: {id: activity_id}}"
+  v-bind:to="{name: 'activity-detail', params: {id: activity.activityId}}"
   v-bind:activity="activity"
   style="text-decoration: none; color: inherit">
       <h2 class="header">{{activity.activityName}}</h2>
@@ -19,7 +19,9 @@
 
 export default {
   name: "activity-thumb",
-  props: ["activity"],
+  props: {
+    activity: Object,
+  },
 
   data() {
     return {
@@ -41,6 +43,9 @@ export default {
   background-color: lightgray;
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgrey;  
+  }
+ .header{
+    background-color: #9BCEA8;
   }
 
  @media only screen and (max-width: 1000px){
@@ -97,4 +102,5 @@ p{
    margin-top: 3px;
   margin-bottom: 3px;
 }
+
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="route-tile overlay" >
-    <h3>Routes</h3>
-    <input type="text" id="route-search" v-model="routeFilter.routeName" />
+    <h3>Community Routes</h3>
+    <input type="text" id="route-search" placeholder = "Search by route name..." v-model="routeFilter.routeName" />
     <route-thumb
       class="route-div"
       @click="displayDetail = !displayDetail"
@@ -75,7 +75,7 @@ export default {
     padding-top: 30px;
     height: 76%;
     width: 35%;
-    background: lightgray;
+    background: #9BCEA8;
     z-index: 5;
     align-self: center;
     overflow: auto;
@@ -108,7 +108,7 @@ export default {
     padding-top: 30px;
     height: 76%;
     width: 35%;
-    background: lightgray;
+    background: #9BCEA8;
     z-index: 5;
     align-self: center;
     overflow: auto;
@@ -140,11 +140,11 @@ export default {
     padding-top: 30px;
     height: 30%;
     width: 80%;
-    background: lightgray;
+    background: #9BCEA8;
     z-index: 5;
     align-self: flex-end;
     overflow: auto;
-    margin-bottom: 32%;
+    margin-bottom: 40%;
   }
    .route-div {
     height: 50%;

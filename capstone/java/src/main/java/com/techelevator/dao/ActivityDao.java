@@ -6,6 +6,8 @@ import java.util.List;
 
 public interface ActivityDao {
 
+    List<Activity> getAllActivities();
+
     List<Activity> getActivitiesByUserId(int userId);
 
     void addNewActivity(Activity activity);

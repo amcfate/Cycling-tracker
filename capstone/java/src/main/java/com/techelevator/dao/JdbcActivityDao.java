@@ -19,6 +19,19 @@ public class JdbcActivityDao implements ActivityDao{
 
 
     @Override
+    public List<Activity> getAllActivities() {
+        String sql = "SELECT * FROM activity WHERE is_public = true";
+        SqlRowSet results = jdbcTemplate.queryForRowSet(sql);
+        List<Activity> allActivities = new ArrayList<>();
+        while (results.next()){
+            Activity activity = mapRowToActivity(results);
+            allActivities.add(activity);
+        }
+        return allActivities;
+
+    }
+
+    @Override
     public List<Activity> getActivitiesByUserId(int userId) {
         String sql = "SELECT * FROM activity WHERE user_id =?";
         SqlRowSet results = jdbcTemplate.queryForRowSet(sql, userId);

@@ -74,8 +74,7 @@ CREATE TABLE trackpoint (
 );
 
 CREATE TABLE activity (
-
-	activity_id SERIAL NOT NULL,
+    activity_id SERIAL NOT NULL,
 	route_id int,
 	user_id int,
 	bike_id int,
