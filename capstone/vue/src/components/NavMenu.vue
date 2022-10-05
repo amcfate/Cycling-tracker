@@ -6,7 +6,7 @@
 
        <h3>
         <router-link
-          v-bind:to="{ name: 'profile' }"
+          v-bind:to="{ name: 'home' }"
           style="text-decoration: none; color: inherit"
           class="h3"
           >Home</router-link

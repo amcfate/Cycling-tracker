@@ -15,7 +15,7 @@
         name="description"
         v-model="newBike.bikeDescription"
       />
-      <button class="add-btn" @click="submitForm()">Add Gear</button>
+      <button class="add-btn" @click="submitForm()">Add Bike</button>
     </form>
   </div>
 </template>

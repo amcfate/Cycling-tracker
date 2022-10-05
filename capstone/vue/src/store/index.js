@@ -18,7 +18,6 @@ if (currentToken != null) {
 
 export default new Vuex.Store({
   state: {
-    isMobile: true,
     token: currentToken || '',
 
     user: currentUser || {},
@@ -50,38 +49,38 @@ export default new Vuex.Store({
     ],
     activity: [
       {
-        route_id: 125,
+        route_id: 0,
         user_id: 0,
         activityName: "activity",
         activityId: 99,
         is_public: true,
         photos: "xxxxx",
-        description: "active",
-        activity_date: "9/1/21",
+        description: "cool",
+        activity_date: "today",
         start_time: "morn",
         end_time: "never",
       },
       {
-        route_id: 123,
+        route_id: 0,
         user_id: 0,
         activityName: "bike ride",
         activityId: 37,
         is_public: true,
         photos: "xxxxx",
         description: "cool",
-        activity_date: "5/5/5",
+        activity_date: "today",
         start_time: "morn",
         end_time: "never",
       },
       {
-        route_id: 100,
+        route_id: 0,
         user_id: 0,
         activityName: "run",
         activityId: 55,
         is_public: true,
         photos: "xxxxx",
-        description: "old",
-        activity_date: "0 AD",
+        description: "cool",
+        activity_date: "today",
         start_time: "morn",
         end_time: "never",
       },
@@ -97,7 +96,18 @@ export default new Vuex.Store({
       },
     ],
     user_profile: [
+      // {
+      //   user_id: 5,
+      //   username: "markb",
+      //   cycling_team: "",
+      //   user_weight: "",
+      //   userAge: 25
+      // }
+    ],
+    trackpoint: [
+      {
 
+      }
     ]
   },
   mutations: {
@@ -134,21 +144,13 @@ export default new Vuex.Store({
       routes.forEach(route => {
         state.routes.unshift(route)
       });
+
     },
     SET_ACTIVITIES(state, activities) {
-      activities.forEach(activity => {
-        state.activity.unshift(activity)
-      });
+      state.activity = activities
     },
-  },
-  CHANGE_IS_MOBILE(state) {
-    state.isMobile = !state.isMobile;
-
-  },
-  CLEAR_DATA(state) {
-    state.activity = [];
-    state.routes = [];
+    ADD_TRACKPOINT(state, trackpoint){
+      state.trackpoint.unshift(trackpoint)
+    },
   }
-}
-)
-
+})

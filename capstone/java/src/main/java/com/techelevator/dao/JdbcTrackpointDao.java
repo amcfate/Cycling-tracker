@@ -58,18 +58,16 @@ public class JdbcTrackpointDao implements TrackpointDao{
     }
 
     @Override
-    public Trackpoint addTrackpoint(Trackpoint newTrackpoint) {
-        String sql = "INSERT INTO trackpoint (route_id, trackpoint_id, latitude, longitude, elevation) VALUES (?, ?, ?, ?, ?)";
+    public void addTrackpoint(Trackpoint newTrackpoint) {
+        int id = jdbcTemplate.queryForObject("SELECT MAX(route_id) FROM route", Integer.class);
 
-        int routeId = newTrackpoint.getRouteId();
-        int newTrackpointId = getNextTrackpointId(); //is this method really necessary
+        String sql = "INSERT INTO trackpoint (route_id, latitude, longitude, elevation) VALUES (?, ?, ?, ?)";
+       /* int routeId = newTrackpoint.getRouteId(); //Substitute for routeId FK*/
         BigDecimal latitude = newTrackpoint.getLatitude();
         BigDecimal longitude = newTrackpoint.getLongitude();
         double elevation = newTrackpoint.getElevation();
 
-        jdbcTemplate.update(sql, routeId, newTrackpointId, latitude, longitude, elevation);
-
-        return getTrackpointById(newTrackpointId);
+        jdbcTemplate.update(sql, (id + 1), latitude, longitude, elevation);
     }
 
     @Override

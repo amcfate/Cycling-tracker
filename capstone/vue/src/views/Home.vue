@@ -2,18 +2,15 @@
   <div class="main">
     <nav class="desktop-nav" v-if="!isMobile">
       <h1 class="logo">Velocity</h1>
-      <h2 class="hbar"></h2>
-
-      <div class="highlighter">
-        <h3 class="h3"
-          @click="
-            showActivitiesTile = false;
-            showRouteTile = !showRouteTile;
-          "
+      <h2 class = hbar></h2>
+      <h3>
+        <router-link
+          v-bind:to="{ name: 'profile' }"
+          style="text-decoration: none; color: inherit"
+          class="h3"
+          >{{ userProfile.username }}</router-link
         >
-          Routes
-        </h3>
-      </div>
+      </h3>
 
       <h3 class="h3"
         @click="
@@ -23,15 +20,16 @@
       >
         Activities
       </h3>
-
-      <h3 class="h3">
-        <router-link
-          v-bind:to="{ name: 'profile' }"
-          style="text-decoration: none; color: inherit"
-          
-          >Profile</router-link
+      <div class="highlighter">
+        <h3
+          @click="
+            showActivitiesTile = false;
+            showRouteTile = !showRouteTile;
+          "
         >
-      </h3>
+          Routes
+        </h3>
+      </div>
 
       <h3 class="h3">
         <router-link
@@ -51,16 +49,12 @@
     </nav>
  <!--try to change this to focus event-->
     <nav class="desktop-nav" v-else>
-      <h3
-      
-        @click="
-          showActivitiesTile = false;
-          showRouteTile = !showRouteTile;
-        "
+      <router-link
+        v-bind:to="{ name: 'profile' }"
+        style="text-decoration: none; color: inherit"
+        class="h3"
+        ><h3>{{ userProfile.username }}</h3></router-link
       >
-        Routes
-      </h3>
-
       <h3
         @click="
           showRouteTile = false;
@@ -70,12 +64,14 @@
         Activities
       </h3>
 
-      <router-link
-        v-bind:to="{ name: 'profile' }"
-        style="text-decoration: none; color: inherit"
-        class="h3"
-        ><h3>Profile</h3></router-link
+      <h3
+        @click="
+          showActivitiesTile = false;
+          showRouteTile = !showRouteTile;
+        "
       >
+        Routes
+      </h3>
     </nav>
 
     <div class="view">
@@ -94,14 +90,22 @@
 //expand search feature and apply to routes && bikes
 
 import Map from "../components/maps/Map.vue";
-
-import RoutesTile from '../components/tiles/RoutesTile.vue';
-import ActivitiesTile from '../components/tiles/ActivitiesTile.vue';
+import RoutesTile from "../components/tiles/RoutesTile.vue";
+import ActivitiesTile from "../components/tiles/ActivitiesTile.vue";
+import profileService from "../services/ProfileService.js";
 export default {
   name: "home",
 
   data() {
     return {
+      userProfile: {
+        id: "",
+        username: "",
+        cyclingTeam: "",
+        userWeight: "",
+        uerAge: "",
+        photo: "",
+      },
       isMobile: false,
       windowWidth: window.innerWidth,
       showRouteTile: false,
@@ -139,6 +143,11 @@ export default {
     },
   },
   methods: {
+    profileButton() {
+      profileService.getProfileDetails().then((response) => {
+        this.userProfile = response.data;
+      });
+    },
     hideOtherTiles() {
       this.showRouteTile = false;
       this.showActivitiesTile = false;
@@ -417,8 +426,8 @@ transition: 100ms ease-in-out;
     color: whitesmoke;
   }
 
-  /* .h3:hover {
+  .h3:hover {
     background-color: whitesmoke;
-  } */
+  }
 }
-</style>
+</style> 

@@ -6,16 +6,13 @@
         Add Activity
       </button>
     </div>
-    <new-activity-form
-      class="form"
-      v-show="showActivityForm"
-     
-    />
+    <new-activity-form class="form" v-show="showActivityForm" />
+    <!-- :userId="activities[0].userId" -->
     <div id="display-content" v-for="activity in activities" :key="activity">
       <h3>{{ activity.activityName }}</h3>
       <ul class="act-details">
         <li>
-          {{ activity.activityDate }} | {{ activity.startTime }} |
+          {{ activity.activityDate }} | {{ activity.startTime }} -
           {{ activity.endTime }}
         </li>
         <li>{{ activity.description }}</li>

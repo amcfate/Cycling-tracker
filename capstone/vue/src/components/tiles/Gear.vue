@@ -7,11 +7,8 @@
       </button>
     </div>
 
-    <new-gear-form
-      class="form"
-      v-show="showGearForm"
-      
-    />
+    <new-gear-form class="form" v-show="showGearForm" />
+    <!-- :userId="userGear[0].userId" -->
     <div class="tile-content">
       <div
         class="display-content"

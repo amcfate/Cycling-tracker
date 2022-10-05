@@ -11,13 +11,22 @@
 </template>
 
 <script>
-import axios from "axios";
+import routeServices from "../../services/RouteServices";
 
 export default {
   data() {
     return {
+      callbackObj: {
+        routeName: "",
+        description: "",
+        distanceMiles: "",
+        elevation: "",
+        ascent: "",
+      },
+      routeDescription: null,
+      routeName: null,
       distance: null,
-      elevation: null,
+      elevations: null,
       startingLat: null,
       startingLong: null,
       map: null,
@@ -43,9 +52,9 @@ export default {
         mapTypeId: window.google.maps.MapTypeId.ROADMAP,
         panControl: true,
         zoomControl: true,
-          zoomControlOptions: {
-      position: window.google.maps.ControlPosition.RIGHT_TOP,
-    },
+        zoomControlOptions: {
+          position: window.google.maps.ControlPosition.RIGHT_TOP,
+        },
         mapTypeControl: true,
         scaleControl: true,
         streetViewControl: true,
@@ -101,6 +110,15 @@ export default {
       return {loc: latLng, name: name};
     },
 
+    makeTrackPointObj(markObj) {
+      let obj = {
+        lat: markObj.loc.lat,
+        lng: markObj.loc.lng,
+        elevation: 436
+      }
+      return obj;
+    },
+
     /*
      * Calculate route between 2 Coordinates
      * https://stackoverflow.com/questions/27341214/how-to-draw-a-route-between-two-markers-in-google-maps
@@ -113,7 +131,7 @@ export default {
       let des = this.waypoints[(this.waypoints.length - 1)]
       if (this.waypoints.length > 2) {
         for (let i = 1; i < this.waypoints.length - 1; i++) {
-          waypnts.push({location: this.waypoints[i], stopover: true});
+          waypnts.push({location: this.waypoints[i], stopover: false});
         }
       }
 
@@ -130,10 +148,11 @@ export default {
           this.directionsDisplay.setMap(this.map);
         }
       });
-      this.getDistance(orgn, des);
       this.hideMarkers();
       this.markers = []
     },
+
+    // {lat: lat, lng: lng, name: name}
 
     setMapOnAll(map) {
       for (let i = 0; i < this.markers.length; i++) {
@@ -141,48 +160,106 @@ export default {
       }
     },
 
-    getDistance(start, end) {
-      let axios = require('axios')
-      var config = {
+   /* getElevation(lat, lng) {
+      let axios = require('axios');
+
+      let config = {
         method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/distancematrix/json?origins=' + start + '&destinations=' + end + '&units=imperial&key=AIzaSyDjB5lrCyoXaoU7Lv4RXi909TRAq5Wua9g',
+        url: 'https://maps.googleapis.com/maps/api/elevation/json?locations=' + lat + '%2C' + lng + '&key=AIzaSyDjB5lrCyoXaoU7Lv4RXi909TRAq5Wua9g',
         headers: {}
       };
+
       axios(config)
           .then(function (response) {
-            if (response.status !== "REQUEST_DENIED")
-              this.distance = response.rows[0].elements.distance;
-            else{
-              window.alert('ERROR GETTING ROUTE DISTANCE')
-            }
+            this.elevations.unshift(response.data.results.elevation)
+            return parseInt(response.data.results.elevation);
           })
-    },
+          .catch(function (error) {
+            console.log(error);
+          });
+    },*/
 
-    hideMarkers() {
-      //Simply points the markers to a null map via setMapOnAll
-      this.setMapOnAll(null)
-    },
 
     deleteMarkers() {
       //Makes marker and locations array empty
       this.locations = []
       this.markers = []
+      this.setMapOnAll(null)
     },
 
     saveRoute() {
-      for (let i = 0; i < this.locations.length; i++) {
-        //Pass back each lat and long to controller
-        axios.post('/saveroute', {
-          lat: this.locations[i].loc.lat,
-          lng: this.locations[i].loc.lng
-        })
+      this.routeName = window.prompt("Name this route");
+      //Check for null and recall if null
+      if (this.routeName === null) {
+        window.alert("Please enter a name")
+        this.saveRoute();
+      }
+      this.routeDescription = window.prompt("Give this route a description");
+      if (this.routeDescription === null) {
+        window.alert("Please enter a description");
+        this.saveRoute();
+      }
+      this.distance = parseInt(window.prompt("Enter distance in miles"));
+      if (this.distance === null) {
+        window.alert("Please enter a distance in miles");
+        this.saveRoute();
       }
 
+      //Package into JSON for callback
+      this.callbackObj = {
+        routeName: this.routeName,
+        description: this.routeDescription,
+        distanceMiles: this.distance,
+        elevation: 1337,
+        ascent: 345
+      }
+      //Commit to store, call API
+      routeServices.saveRoute(this.callbackObj).then((response) => {
+        if (response.status === 200 || response.status === 201) {
+          this.$store.commit("ADD_ROUTE", this.callbackObj)
+          this.$router.push("/saveroute")
+        }
+      });
+      //Reset obj
+      this.callbackObj = {}
 
+      //Save trackpoints after route save
+      this.saveTrackPoints()
+    },
+
+    calculateAscent() {
+      let largest = this.elevations[0];
+      let smallest = this.elevations[1];
+      for (let i = 0; i < this.elevations.length; i++) {
+        let current = this.elevations[i]
+        if (current > largest) {
+          largest = current;
+        } else if (current < smallest) {
+          smallest = current
+        }
+      }
+      return largest - smallest;
+    },
+
+    saveTrackPoints() {
+      //Loop through locations
+      for (let i = 0; i < this.locations.length; i++) {
+        let trackPoint = this.makeTrackPointObj(this.locations[i]);
+
+        //Save trackpoint
+        routeServices.saveTrackPoints(trackPoint).then((response) => {
+          if (response.status === 201 || response.status === 200) {
+            this.$store.commit("ADD_TRACKPOINT", trackPoint)
+            this.$router.push("/savetrackpoint")
+          }
+        });
+
+        //Reset locations
+        this.locations = []
+
+      }
     }
-
   },
-
   mounted() {
     // Initialize map after DOM is mounted
     this.initMap();
@@ -193,17 +270,17 @@ export default {
 
 </script>
 
-<style scoped>
-.wrapper{
+<style>
+.wrapper {
   display: flex;
-  position:relative;
+  position: relative;
   height: 100vh;
   width: 100vw;
 }
 
 #map {
   grid-area: map;
-  width: 100%;
+  width: 100vw;
   height: 100%;
   /* position: absolute; */
 
@@ -244,39 +321,39 @@ export default {
   border-bottom-right-radius: 2px;
 }
 
-.nav-controls{
-  
+.nav-controls {
+
   font-weight: bold;
   display: flex;
   background-color: #fff;
   z-index: 1;
-  width:200px;
+  width: 200px;
   align-self: start;
   border-radius: 3px;
   margin-top: 65px;
   margin-left: 10px;
   margin-right: 0%;
   position: absolute;
- 
+
 }
 
 
-
-.button{
+.button {
   padding: 5px;
   border-right-style: solid;
   border-width: 2px;
-  border-color:  rgb(240, 240, 240);
+  border-color: rgb(240, 240, 240);
   border-top-right-radius: 0px;
   border-bottom-right-radius: 0px;
 }
 
-.last-btn{
+.last-btn {
   border: none;
   padding: 5px;
   border-top-right-radius: 2px;
   border-bottom-right-radius: 2px;
 }
+
 .nav {
   text-align: center;
   position: absolute;
