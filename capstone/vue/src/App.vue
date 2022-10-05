@@ -6,8 +6,7 @@
       
       <router-link v-bind:to="{ name: 'home' }"><h3>Velocity</h3></router-link
       >&nbsp;|&nbsp;
-    
-      <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
+
         <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"

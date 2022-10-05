@@ -8,7 +8,6 @@ import com.techelevator.model.Route;
 import com.techelevator.model.Trackpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -16,7 +15,6 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -89,8 +87,8 @@ public class RouteController {
 
         return new Trackpoint(trackpointDTO.getRouteId(),
                               trackpointDTO.getTrackpointId(),
-                              trackpointDTO.getLatitude(),
-                              trackpointDTO.getLongitude(),
+                              trackpointDTO.getLat(),
+                              trackpointDTO.getLng(),
                               trackpointDTO.getElevation());
     }
 

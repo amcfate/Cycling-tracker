@@ -152,6 +152,5 @@ export default new Vuex.Store({
     ADD_TRACKPOINT(state, trackpoint){
       state.trackpoint.unshift(trackpoint)
     },
-   
   }
 })
