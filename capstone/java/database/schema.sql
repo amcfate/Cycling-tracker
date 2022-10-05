@@ -74,12 +74,7 @@ CREATE TABLE trackpoint (
 );
 
 CREATE TABLE activity (
-<<<<<<< HEAD
     activity_id SERIAL NOT NULL,
-=======
-
-	activity_id SERIAL NOT NULL,
->>>>>>> main
 	route_id int,
 	user_id int,
 	activity_name varchar,

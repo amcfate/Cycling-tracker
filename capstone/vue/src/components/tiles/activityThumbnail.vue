@@ -44,7 +44,7 @@ export default {
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgrey;  
   }
-  h2 .header{
+ .header{
     background-color: #9BCEA8;
   }
 

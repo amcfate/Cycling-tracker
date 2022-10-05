@@ -26,7 +26,7 @@ export default {
     Gear,
     TopNav,
    },
-   props: [""],
+  //  props: [""],
      data() {
     return {
       isMobile: false,

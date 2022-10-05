@@ -1,17 +1,17 @@
  <template>
  
   <div id="app">
-    <Map />
+    
     <div id="nav" v-if="isMobile">
       
-      <router-link v-bind:to="{ name: 'home' }"><h3>Velocity</h3></router-link
+      <router-link v-bind:to="{ name: 'home' }" style="text-decoration: none; color: inherit"><h3>Velocity</h3></router-link
       >&nbsp;|&nbsp;
     
-      <router-link v-bind:to="{ name: 'maptesting' }">Map Test!</router-link>
+      <router-link v-bind:to="{ name: 'maptesting' }" style="text-decoration: none; color: inherit">Map Test!</router-link>
         <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
-        >Logout</router-link
+        style="text-decoration: none; color: inherit">Logout</router-link
       >
     </div>
    <router-view />
@@ -157,7 +157,7 @@ router-link {
   background-clip: border-box;
   height: 100vh;
   background-position: center 100%;
-  /* background-attachment: fixed; */
+ 
 }
 </style>
 

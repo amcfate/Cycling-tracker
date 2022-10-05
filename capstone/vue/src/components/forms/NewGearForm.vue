@@ -17,7 +17,7 @@
 <script>
 import gearService from "../../services/GearService.js";
 export default {
-  props: ["userId"],
+  // props: ["userId"],
   data() {
     return {
       newGear: {

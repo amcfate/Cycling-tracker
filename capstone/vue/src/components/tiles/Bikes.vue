@@ -9,7 +9,7 @@
     <new-bike-form
       class="form"
       v-show="showBikeForm"
-      :userId="userBikes[0].userId"
+      
     />
     <div class="tile-content">
       <div class="display-content" v-for="bike in userBikes" :key="bike.userId">

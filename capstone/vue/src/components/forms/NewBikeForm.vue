@@ -24,7 +24,7 @@
 import bikeService from "../../services/BikeService.js";
 export default {
   name: "new-bike-form",
-  props: ["userId"],
+  // props: ["userId"],
 
   data() {
     return {

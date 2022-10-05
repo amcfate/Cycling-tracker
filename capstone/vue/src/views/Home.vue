@@ -2,10 +2,10 @@
   <div class="main">
     <nav class="desktop-nav" v-if="!isMobile">
       <h1 class="logo">Velocity</h1>
-      <h2></h2>
+      <h2 class="hbar"></h2>
 
       <div class="highlighter">
-        <h3
+        <h3 class="h3"
           @click="
             showActivitiesTile = false;
             showRouteTile = !showRouteTile;
@@ -15,7 +15,7 @@
         </h3>
       </div>
 
-      <h3
+      <h3 class="h3"
         @click="
           showRouteTile = false;
           showActivitiesTile = !showActivitiesTile;
@@ -24,20 +24,20 @@
         Activities
       </h3>
 
-      <h3>
+      <h3 class="h3">
         <router-link
           v-bind:to="{ name: 'profile' }"
           style="text-decoration: none; color: inherit"
-          class="h3"
+          
           >Profile</router-link
         >
       </h3>
 
-      <h3>
+      <h3 class="h3">
         <router-link
           v-bind:to="{ name: 'leaderboard' }"
           style="text-decoration: none; color: inherit"
-          class="h3"
+  
           >Leaderboard</router-link
         >
       </h3>
@@ -46,7 +46,7 @@
         v-bind:to="{ name: 'logout' }"
         style="text-decoration: none; color: inherit"
         class="logout"
-        ><h3>Logout</h3></router-link
+        ><h3 class="h3">Logout</h3></router-link
       >
     </nav>
  <!--try to change this to focus event-->
@@ -128,10 +128,7 @@ export default {
     //  this.clearData();
 
   },
-   created(){
-      
-
-  },
+ 
  
 
   computed: {
@@ -162,7 +159,7 @@ export default {
   },
 };
 </script>
-<style >
+<style scoped >
 @media only screen and (min-width: 700px) {
   .view {
     display: flex;
@@ -184,7 +181,7 @@ export default {
     padding-bottom: 0%;
     border-radius: 4px;
   }
-  /* h2 {
+  .hbar {
     border-bottom: 1px;
     border-style: solid;
     border-color: black;
@@ -208,7 +205,7 @@ export default {
     box-shadow: none;
   }
 
-  h3 {
+  .h3 {
     margin: 10px;
     padding-top: 4%;
     padding-bottom: 4%;
@@ -223,7 +220,7 @@ transition: 100ms ease-in-out;
     padding-top: 4%;
     padding-bottom: 4%;
   }
-  h3:hover{
+  .h3:hover{
     background-color: #97cea4;
      box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
 -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
@@ -247,7 +244,7 @@ transition: 100ms ease-in-out;
     display: flex;
     justify-content: space-evenly;
   }
-  h4 {
+  .h4 {
     margin: 50px;
     margin-bottom: 10px;
   }
@@ -287,26 +284,26 @@ transition: 100ms ease-in-out;
     padding-top: 6%;
     padding-bottom: 8%;
   }
-  /* h2 {
+   .h2 {
     border-bottom: 1px;
     border-style: solid;
     border-color: black;
     margin-left: 30%;
     margin-right: 30%;
-  } */
+  }
   .logo:hover {
     background-color: whitesmoke;
   }
   .desktop-nav {
     height: 100%;
     width: 15%;
-    background: lightgray;
+    background: #9bcea8;
   }
-  h3 {
+  .h3 {
     padding-top: 4%;
     padding-bottom: 4%;
   }
-  h3:hover {
+  .h3:hover {
     background-color: whitesmoke;
   }
   .h3 {
@@ -330,7 +327,7 @@ transition: 100ms ease-in-out;
     display: flex;
     justify-content: space-evenly;
   }
-  h4 {
+  .h4 {
     margin: 50px;
     margin-bottom: 10px;
   }
@@ -369,7 +366,7 @@ transition: 100ms ease-in-out;
   }
   .map {
     height: 100%;
-    width: 10%;
+    width: 100%;
     overflow: hidden;
   }
 
@@ -404,12 +401,12 @@ transition: 100ms ease-in-out;
     bottom: 0;
     height: 90px;
     width: 96.5%;
-    background: lightgray;
+    background: #9bcea8;
     z-index: 4;
     float: inherit;
   }
 
-  h3,
+  .h3,
   .h3 {
     text-align: center;
     padding: 1%;
