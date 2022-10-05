@@ -1,6 +1,6 @@
 <template>
   <div class="route-tile overlay">
-    <h3>My Activities</h3>
+    <h3>Recent Activities in the Community</h3>
     <input
       type="text"
       id="route-search"
@@ -89,6 +89,7 @@ export default {
   #route-search {
     margin: 5%;
   }
+  
 }
 
 @media only screen and (min-width: 1440px) {
@@ -132,7 +133,7 @@ export default {
     padding-left: 5px;
     margin-left: 10px;
     padding-top: 30px;
-    height: 30%;
+    height: 80%;
     width: 80%;
     background: lightgray;
     z-index: 5;
