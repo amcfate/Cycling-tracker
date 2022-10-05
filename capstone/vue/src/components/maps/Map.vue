@@ -179,19 +179,17 @@ export default {
           });
     },*/
 
-    hideMarkers() {
-      //Simply points the markers to a null map via setMapOnAll
-      this.setMapOnAll(null)
-    },
 
     deleteMarkers() {
       //Makes marker and locations array empty
       this.locations = []
       this.markers = []
+      this.setMapOnAll(null)
     },
 
     saveRoute() {
       this.routeName = window.prompt("Name this route");
+      //Check for null and recall if null
       if (this.routeName === null) {
         window.alert("Please enter a name")
         this.saveRoute();
@@ -207,6 +205,7 @@ export default {
         this.saveRoute();
       }
 
+      //Package into JSON for callback
       this.callbackObj = {
         routeName: this.routeName,
         description: this.routeDescription,
@@ -214,16 +213,18 @@ export default {
         elevation: 1337,
         ascent: 345
       }
-
+      //Commit to store, call API
       routeServices.saveRoute(this.callbackObj).then((response) => {
-        if (response.status === 200) {
+        if (response.status === 200 || response.status === 201) {
           this.$store.commit("ADD_ROUTE", this.callbackObj)
           this.$router.push("/saveroute")
         }
       });
+      //Reset obj
+      this.callbackObj = {}
 
+      //Save trackpoints after route save
       this.saveTrackPoints()
-
     },
 
     calculateAscent() {
@@ -241,16 +242,20 @@ export default {
     },
 
     saveTrackPoints() {
+      //Loop through locations
       for (let i = 0; i < this.locations.length; i++) {
         let trackPoint = this.makeTrackPointObj(this.locations[i]);
 
+        //Save trackpoint
         routeServices.saveTrackPoints(trackPoint).then((response) => {
-          if (response.status === 201) {
+          if (response.status === 201 || response.status === 200) {
             this.$store.commit("ADD_TRACKPOINT", trackPoint)
             this.$router.push("/savetrackpoint")
           }
         });
 
+        //Reset locations
+        this.locations = []
 
       }
     }

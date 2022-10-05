@@ -211,7 +211,7 @@ export default {
     padding-bottom: 4%;
     border-radius: 4px;
   }
-  /* h2 {
+  h2 {
     border-bottom: 1px;
     border-style: solid;
     border-color: black;
@@ -299,13 +299,13 @@ export default {
     padding-top: 6%;
     padding-bottom: 8%;
   }
-  /* h2 {
+  h2 {
     border-bottom: 1px;
     border-style: solid;
     border-color: black;
     margin-left: 30%;
     margin-right: 30%;
-  } */
+  }
   .logo:hover {
     background-color: whitesmoke;
   }
@@ -432,8 +432,8 @@ export default {
     color: whitesmoke;
   }
 
-  /* .h3:hover {
+  .h3:hover {
     background-color: whitesmoke;
-  } */
+  }
 }
-</style>
+</style> 
