@@ -1,13 +1,13 @@
 <template>
   <div class="main">
     <nav class="desktop-nav" v-if="!isMobile">
-      <h1 class="logo">Velocity</h1>
+      <h1 class="logo">VELOcity</h1>
       <h2 class = hbar></h2>
-      <h3>
+      <h3 class="h3">
         <router-link
           v-bind:to="{ name: 'profile' }"
           style="text-decoration: none; color: inherit"
-          class="h3"
+          
           >{{ userProfile.username }}</router-link
         >
       </h3>
@@ -21,7 +21,7 @@
         Activities
       </h3>
       <div class="highlighter">
-        <h3
+        <h3 class="h3"
           @click="
             showActivitiesTile = false;
             showRouteTile = !showRouteTile;
@@ -123,6 +123,7 @@ export default {
     this.$nextTick(() => {
       window.addEventListener("resize", this.onResize);
       this.onResize();
+      this.profileButton();
     });
      
   },
