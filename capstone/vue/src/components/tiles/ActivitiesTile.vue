@@ -137,11 +137,11 @@ export default {
     padding-top: 30px;
     height: 65%;
     width: 80%;
-    background: lightgray;
+    background: #9bcea8;
     z-index: 5;
     align-self: flex-end;
     overflow: auto;
-    margin-bottom: 40%;
+    margin-bottom: 150px;
   }
   .route-div {
     height: 50%;

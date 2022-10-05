@@ -40,6 +40,8 @@
         >
       </h3>
 
+      <!-- show current bike -->
+
       <router-link
         v-bind:to="{ name: 'logout' }"
         style="text-decoration: none; color: inherit"
@@ -166,7 +168,7 @@ export default {
     clearData() {
       this.$store.commit("CLEAR_DATA");
     },
-    getActivities() {
+    getAllActivities() {
       ActivitiesService.getAllActivities()
         .then((response) => {
           this.$store.commit("SET_ACTIVITIES", response.data);
