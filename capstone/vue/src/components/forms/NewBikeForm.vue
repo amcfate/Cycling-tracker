@@ -44,7 +44,7 @@ export default {
       bikeService.addNewBike(this.newBike).then((response) => {
         if (response.status === 201) {
           this.$store.commit("ADD_NEW_BIKE", this.newBike);
-          this.$router.push("/profile");
+          //    this.$router.push("/profile");
           console.log(this.newBike);
         }
         location.reload();
@@ -61,9 +61,9 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #bike-form {
-  display: flexbox;
+  display: flex;
   flex-direction: row;
   border-radius: 8px;
   padding-left: 5px;
@@ -79,6 +79,7 @@ export default {
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin: 4px;
+  padding: 14px;
   width: 100%;
 }
 .add-btn {

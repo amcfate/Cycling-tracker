@@ -2,13 +2,34 @@
   <div class="tile">
     <div class="tile-head">
       <h3>My Bikes</h3>
+      <button
+        v-show="showBikes == true"
+        style="align-self: center"
+        class="remove"
+        @click="showBikes = !showBikes"
+      >
+        ^
+      </button>
+      <button
+        v-show="showBikes == false"
+        style="align-self: center"
+        class="remove"
+        @click="showBikes = !showBikes"
+      >
+        v
+      </button>
       <button class="bikes-btn" @click="showBikeForm = !showBikeForm">
         Add Bikes
       </button>
     </div>
     <new-bike-form class="form" v-show="showBikeForm" />
     <div class="tile-content">
-      <div class="display-content" v-for="bike in userBikes" :key="bike.userId">
+      <div
+        class="display-content"
+        v-show="showBikes"
+        v-for="bike in userBikes"
+        :key="bike.userId"
+      >
         <div class="bike-tiles">
           {{ bike.bikeName }} | {{ bike.type }} |
           {{ bike.bikeDescription }}
@@ -28,6 +49,7 @@ export default {
   },
   data() {
     return {
+      showBikes: true,
       showBikeForm: false,
       userBikes: [
         {
@@ -55,13 +77,29 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.remove {
+  display: inline-block;
+  color: black;
+  padding: 6px 6px;
+  height: 26px;
+  font-weight: bolder;
+  font-size: 14px;
+  background-color: #9bcea8;
+  border-color: white;
+  border-radius: 4px;
+  margin-right: 280px auto;
+}
+
+.remove:hover {
+  background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+}
 .tile {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   margin: 12px;
-  background-color: rgba(69, 203, 178, 255);
+  background-color: #9bcea8;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: blur;
@@ -79,10 +117,16 @@ export default {
   text-align: left;
   padding: 6px;
 }
+
+.tile-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .display-content {
   display: flex;
   flex-direction: row;
-  /* width: fit-content; */
+  width: fit-content;
   flex-wrap: wrap;
   margin: 6px;
   background-color: white;
@@ -98,6 +142,7 @@ export default {
   box-shadow: 2px 10px 20px darkgray;
   padding: 6px;
   text-align: left;
+  width: fit-content;
 }
 /* .form {
   display: flex;

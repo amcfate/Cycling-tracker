@@ -115,7 +115,8 @@ export default {
     height: 50%;
     width: 80%;
     margin: 10px;
-    background-color: whitesmoke;
+    size: fit-content;
+    background-color: white;
     align-self: center;
     justify-self: center;
     justify-self: end;
@@ -137,18 +138,20 @@ export default {
     background: #9bcea8;
     z-index: 5;
     align-self: flex-end;
-    overflow: auto;
+    overflow:auto;
     margin-bottom: 40%;
   }
   .route-div {
+    min-height: 150px;
     height: 50%;
     width: 80%;
     margin: 10px;
-    background-color: whitesmoke;
+    size: fit-content;
+    background-color: white;
     align-self: center;
     justify-self: center;
     justify-self: end;
-    overflow: auto;
+    /* overflow: auto; */
   }
 }
 </style>

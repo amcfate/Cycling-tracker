@@ -5,7 +5,7 @@
       v-bind:route="route"
       style="text-decoration: none; color: inherit"
     >
-      <h2 class="header">{{ route.routeName }}</h2>
+      <h4 class="header">{{ route.routeName }}</h4>
 
       <h5>Length</h5>
       <p>{{ route.distance }} miles</p>
@@ -57,6 +57,7 @@ export default {
     padding-right: 3%;
     overflow: auto;
   }
+
 }
 @media only screen and (max-width: 1000px) {
   .route-thumb {
@@ -87,4 +88,5 @@ p {
 .info {
   margin-top: 0px;
 }
+
 </style>

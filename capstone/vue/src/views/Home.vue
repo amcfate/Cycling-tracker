@@ -51,13 +51,15 @@
     </nav>
     <!--try to change this to focus event-->
     <nav class="desktop-nav" v-else>
-     <h3 class="h3" > <router-link
-        v-bind:to="{ name: 'profile' }"
-        style="text-decoration: none; color: inherit"
-        
-        >{{ userProfile.username }}</router-link
-      ></h3>
-      <h3 class="h3"
+      <h3 class="h3">
+        <router-link
+          v-bind:to="{ name: 'profile' }"
+          style="text-decoration: none; color: inherit"
+          >{{ userProfile.username }}</router-link
+        >
+      </h3>
+      <h3
+        class="h3"
         @click="
           showRouteTile = false;
           showActivitiesTile = !showActivitiesTile;
@@ -66,7 +68,8 @@
         Activities
       </h3>
 
-      <h3 class="h3"
+      <h3
+        class="h3"
         @click="
           showActivitiesTile = false;
           showRouteTile = !showRouteTile;
@@ -80,7 +83,6 @@
       <routes-tile v-show="showRouteTile" />
 
       <activities-tile v-show="showActivitiesTile" />
-      
 
       <Map class="map"></Map>
     </div>
@@ -91,7 +93,7 @@
 
 <script>
 //expand search feature and apply to routes && bikes
-
+import ActivitiesService from "../services/ActivitiesService.js";
 import Map from "../components/maps/Map.vue";
 import RoutesTile from "../components/tiles/RoutesTile.vue";
 import ActivitiesTile from "../components/tiles/ActivitiesTile.vue";
@@ -129,8 +131,8 @@ export default {
       this.profileButton();
     });
   },
-  created(){
-    this.getAllActivities();  
+  created() {
+    this.getAllActivities();
   },
 
   beforeDestroy() {
@@ -168,7 +170,17 @@ export default {
     clearData() {
       this.$store.commit("CLEAR_DATA");
     },
-
+    getAllActivities() {
+      ActivitiesService.getActivities()
+        .then((response) => {
+          this.$store.commit("SET_ACTIVITIES", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: "NotFound" });
+          }
+        });
+    },
   },
 };
 </script>
@@ -208,7 +220,7 @@ export default {
     max-width: 300px;
     background: #9bcea8;
     display: flex;
-    flex-direction: column;
+    flex-flow: column;
   }
   .logout {
     margin-top: auto;
@@ -288,6 +300,13 @@ export default {
     justify-content: center;
   }
 
+  .overlay {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding-top: 10px;
+  }
+
   .main {
     display: flex;
     flex-direction: column;
@@ -324,29 +343,30 @@ export default {
     flex-direction: row;
     background-color: whitesmoke;
     border: 1px solid lightgray;
-    margin: 10px;
+    margin: 2px;
+    margin-left: 7px;
+    border-radius: 2px;
     align-items: center;
     justify-content: space-evenly;
     position: fixed;
     left: 0;
     bottom: 0;
-    height: 90px;
-    width: 96%;
+    height: 70px;
+    width: 97vw;
     background: #9bcea8;
     z-index: 4;
     float: inherit;
   }
 
- 
   .h3 {
     width: 78px;
     text-align: center;
     padding: 1%;
-     margin: 10px;
+    margin: 10px;
     padding-top: 1%;
     padding-bottom: 1%;
-    padding-left:5%;
-    padding-right:5%;
+    padding-left: 5%;
+    padding-right: 5%;
     border-radius: 2px;
     box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
     -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
@@ -354,7 +374,6 @@ export default {
     transition: 100ms ease-in-out;
   }
 
- 
   .h3:hover {
     background-color: #97cea4;
     box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
@@ -364,7 +383,5 @@ export default {
       inset 4px 4px 24px rgba(97, 104, 104, 0.52);
     transform: scale(1.01);
   }
-
- 
 }
 </style>  

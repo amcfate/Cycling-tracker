@@ -1,23 +1,29 @@
 <template>
   <div class="profile-form">
     <div class="form-elements">
-      <div class="team">
-        <label for="cyclingTeam"
-          >A part of a cycling team or club? Put it's name here:
-        </label>
-        <input type="text" v-model="updateInfo.cyclingTeam" />
-      </div>
-      <div class="age">
-        <label for="userAge">If you'd like, add your age here: </label>
-        <input type="text" v-model="updateInfo.userAge" />
-      </div>
-      <div class="photo">
-        <label for="photo">Upload a new profile photo here: </label>
-        <select name="photo" id="" v-model="updateInfo.photo"></select>
-        <button style="width: auto" @click="updateProfile()">
-          Submit Changes
-        </button>
-      </div>
+      <form v-on:submit.prevent>
+        <div class="team">
+          <label for="cyclingTeam"
+            >Part of a cycling team or club? Put its name here:
+          </label>
+          <input type="text" v-model="updateInfo.cyclingTeam" />
+        </div>
+        <div class="age">
+          <label for="userAge">If you'd like, add your age here: </label>
+          <input type="text" v-model="updateInfo.userAge" />
+        </div>
+        <!-- <div class="weight">
+          <label for="userAge">Enter your weight here: </label>
+          <input type="text" v-model="updateInfo.userWeight" />
+        </div> -->
+        <div class="submit">
+          <!-- <label for="photo">Upload a new profile photo here: </label>
+        <select name="photo" id="" v-model="updateInfo.photo"></select> -->
+          <button style="width: auto" @click="updateProfile()">
+            Submit Changes
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </template>
@@ -32,9 +38,10 @@ export default {
         username: "",
         cyclingTeam: "",
         userWeight: "",
-        uerAge: "",
+        userAge: "",
         photo: "",
       },
+      
     };
   },
   methods: {
@@ -42,25 +49,25 @@ export default {
       profileService.updateProfileDetails(this.updateInfo).then((response) => {
         if (response.status == 200) {
           this.$store.commit("UPDATE_PROFILE", this.updateInfo);
-          this.$router.push("/profile");
+          //alert("You have successfully updated your profile!");
         }
       });
     },
+    loadProfile() {
+      profileService.getProfileDetails().then((response) => {
+        this.updateInfo = response.data;
+      });
   },
+  },
+
   mounted() {
-    this.updateInfo = {
-      userId: this.userId,
-      username: this.username,
-      cyclingTeam: this.cyclingTeam,
-      userWeight: this.userWeight,
-      uerAge: this.uerAge,
-      photo: this.photo,
-    };
+    this.loadProfile();
   },
+    
 };
 </script>
 
-<style >
+<style scoped>
 .profile-form {
   display: flex;
   flex-direction: column;

@@ -1,10 +1,10 @@
 <template>
   <div>
-      <nav class="desktop-nav" v-if="!isMobile">
+    <nav class="desktop-nav" v-if="!isMobile">
       <h1 class="logo">VELOcity</h1>
       <h2></h2>
 
-       <h3>
+      <h3>
         <router-link
           v-bind:to="{ name: 'home' }"
           style="text-decoration: none; color: inherit"
@@ -40,7 +40,7 @@
     </nav>
     <!--try to change this to focus event-->
     <nav class="desktop-nav" v-else>
-       <h3>
+      <h3>
         <router-link
           v-bind:to="{ name: 'home' }"
           style="text-decoration: none; color: inherit"
@@ -49,14 +49,14 @@
         >
       </h3>
 
-      <h3>
+      <!-- <h3>
         <router-link
           v-bind:to="{ name: 'profile' }"
           style="text-decoration: none; color: inherit"
           class="h3"
           >Profile</router-link
         >
-      </h3>
+      </h3> -->
 
       <h3>
         <router-link
@@ -71,12 +71,20 @@
 </template>
 
 <script>
-
+import profileService from "../services/ProfileService.js";
 export default {
   name: "home",
 
   data() {
     return {
+      userProfile: {
+        id: "",
+        username: "",
+        cyclingTeam: "",
+        userWeight: "",
+        uerAge: "",
+        photo: "",
+      },
       isMobile: false,
       windowWidth: window.innerWidth,
       showRouteTile: false,
@@ -85,10 +93,9 @@ export default {
       activities: [],
     };
   },
-  components: {
-   
-  },
+  components: {},
   mounted() {
+    this.profileButton();
     this.$nextTick(() => {
       window.addEventListener("resize", this.onResize);
       this.onResize();
@@ -97,10 +104,14 @@ export default {
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
-    
   },
 
   methods: {
+    profileButton() {
+      profileService.getProfileDetails().then((response) => {
+        this.userProfile = response.data;
+      });
+    },
     hideOtherTiles() {
       this.showRouteTile = false;
       this.showActivitiesTile = false;
@@ -122,7 +133,6 @@ export default {
 
 <style scoped>
 @media only screen and (min-width: 700px) {
-  
   .logo {
     font-size: 40px;
     padding-top: 4%;
@@ -140,7 +150,8 @@ export default {
   .desktop-nav {
     height: 100%;
     width: 100%;
-    background: #9BCEA8;
+    padding: 4px;
+    background: #9bcea8;
     display: flex;
     flex-flow: column;
   }
@@ -212,7 +223,6 @@ export default {
   }
 }
 @media only screen and (min-width: 1440px) {
-  
   .logo {
     padding-top: 6%;
     padding-bottom: 8%;
@@ -229,8 +239,8 @@ export default {
   }
   .desktop-nav {
     height: 100%;
-    width:100%;
-    background: #9BCEA8;
+    width: 100%;
+    background: #9bcea8;
   }
   h3 {
     padding-top: 4%;
@@ -282,8 +292,29 @@ export default {
   }
 }
 @media only screen and (max-width: 700px) {
-  
-
+  .h3 {
+    margin: 10px;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    border-radius: 2px;
+    box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
+    -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+    -moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+    transition: 100ms ease-in-out;
+  }
+  .h3 {
+    padding-top: 4%;
+    padding-bottom: 4%;
+  }
+  .h3:hover {
+    background-color: #97cea4;
+    box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
+    -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+    -moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52),
+      inset -1px -1px 9px rgba(97, 104, 104, 0.52),
+      inset 4px 4px 24px rgba(97, 104, 104, 0.52);
+    transform: scale(1.01);
+  }
   .activity {
     height: 50%;
     width: 80%;
@@ -308,14 +339,15 @@ export default {
     flex-direction: row;
     background-color: whitesmoke;
     border: 1px solid lightgray;
-    margin: 10px;
+    margin: 2px;
+    border-radius: 2px;
     justify-content: space-evenly;
     position: fixed;
     left: 0;
     bottom: 0;
-    height: 90px;
-    width: 96.5%;
-    background: #9BCEA8;
+    height: 70px;
+    width: 99vw;
+    background: #9bcea8;
     z-index: 4;
     float: inherit;
   }
@@ -330,6 +362,5 @@ export default {
   h3:hover {
     color: whitesmoke;
   }
-
 }
 </style>
