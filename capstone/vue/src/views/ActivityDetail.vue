@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <nav-menu class="nav-menu"></nav-menu>
+    <nav-menu class="nav-menu" />
     <div class="tile">
       <div class="tile-head">
         <div class="map-cage"><Map class="map"></Map></div>
@@ -16,7 +16,6 @@
           </li>
           <li>{{}}</li>
           <li class="last">{{ getActivityDetails.description }}</li>
-
         </ul>
       </div>
       <div class="route-detail">
@@ -86,9 +85,8 @@ export default {
   justify-self: center;
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   padding: 20px;
-  
   height: 93vh;
   width: 70%;
   margin-bottom: 20px;
@@ -135,19 +133,18 @@ Map {
   display: none;
 }
 @media only screen and (max-width: 700px) {
-  
   .tile {
-  align-self: center;
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-  align-content: center;
-  padding: 20px;
-  
-  height: 75%;
-  width: 90%;
-  margin-bottom: 26%;
-  margin-right: 5px;
-}
+    align-self: center;
+    justify-self: center;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    padding: 20px;
+
+    height: 75%;
+    width: 90%;
+    margin-bottom: 26%;
+    margin-right: 5px;
+  }
 }
 </style>

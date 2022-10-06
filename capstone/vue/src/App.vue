@@ -15,12 +15,14 @@
       >
     </div>
     <router-view />
+    <!-- <nav-menu /> -->
   </div>
 </template>
 
 <script>
 import RouteService from "@/services/RouteServices.js";
 import ActivitiesService from "@/services/ActivitiesService.js";
+// import NavMenu from "../src/components/NavMenu.vue";
 export default {
   name: "App",
   data() {
@@ -30,17 +32,14 @@ export default {
     };
   },
   components: {},
-  created(){
-    this.getAllActivities();
-     this.getAllRoutes();
+  created() {
+    this.getAllRoutes();
   },
-   mounted() {
+  mounted() {
     this.$nextTick(() => {
       window.addEventListener("resize", this.onResize);
       this.onResize();
     });
-   
-     
   },
 
   beforeDestroy() {
@@ -51,7 +50,7 @@ export default {
       this.windowWidth = window.innerWidth;
       if (this.windowWidth < 700) {
         this.isMobile = true;
-        this.$store.state.commit("SET_IS_MOBILE");
+        //this.$store.state.commit("SET_IS_MOBILE");
       } else {
         this.isMobile = false;
       }
@@ -116,6 +115,19 @@ body {
   height: 5vh;
 }
 
+/* @media only screen and (min-width: 700px) {
+  #nav {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #9bcea8;
+    border: 1px solid lightgray;
+    width: 30vw;
+    height: 100vh;
+  }
+} */
+/* 
 .control-bar {
   display: flex;
   flex-direction: row;
@@ -130,8 +142,8 @@ body {
   left: 0;
   bottom: 0;
   width: 86vw;
-  /* width: 86%; */
-}
+  width: 86%;
+} */
 
 .btn {
   size: flex-grow;

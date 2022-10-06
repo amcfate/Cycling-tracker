@@ -2,6 +2,22 @@
   <div class="tile">
     <div class="tile-head">
       <h3>My Gear</h3>
+      <button
+        v-show="showGear == true"
+        style="align-self: center"
+        class="remove"
+        @click="showGear = !showGear"
+      >
+        ^
+      </button>
+      <button
+        v-show="showGear == false"
+        style="align-self: center"
+        class="remove"
+        @click="showGear = !showGear"
+      >
+        v
+      </button>
       <button class="gear-btn" @click="showGearForm = !showGearForm">
         Add Gear
       </button>
@@ -11,6 +27,7 @@
     <!-- :userId="userGear[0].userId" -->
     <div class="tile-content">
       <div
+        v-show="showGear"
         class="display-content"
         v-for="gear in userGear"
         v-bind:key="gear.userId"
@@ -33,6 +50,8 @@ export default {
   },
   data() {
     return {
+      showGear: true,
+
       showGearForm: false,
       userGear: [
         {
@@ -56,7 +75,23 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.remove {
+  display: inline-block;
+  color: black;
+  padding: 6px 6px;
+  height: 26px;
+  font-weight: bolder;
+  font-size: 14px;
+  background-color: #9bcea8;
+  border-color: white;
+  border-radius: 4px;
+  margin-right: 290px;
+}
+
+.remove:hover {
+  background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+}
 .tile-head {
   display: flex;
   flex-direction: row;

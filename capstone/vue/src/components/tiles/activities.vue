@@ -2,14 +2,37 @@
   <div class="tile">
     <div class="tile-head">
       <h3>My Activities</h3>
+      <button
+        v-show="showActivity == true"
+        style="align-self: center"
+        class="remove"
+        @click="showActivity = !showActivity"
+      >
+        ^
+      </button>
+      <button
+        v-show="showActivity == false"
+        style="align-self: center"
+        class="remove"
+        @click="showActivity = !showActivity"
+      >
+        v
+      </button>
       <button id="activity-btn" @click="showActivityForm = !showActivityForm">
         Add Activity
       </button>
     </div>
     <new-activity-form class="form" v-show="showActivityForm" />
     <!-- :userId="activities[0].userId" -->
-    <div id="display-content" v-for="activity in activities" :key="activity">
-      <h3>{{ activity.activityName }}</h3>
+    <div
+      id="display-content"
+      v-for="activity in activities"
+      :key="activity"
+      v-show="showActivity"
+    >
+      <div class="disp-head">
+        <h3>{{ activity.activityName }}</h3>
+      </div>
       <ul class="act-details">
         <li>
           {{ activity.activityDate }} | {{ activity.startTime }} -
@@ -31,6 +54,7 @@ export default {
   },
   data() {
     return {
+      showActivity: true,
       showActivityForm: false,
       activities: [
         {
@@ -63,6 +87,23 @@ export default {
 </script>
 
 <style scoped>
+.remove {
+  display: inline-block;
+  color: black;
+  padding: 6px 6px;
+  height: 26px;
+  font-weight: bolder;
+  font-size: 14px;
+  background-color: #9bcea8;
+  border-color: white;
+  border-radius: 4px;
+  margin-right: 240px;
+}
+
+.remove:hover {
+  background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+}
+
 .tile {
   display: flex;
   flex-direction: column;

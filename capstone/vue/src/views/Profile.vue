@@ -1,13 +1,19 @@
 <template>
+  <div class="main">
+<nav-menu class= "nav-menu"/>
+<div class="useless-div">
   <div class="profile">
     <user-profile />
     <activities />
     <bikes />
     <gear />
   </div>
+  </div>
+  </div>
 </template>
 
 <script>
+import NavMenu from "../components/NavMenu.vue";
 import activities from "../components/tiles/activities.vue";
 import Bikes from "../components/tiles/Bikes.vue";
 import Gear from "../components/tiles/Gear.vue";
@@ -22,6 +28,7 @@ export default {
     activities,
     Bikes,
     Gear,
+    NavMenu
     
   },
   //  props: [""],
@@ -55,11 +62,44 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
+.main {
+  display: flex;
+  width: 98vw;
+  height: 100vh;
+  overflow: auto;
+  
+}
+
+
+.nav-menu {
+  width: 300px;
+}
 .profile {
+   align-self: center;
+  justify-self: center;
   display: flex;
   flex-direction: column;
-  overflow: auto;
   align-items: center;
+  height: 95vh;
+  width: 80vw;
+  margin:auto;
+  
+  
+  
 }
+
+@media only screen and (max-width: 700px) {
+  .profile{
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  width: 100vw;
+  margin-bottom: 100px;
+  
+  }
+}
+
 </style>

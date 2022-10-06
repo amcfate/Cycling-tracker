@@ -17,7 +17,6 @@
 <script>
 import gearService from "../../services/GearService.js";
 export default {
-  // props: ["userId"],
   data() {
     return {
       newGear: {
@@ -32,10 +31,10 @@ export default {
       gearService.addGear(this.newGear).then((response) => {
         if (response.status === 201) {
           this.$store.commit("ADD_GEAR", this.newGear);
-          this.$router.push("/gear");
+          // this.$router.push("/gear");
           console.log(this.newGear);
+          location.reload();
         }
-        location.reload();
       });
     },
   },
