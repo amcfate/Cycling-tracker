@@ -6,8 +6,8 @@
           {{ userProfile.username }}
         </h2>
         <ul class="user-info" v-show="showDetails">
-          <li class="details">Team: {{ userProfile.cyclingTeam }}</li>
-          <li class="details">Age: {{ userProfile.userAge }}</li>
+          <li class="details">Team: {{ cyclingTeam }}</li>
+          <li class="details">Age: {{ age }}</li>
         </ul>
       </div>
       <div class="right-container">
@@ -40,7 +40,7 @@ export default {
         username: "",
         cyclingTeam: "",
         userWeight: "",
-        uerAge: "",
+        userAge: "",
         photo: "",
       },
     };
@@ -48,9 +48,19 @@ export default {
   methods: {
     loadProfile() {
       profileService.getProfileDetails().then((response) => {
-        this.userProfile = response.data;
+        if (response.status == 200) {
+           this.userProfile = response.data;
+          this.$store.commit("UPDATE_PROFILE", this.userProfile);
+        }
       });
+    
     },
+  },
+  computed: {
+    cyclingTeam() {
+      return this.$store.state.user_profile.cyclingTeam},
+    age(){
+      return this.$store.state.user_profile.userAge},  
   },
 
   mounted() {

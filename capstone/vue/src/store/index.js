@@ -96,13 +96,13 @@ export default new Vuex.Store({
       },
     ],
     user_profile: [
-      // {
-      //   user_id: 5,
-      //   username: "markb",
-      //   cycling_team: "",
-      //   user_weight: "",
-      //   userAge: 25
-      // }
+      {
+        userId: "",
+        userName: "",
+        cyclingTeam: "",
+        userWeight: "",
+        userAge: ""
+      }
     ],
     trackpoint: [
       {
