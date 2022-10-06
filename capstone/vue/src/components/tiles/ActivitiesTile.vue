@@ -4,7 +4,7 @@
     <input
       type="text"
       id="route-search"
-      placeholder = "Search by activity name..."
+      placeholder="Search by activity name..."
       v-model="activityFilter.activityName"
     />
     <activity-thumb
@@ -50,18 +50,18 @@ export default {
       let filteredActivity = this.activities;
       if (filteredActivityName != "") {
         filteredActivity = this.$store.state.activity.filter((activity) =>
-         activity.activityName.toLowerCase()
-         .includes(filteredActivityName.toLowerCase())
+          activity.activityName
+            .toLowerCase()
+            .includes(filteredActivityName.toLowerCase())
         );
         return filteredActivity;
       } else return this.$store.state.activity;
-      
     },
   },
 };
 </script>
 
-<style>
+<style scoped>
 @media only screen and (min-width: 700px) {
   .route-tile {
     display: flex;
@@ -74,7 +74,7 @@ export default {
     padding-top: 30px;
     height: 76%;
     width: 35%;
-      background: #9BCEA8;
+    background: #9bcea8;
     z-index: 5;
     align-self: center;
     overflow: auto;
@@ -91,9 +91,8 @@ export default {
   #route-search {
     margin: 5%;
   }
-  
 }
-
+/* 
 @media only screen and (min-width: 1440px) {
   .route-tile {
     display: flex;
@@ -123,7 +122,7 @@ export default {
     justify-self: center;
     justify-self: end;
   }
-}
+} */
 
 @media only screen and (max-width: 700px) {
   .route-tile {

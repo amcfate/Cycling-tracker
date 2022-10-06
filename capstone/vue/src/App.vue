@@ -1,94 +1,94 @@
  <template>
- 
   <div id="app">
-    
     <div id="nav" v-if="isMobile">
-      
-      <router-link v-bind:to="{ name: 'home' }" style="text-decoration: none; color: inherit"><h3>Velocity</h3></router-link
+      <router-link
+        v-bind:to="{ name: 'home' }"
+        style="text-decoration: none; color: inherit"
+        ><h3>VELOcity</h3></router-link
       >&nbsp;|&nbsp;
-    
-        <router-link
+
+      <router-link
         v-bind:to="{ name: 'logout' }"
         v-if="$store.state.token != ''"
-        style="text-decoration: none; color: inherit">Logout</router-link
+        style="text-decoration: none; color: inherit"
+        >Logout</router-link
       >
     </div>
-   <router-view />
+    <router-view />
   </div>
 </template>
 
 <script>
-import RouteService from "@/services/RouteServices.js"
-import ActivitiesService from "@/services/ActivitiesService.js"
+import RouteService from "@/services/RouteServices.js";
+import ActivitiesService from "@/services/ActivitiesService.js";
 export default {
   name: "App",
-   data() {
+  data() {
     return {
       isMobile: false,
       windowWidth: window.innerWidth,
     };
-   },
+  },
   components: {},
+  created(){
+    this.getAllActivities();
+     this.getAllRoutes();
+  },
    mounted() {
     this.$nextTick(() => {
       window.addEventListener("resize", this.onResize);
       this.onResize();
     });
-    this.getAllActivities();
-     this.getAllRoutes();
+   
      
   },
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
   },
-  methods:{
-  
-      onResize() {
+  methods: {
+    onResize() {
       this.windowWidth = window.innerWidth;
       if (this.windowWidth < 700) {
         this.isMobile = true;
-        this.$store.state.commit('SET_IS_MOBILE')
+        this.$store.state.commit("SET_IS_MOBILE");
       } else {
         this.isMobile = false;
       }
     },
-        getAllActivities(){
-          ActivitiesService
-      .getActivities()
-      .then(response => {
-        this.$store.commit("SET_ACTIVITIES", response.data);
-      })
-      .catch(error => {
-        if (error.response.status == 404) {
-          this.$router.push({name: 'NotFound'});
-        }
-      });
+    getAllActivities() {
+      ActivitiesService.getActivities()
+        .then((response) => {
+          this.$store.commit("SET_ACTIVITIES", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: "NotFound" });
+          }
+        });
     },
-    getAllRoutes(){
-         RouteService
-      .getAllRoutes()
-      .then(response => {
-        this.$store.commit("SET_ROUTES", response.data);
-      })
-      .catch(error => {
-        if (error.response.status == 404) {
-          this.$router.push({name: 'NotFound'});
-        }
-      });
-    }
-}
-}
+    getAllRoutes() {
+      RouteService.getAllRoutes()
+        .then((response) => {
+          this.$store.commit("SET_ROUTES", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: "NotFound" });
+          }
+        });
+    },
+  },
+};
 </script>
 <style>
-*::-webkit-scrollbar{
-  width:.5em;
-  height:10px;  
+*::-webkit-scrollbar {
+  width: 0.5em;
+  height: 10px;
 }
-*::-webkit-scrollbar-thumb{
-    background-color: darkgrey;
-    border-radius: 5px;
-  
+*::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  border-radius: 5px;
 }
 @font-face {
   font-family: Inter-Light;
@@ -157,7 +157,6 @@ router-link {
   background-clip: border-box;
   height: 100vh;
   background-position: center 100%;
- 
 }
 </style>
 

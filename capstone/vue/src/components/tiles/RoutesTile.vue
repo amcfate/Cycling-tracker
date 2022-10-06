@@ -1,7 +1,12 @@
 <template>
-  <div class="route-tile overlay" >
+  <div class="route-tile overlay">
     <h3>Community Routes</h3>
-    <input type="text" id="route-search" placeholder = "Search by route name..." v-model="routeFilter.routeName" />
+    <input
+      type="text"
+      id="route-search"
+      placeholder="Search by route name..."
+      v-model="routeFilter.routeName"
+    />
     <route-thumb
       class="route-div"
       @click="displayDetail = !displayDetail"
@@ -9,22 +14,19 @@
       v-bind:key="route.route_id"
       v-bind:route="route"
     />
-    <route-detail v-show="!displayDetail"/>
+    <route-detail v-show="!displayDetail" />
   </div>
 </template>
 
 <script>
-import RouteDetail from '../../views/RouteDetail.vue';
+import RouteDetail from "../../views/RouteDetail.vue";
 import RouteThumb from "./RouteThumb.vue";
-
-
 
 export default {
   name: "routes-tile",
 
   data() {
     return {
-     
       routeFilter: {
         routeName: "",
         description: "",
@@ -35,13 +37,11 @@ export default {
       showRouteTile: false,
       displayDetail: true,
       routes: [],
-      
     };
   },
   components: {
     RouteThumb,
     RouteDetail,
-    
   },
   computed: {
     filteredRoutes() {
@@ -50,21 +50,18 @@ export default {
       const routes = this.$store.state.routes;
       if (routeFilter != "") {
         filteredRoutes = routes.filter((route) =>
-          route.routeName.toLowerCase()
-          .includes(routeFilter.toLowerCase())
+          route.routeName.toLowerCase().includes(routeFilter.toLowerCase())
         );
         return filteredRoutes;
       } else return this.$store.state.routes;
     },
   },
-  
 };
 </script>
 
-<style>
-@media only screen and (min-width: 700px){
-
- .route-tile {
+<style scoped>
+@media only screen and (min-width: 700px) {
+  .route-tile {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -75,13 +72,13 @@ export default {
     padding-top: 30px;
     height: 76%;
     width: 35%;
-    background: #9BCEA8;
+    background: #9bcea8;
     z-index: 5;
     align-self: center;
     overflow: auto;
   }
   .route-div {
-    height: 50%;
+    min-height: 200px;
     width: 80%;
     margin: 10px;
     background-color: whitesmoke;
@@ -89,15 +86,13 @@ export default {
     justify-self: center;
     justify-self: end;
   }
-   #route-search {
+  #route-search {
     margin: 5%;
   }
-
 }
 
 @media only screen and (min-width: 1440px) {
-
-    .route-tile {
+  .route-tile {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -108,7 +103,7 @@ export default {
     padding-top: 30px;
     height: 76%;
     width: 35%;
-    background: #9BCEA8;
+    background: #9bcea8;
     z-index: 5;
     align-self: center;
     overflow: auto;
@@ -128,8 +123,7 @@ export default {
 }
 
 @media only screen and (max-width: 700px) {
-
-    .route-tile {
+  .route-tile {
     display: flex;
     align-items: center;
     flex-direction: column;
@@ -140,13 +134,13 @@ export default {
     padding-top: 30px;
     height: 30%;
     width: 80%;
-    background: #9BCEA8;
+    background: #9bcea8;
     z-index: 5;
     align-self: flex-end;
     overflow: auto;
     margin-bottom: 40%;
   }
-   .route-div {
+  .route-div {
     height: 50%;
     width: 80%;
     margin: 10px;
@@ -154,7 +148,7 @@ export default {
     align-self: center;
     justify-self: center;
     justify-self: end;
+    overflow: auto;
   }
 }
-
 </style>

@@ -2,20 +2,22 @@
   <div class="wrapper">
 
     <div class="nav-controls">
-      <div class="button" v-on:click="calculateRoute()">Get Route</div>
+      <div class="button" v-on:click="calculateRoute(); showRouteForm = !showRouteForm">Get Route</div>
       <div class="button" v-on:click="deleteMarkers()">Start Over</div>
       <div class="last-btn" v-on:click="saveRoute()">Save route</div>
     </div>
     <div id="map"></div>
+    <new-route-form  class="route-form" v-show="! showRouteForm"/>
   </div>
 </template>
 
 <script>
 import routeServices from "../../services/RouteServices";
-
+import newRouteForm from "../forms/NewRouteForm.vue"
 export default {
   data() {
     return {
+      showRouteForm: true,
       callbackObj: {
         routeName: "",
         description: "",
@@ -23,8 +25,10 @@ export default {
         elevation: "",
         ascent: "",
       },
+      elevator: null,
       routeDescription: null,
       routeName: null,
+      duration: null,
       distance: null,
       elevations: null,
       startingLat: null,
@@ -38,6 +42,9 @@ export default {
       fromLocation: "",
       toLocation: "",
     };
+  },
+  components:{
+    newRouteForm,
   },
   methods: {
     /*
@@ -69,7 +76,9 @@ export default {
       }
 
       //this.getLocation();zex3ase3Z@ws
+
       this.map = new window.google.maps.Map(mapElement, mapOptions);
+      this.elevator = new window.google.maps.ElevationService();
       window.google.maps.event.addListener(this.map, 'click', this.addPinViaClick);
     },
     /*
@@ -103,18 +112,18 @@ export default {
         },
       });
 
-      this.markers.unshift(marker)
+      this.markers.push(marker)
     },
 
     makeMarkerObj(latLng, name) {
       return {loc: latLng, name: name};
     },
 
-    makeTrackPointObj(markObj) {
+    makeTrackPointObj(markObj, marker) {
       let obj = {
         lat: markObj.loc.lat,
         lng: markObj.loc.lng,
-        elevation: 436
+        elevation: this.requestElevations(marker)
       }
       return obj;
     },
@@ -146,45 +155,16 @@ export default {
         if (status === window.google.maps.DirectionsStatus.OK) {
           this.directionsDisplay.setDirections(response);
           this.directionsDisplay.setMap(this.map);
+
+          this.computeTotalDistance(response)
         }
       });
       this.hideMarkers();
-      this.markers = []
     },
-
-    // {lat: lat, lng: lng, name: name}
-
-    setMapOnAll(map) {
-      for (let i = 0; i < this.markers.length; i++) {
-        this.markers[i].setMap(map);
-      }
-    },
-
-   /* getElevation(lat, lng) {
-      let axios = require('axios');
-
-      let config = {
-        method: 'get',
-        url: 'https://maps.googleapis.com/maps/api/elevation/json?locations=' + lat + '%2C' + lng + '&key=AIzaSyDjB5lrCyoXaoU7Lv4RXi909TRAq5Wua9g',
-        headers: {}
-      };
-
-      axios(config)
-          .then(function (response) {
-            this.elevations.unshift(response.data.results.elevation)
-            return parseInt(response.data.results.elevation);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-    },*/
 
 
     deleteMarkers() {
-      //Makes marker and locations array empty
-      this.locations = []
-      this.markers = []
-      this.setMapOnAll(null)
+      location.reload()
     },
 
     saveRoute() {
@@ -199,11 +179,7 @@ export default {
         window.alert("Please enter a description");
         this.saveRoute();
       }
-      this.distance = parseInt(window.prompt("Enter distance in miles"));
-      if (this.distance === null) {
-        window.alert("Please enter a distance in miles");
-        this.saveRoute();
-      }
+      window.alert("Distance = " + this.distance);
 
       //Package into JSON for callback
       this.callbackObj = {
@@ -217,7 +193,6 @@ export default {
       routeServices.saveRoute(this.callbackObj).then((response) => {
         if (response.status === 200 || response.status === 201) {
           this.$store.commit("ADD_ROUTE", this.callbackObj)
-          this.$router.push("/saveroute")
         }
       });
       //Reset obj
@@ -225,52 +200,69 @@ export default {
 
       //Save trackpoints after route save
       this.saveTrackPoints()
+
+      window.alert("Saved!")
+
     },
 
-    calculateAscent() {
-      let largest = this.elevations[0];
-      let smallest = this.elevations[1];
-      for (let i = 0; i < this.elevations.length; i++) {
-        let current = this.elevations[i]
-        if (current > largest) {
-          largest = current;
-        } else if (current < smallest) {
-          smallest = current
-        }
-      }
-      return largest - smallest;
-    },
 
     saveTrackPoints() {
       //Loop through locations
       for (let i = 0; i < this.locations.length; i++) {
-        let trackPoint = this.makeTrackPointObj(this.locations[i]);
+        let trackPoint = this.makeTrackPointObj(this.locations[i], this.markers[i]);
 
         //Save trackpoint
         routeServices.saveTrackPoints(trackPoint).then((response) => {
           if (response.status === 201 || response.status === 200) {
             this.$store.commit("ADD_TRACKPOINT", trackPoint)
-            this.$router.push("/savetrackpoint")
+          }
+          else{
+            window.alert("ERROR SAVING TRACKPOINTS")
           }
         });
-
-        //Reset locations
-        this.locations = []
-
       }
+      this.locations = [];
+
+    },
+    computeTotalDistance(result) {
+      let totalDist = 0;
+      let totalTime = 0;
+      let myRoute = result.routes[0];
+      for (let i = 0; i < myRoute.legs.length; i++) {
+        totalDist += myRoute.legs[i].distance.value;
+        totalTime += myRoute.legs[i].duration.value;
+      }
+      totalDist = totalDist / 1000;
+      this.distance = totalDist * .62137
+      this.duration = totalTime
+
+    },
+    requestElevations(marker) {
+      let location = marker.getPosition();
+      this.elevator.getElevationForLocations(location, (results, status) => {
+        if(status === window.google.maps.ElevationStatus.OK) {
+          if(results[0]) {
+            return parseFloat(results[0].elevation.toFixed(1))
+          }
+        }
+      })
+      
     }
   },
-  mounted() {
-    // Initialize map after DOM is mounted
-    this.initMap();
-    this.directionsDisplay = new window.google.maps.DirectionsRenderer();
-    this.service = new window.google.maps.DirectionsService();
-  },
-};
+mounted()
+{
+  // Initialize map after DOM is mounted
+  this.initMap();
+  this.directionsDisplay = new window.google.maps.DirectionsRenderer();
+  this.service = new window.google.maps.DirectionsService();
+}
+,
+}
+;
 
 </script>
 
-<style>
+<style scoped>
 .wrapper {
   display: flex;
   position: relative;
@@ -280,7 +272,7 @@ export default {
 
 #map {
   grid-area: map;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   /* position: absolute; */
 
@@ -358,5 +350,13 @@ export default {
   text-align: center;
   position: absolute;
   z-index: 5;
+}
+.route-form{
+  position: absolute;
+  top: 150px;
+  left: 10px;
+  z-index: 5;
+  min-height: 30%;
+  min-width: 30%;
 }
 </style>
