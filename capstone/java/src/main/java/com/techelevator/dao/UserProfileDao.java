@@ -8,4 +8,7 @@ public interface UserProfileDao {
 
     boolean create (int id, String username);
 
+    void updateUserProfile(UserProfile userProfile);
+
+
 }

@@ -2,7 +2,7 @@ package com.techelevator.model;
 
 public class UserProfile {
 
-    private int id;
+    private int userId;
     private String username;
     private String cyclingTeam;
     private double userWeight;
@@ -12,11 +12,11 @@ public class UserProfile {
     public UserProfile(){}
 
     public UserProfile(int id) {
-        this.id = id;
+        this.userId = id;
     }
 
     public UserProfile(int id, String username, String cyclingTeam, double userWeight, int userAge, String photo) {
-        this.id = id;
+        this.userId = id;
         this.username = username;
         this.cyclingTeam = cyclingTeam;
         this.userWeight = userWeight;
@@ -24,12 +24,12 @@ public class UserProfile {
         this.photo = photo;
     }
 
-    public int getId() {
-        return id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {

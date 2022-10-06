@@ -6,7 +6,7 @@
       <h3 class="header">{{activity.activityName}}</h3>
       <div class="info">
       <h5>Description</h5>
-      <p>{{activity.description}}</p>
+      <p>{{ activity.description }}</p>
       <h5>Date</h5>
       <p>{{activity.activityDate}}</p>
       <h5>Time</h5>
@@ -16,7 +16,6 @@
 </template>
 
 <script>
-
 export default {
   name: "activity-thumb",
   props: {
@@ -26,16 +25,13 @@ export default {
   data() {
     return {
       ActivityClicked: false,
-     
     };
   },
-
 };
 </script>
 
-<style>
-
-.home{
+<style scoped>
+.home {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -92,20 +88,18 @@ export default {
 
 .mapDiv {
   border-radius: 8px;
-  height:50%;
+  height: 50%;
   width: 80%;
   background-color: black;
   margin-bottom: 22px;
-  
 }
-h5{
+h5 {
   margin-top: 3px;
   margin-bottom: 3px;
   padding: none;
 }
-p{
-   margin-top: 3px;
+p {
+  margin-top: 3px;
   margin-bottom: 3px;
 }
-
 </style>

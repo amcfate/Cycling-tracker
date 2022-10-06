@@ -44,7 +44,7 @@ export default {
       bikeService.addNewBike(this.newBike).then((response) => {
         if (response.status === 201) {
           this.$store.commit("ADD_NEW_BIKE", this.newBike);
-          this.$router.push("/bikes");
+          this.$router.push("/profile");
           console.log(this.newBike);
         }
         location.reload();

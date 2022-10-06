@@ -2,17 +2,17 @@
   <div class="main">
     <nav class="desktop-nav" v-if="!isMobile">
       <h1 class="logo">VELOcity</h1>
-      <h2 class = hbar></h2>
+      <h2 class="hbar"></h2>
       <h3 class="h3">
         <router-link
           v-bind:to="{ name: 'profile' }"
           style="text-decoration: none; color: inherit"
-          
           >{{ userProfile.username }}</router-link
         >
       </h3>
 
-      <h3 class="h3"
+      <h3
+        class="h3"
         @click="
           showRouteTile = false;
           showActivitiesTile = !showActivitiesTile;
@@ -21,7 +21,8 @@
         Activities
       </h3>
       <div class="highlighter">
-        <h3 class="h3"
+        <h3
+          class="h3"
           @click="
             showActivitiesTile = false;
             showRouteTile = !showRouteTile;
@@ -35,7 +36,6 @@
         <router-link
           v-bind:to="{ name: 'leaderboard' }"
           style="text-decoration: none; color: inherit"
-  
           >Leaderboard</router-link
         >
       </h3>
@@ -49,7 +49,7 @@
         ><h3 class="h3">Logout</h3></router-link
       >
     </nav>
- <!--try to change this to focus event-->
+    <!--try to change this to focus event-->
     <nav class="desktop-nav" v-else>
       <router-link
         v-bind:to="{ name: 'profile' }"
@@ -130,16 +130,12 @@ export default {
       this.onResize();
       this.profileButton();
     });
-     
   },
 
   beforeDestroy() {
     window.removeEventListener("resize", this.onResize);
     //  this.clearData();
-
   },
- 
- 
 
   computed: {
     lastRoute() {
@@ -191,7 +187,6 @@ export default {
           }
         });
     },
-
   },
 };
 </script>
@@ -224,19 +219,17 @@ export default {
     margin-left: 30%;
     margin-right: 30%;
   }
-
   .desktop-nav {
     height: 100%;
     width: 20%;
     background: #9bcea8;
-   display: flex;
-   flex-flow: column;
+    display: flex;
+    flex-direction: row;
   }
-  .logout{
+  .logout {
     margin-top: auto;
-    
   }
-  .logout h3{
+  .logout h3 {
     font-weight: 1;
     box-shadow: none;
   }
@@ -246,26 +239,25 @@ export default {
     padding-top: 4%;
     padding-bottom: 4%;
     border-radius: 2px;
-   box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
--webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
--moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
-transition: 100ms ease-in-out;
+    box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
+    -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+    -moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+    transition: 100ms ease-in-out;
   }
 
   .h3 {
     padding-top: 4%;
     padding-bottom: 4%;
   }
-  .h3:hover{
+  .h3:hover {
     background-color: #97cea4;
-     box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
--webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
--moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52),
-			inset -1px -1px 9px rgba(97, 104, 104, 0.52),
-			inset 4px 4px 24px rgba(97, 104, 104, 0.52);
-		transform: scale(1.01);
+    box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
+    -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+    -moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52),
+      inset -1px -1px 9px rgba(97, 104, 104, 0.52),
+      inset 4px 4px 24px rgba(97, 104, 104, 0.52);
+    transform: scale(1.01);
   }
- 
 
   .activity-div {
     height: 50%;
@@ -320,7 +312,7 @@ transition: 100ms ease-in-out;
     padding-top: 6%;
     padding-bottom: 8%;
   }
-   .h2 {
+  .h2 {
     border-bottom: 1px;
     border-style: solid;
     border-color: black;

@@ -4,10 +4,7 @@ import com.techelevator.dao.UserDao;
 import com.techelevator.dao.UserProfileDao;
 import com.techelevator.model.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 
@@ -23,6 +20,12 @@ public class UserProfileController {
     @RequestMapping(path = "/profile", method = RequestMethod.GET)
     public UserProfile getProfile(Principal principal){
         return userProfileDao.getProfileById(userDao.findIdByUsername(principal.getName()));
+    }
+
+    @RequestMapping(path = "/updateProfile", method = RequestMethod.POST)
+    public void updateUserProfile(@RequestBody UserProfile userProfile, Principal principal) {
+        userProfile.setUserId(userDao.findIdByUsername(principal.getName()));
+        userProfileDao.updateUserProfile(userProfile);
     }
 
 }

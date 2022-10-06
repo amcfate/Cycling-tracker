@@ -49,7 +49,7 @@ public class JdbcActivityDao implements ActivityDao{
                 "is_public, description, activity_date, start_time, end_time) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         jdbcTemplate.update(sql, activity.getRouteId(), activity.getUserId(),
-                activity.getActivityName(), activity.isPublic(),
+                activity.getBikeId(), activity.getActivityName(), activity.isPublic(),
                 activity.getDescription(), activity.getActivityDate(),
                 activity.getStartTime(), activity.getEndTime());
     }

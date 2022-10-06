@@ -1,5 +1,5 @@
 <template>
-  <div class = "leaderboard">  
+  <div class="leaderboard">
     <h4>Top Athletes on Velocidad</h4>
     <table>
       <tr>
@@ -18,23 +18,17 @@
         <td>99 miles</td>
       </tr>
     </table>
-</div>
+  </div>
 </template>
 
 <script>
-
-
 export default {
   name: "leaderboard",
-  components: {
-    
-    
-    
-  },
+  components: {},
 };
 </script>
 
-<style>
+<style scoped>
 .leaderboard {
   display: flex;
   flex-direction: column;
@@ -50,8 +44,7 @@ export default {
   padding: 6px;
 }
 
-h4{
+h4 {
   font-size: 4vh;
-
 }
 </style>
