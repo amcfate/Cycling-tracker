@@ -84,9 +84,9 @@ export default {
   flex-direction: column;
   align-content: center;
   padding: 1px;
-
+  margin: 8px;
   height: 93vh;
-  width: 70vw;
+  width: auto;
 }
 .route-detail {
   margin-right: 8px;

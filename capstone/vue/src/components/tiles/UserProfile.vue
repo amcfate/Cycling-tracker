@@ -5,7 +5,7 @@
         <h2 id="username">
           {{ userProfile.username }}
         </h2>
-        <ul class="user-info">
+        <ul class="user-info" v-show="showDetails">
           <li class="details">Team: {{ userProfile.cyclingTeam }}</li>
           <li class="details">Age: {{ userProfile.userAge }}</li>
         </ul>
@@ -15,6 +15,9 @@
           <img src="../../assets/gear.png" />
         </button>
       </div>
+    </div>
+    <div class="toggle-details" v-show="showEditForm">
+      <button @click="showDetails = !showDetails">Show / Hide Details</button>
     </div>
     <edit-profile-form v-show="showEditForm" />
   </div>
@@ -30,6 +33,7 @@ export default {
   },
   data() {
     return {
+      showDetails: true,
       showEditForm: false,
       userProfile: {
         userId: "",
@@ -56,6 +60,21 @@ export default {
 </script>
 
 <style scoped>
+.toggle-details {
+  display: inline-block;
+  color: black;
+  padding: 6px 6px;
+  height: 26px;
+  font-weight: bolder;
+  font-size: 10px;
+  background-color: #9bcea8;
+  border-color: white;
+  border-radius: 4px;
+}
+
+.toggle-details:hover {
+  background-image: linear-gradient(rgb(0 0 0/40%) 0 0);
+}
 .profile-page {
   display: flex;
   flex-direction: column;
@@ -64,7 +83,7 @@ export default {
   border: 1px solid darkgray;
   border-radius: 8px;
   margin: 4px;
-  width: 96vw;
+  width: 96%;
 }
 
 .header {

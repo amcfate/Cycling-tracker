@@ -223,7 +223,7 @@ export default {
     width: 20%;
     background: #9bcea8;
     display: flex;
-    flex-direction: row;
+    flex-flow: column;
   }
   .logout {
     margin-top: auto;

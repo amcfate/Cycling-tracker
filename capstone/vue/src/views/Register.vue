@@ -98,12 +98,13 @@ export default {
 
 #register {
   margin: auto;
-  background-color: lightgray;
+  background-color: #9bcea8;
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-image: blur;
   border-radius: 12px;
   width: 70%;
+  max-width: 500px;
   box-shadow: 2px 10px 20px darkgrey;
 }
 
