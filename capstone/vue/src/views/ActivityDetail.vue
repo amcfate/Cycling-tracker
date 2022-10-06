@@ -1,6 +1,6 @@
 <template>
   <div class="main">
-    <nav-menu class="nav-menu"></nav-menu>
+    <nav-menu class="nav-menu"/>
     <div class="tile">
       <div class="tile-head">
         <div class="map-cage"><Map class="map"></Map></div>
@@ -30,7 +30,7 @@
         </ul>
       </div>
     </div>
-  </div>
+    </div>
 </template>
 
 
@@ -86,12 +86,12 @@ export default {
   justify-self: center;
   display: flex;
   flex-direction: column;
-  align-content: center;
+  align-items: center;
   padding: 20px;
-  
   height: 93vh;
   width: 70%;
   margin-bottom: 20px;
+  
 }
 .route-detail {
   display: flex;

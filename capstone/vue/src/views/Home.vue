@@ -91,7 +91,7 @@
 
 <script>
 //expand search feature and apply to routes && bikes
-
+import ActivitiesService from "../services/ActivitiesService.js"
 import Map from "../components/maps/Map.vue";
 import RoutesTile from "../components/tiles/RoutesTile.vue";
 import ActivitiesTile from "../components/tiles/ActivitiesTile.vue";
@@ -121,6 +121,7 @@ export default {
     Map,
     RoutesTile,
     ActivitiesTile,
+    
   },
   mounted() {
     this.$nextTick(() => {
@@ -168,7 +169,17 @@ export default {
     clearData() {
       this.$store.commit("CLEAR_DATA");
     },
-
+     getAllActivities() {
+      ActivitiesService.getActivities()
+        .then((response) => {
+          this.$store.commit("SET_ACTIVITIES", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: "NotFound" });
+          }
+        });
+    },
   },
 };
 </script>

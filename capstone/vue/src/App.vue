@@ -31,7 +31,7 @@ export default {
   },
   components: {},
   created(){
-    this.getAllActivities();
+   
      this.getAllRoutes();
   },
    mounted() {
