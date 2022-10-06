@@ -1,19 +1,17 @@
 <template>
-  <router-link
-    class="home"
-    v-bind:to="{ name: 'activity-detail', params: { id: activity.activityId } }"
-    v-bind:activity="activity"
-    style="text-decoration: none; color: inherit"
-  >
-    <h2 class="header">{{ activity.activityName }}</h2>
-    <div class="info">
+  <router-link class="home"
+  v-bind:to="{name: 'activity-detail', params: {id: activity.activityId}}"
+  v-bind:activity="activity"
+  style="text-decoration: none; color: inherit">
+      <h3 class="header">{{activity.activityName}}</h3>
+      <div class="info">
       <h5>Description</h5>
       <p>{{ activity.description }}</p>
       <h5>Date</h5>
-      <p>{{ activity.activity_date }}</p>
-      <h5></h5>
-    </div>
-    <div class="mapDiv"></div>
+      <p>{{activity.activityDate}}</p>
+      <h5>Time</h5>
+      <p>{{activity.startTime}}</p>
+      </div>
   </router-link>
 </template>
 
@@ -40,31 +38,36 @@ export default {
   align-items: center;
   background-color: lightgray;
   border-radius: 8px;
-  box-shadow: 2px 10px 20px darkgrey;
-}
-.header {
-  background-color: #9bcea8;
-}
-
-@media only screen and (max-width: 1000px) {
-  .home {
-    margin: auto;
-    display: flex;
-    flex-grow: auto;
-    align-content: space-between;
-    flex-direction: column;
-    justify-content: center;
-    background-color: lightgray;
-    background-size: 100% 100%;
-    border-radius: 8px;
-    height: 80vh;
-    box-shadow: 2px 10px 20px darkgrey;
-    width: auto;
-    padding-left: 3%;
-    padding-right: 3%;
+  box-shadow: 2px 10px 20px darkgrey; 
+  overflow: auto;
   }
+ .header{
+   margin-top: 10px;
+    background-color: #9BCEA8;
+    border-radius: 6px;
+    padding: 5px;
+  }
+
+ @media only screen and (max-width: 700px){
+  .home {
+  margin: auto;
+  display: flex;
+  flex-grow: auto;
+  align-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  background-color: lightgray;
+  background-size: 100% 100%;
+  border-radius: 8px;
+  height: 80vh;
+  box-shadow: 2px 10px 20px darkgrey;
+  width: auto;
+  padding-left: 3%;
+  padding-right: 3%;
+  overflow: auto;
 }
-@media only screen and (max-width: 1000px) {
+ }
+@media only screen and (max-width: 700px) {
   .home {
     margin: auto;
     display: flex;
@@ -78,7 +81,7 @@ export default {
     width: 70%;
     height: 80vh;
     box-shadow: 2px 10px 20px darkgrey;
-
+      overflow: auto;
     flex-basis: auto;
   }
 }

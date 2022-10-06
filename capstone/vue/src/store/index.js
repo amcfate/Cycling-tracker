@@ -57,7 +57,7 @@ export default new Vuex.Store({
         photos: "xxxxx",
         description: "cool",
         activity_date: "today",
-        start_time: "morn",
+        startTime: "morn",
         end_time: "never",
       },
       {
@@ -69,7 +69,7 @@ export default new Vuex.Store({
         photos: "xxxxx",
         description: "cool",
         activity_date: "today",
-        start_time: "morn",
+        startTime: "morn",
         end_time: "never",
       },
       {
@@ -81,7 +81,7 @@ export default new Vuex.Store({
         photos: "xxxxx",
         description: "cool",
         activity_date: "today",
-        start_time: "morn",
+        startTime: "morn",
         end_time: "never",
       },
     ],
@@ -147,7 +147,10 @@ export default new Vuex.Store({
 
     },
     SET_ACTIVITIES(state, activities) {
-      state.activity = activities
+      activities.forEach(activity => {
+        if(state.activity.indexOf(activity.activityId) == -1)
+        state.activity.unshift(activity)
+      })
     },
     ADD_TRACKPOINT(state, trackpoint) {
       state.trackpoint.unshift(trackpoint)

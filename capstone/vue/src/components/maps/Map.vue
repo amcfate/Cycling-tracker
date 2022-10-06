@@ -2,20 +2,22 @@
   <div class="wrapper">
 
     <div class="nav-controls">
-      <div class="button" v-on:click="calculateRoute()">Get Route</div>
+      <div class="button" v-on:click="calculateRoute(); showRouteForm = !showRouteForm">Get Route</div>
       <div class="button" v-on:click="deleteMarkers()">Start Over</div>
       <div class="last-btn" v-on:click="saveRoute()">Save route</div>
     </div>
     <div id="map"></div>
+    <new-route-form  class="route-form" v-show="! showRouteForm"/>
   </div>
 </template>
 
 <script>
 import routeServices from "../../services/RouteServices";
-
+import newRouteForm from "../forms/NewRouteForm.vue"
 export default {
   data() {
     return {
+      showRouteForm: true,
       callbackObj: {
         routeName: "",
         description: "",
@@ -40,6 +42,9 @@ export default {
       fromLocation: "",
       toLocation: "",
     };
+  },
+  components:{
+    newRouteForm,
   },
   methods: {
     /*
@@ -257,7 +262,7 @@ mounted()
 
 </script>
 
-<style>
+<style scoped>
 .wrapper {
   display: flex;
   position: relative;
@@ -267,7 +272,7 @@ mounted()
 
 #map {
   grid-area: map;
-  width: 100vw;
+  width: 100%;
   height: 100%;
   /* position: absolute; */
 
@@ -345,5 +350,13 @@ mounted()
   text-align: center;
   position: absolute;
   z-index: 5;
+}
+.route-form{
+  position: absolute;
+  top: 150px;
+  left: 10px;
+  z-index: 5;
+  min-height: 30%;
+  min-width: 30%;
 }
 </style>

@@ -30,13 +30,17 @@ export default {
     };
   },
   components: {},
-  mounted() {
+  created(){
+    this.getAllActivities();
+     this.getAllRoutes();
+  },
+   mounted() {
     this.$nextTick(() => {
       window.addEventListener("resize", this.onResize);
       this.onResize();
     });
-    this.getAllActivities();
-    this.getAllRoutes();
+   
+     
   },
 
   beforeDestroy() {

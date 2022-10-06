@@ -1,6 +1,5 @@
 <template>
   <div class="main">
-    <activities-tile v-show="clicked" />
     <nav-menu class="nav-menu"></nav-menu>
     <div class="tile">
       <div class="tile-head">
@@ -15,19 +14,19 @@
             {{ getActivityDetails.startTime }} |
             {{ getActivityDetails.endTime }}
           </li>
-          <li>{{ getActivityDetails.description }}</li>
+          <li>{{}}</li>
+          <li class="last">{{ getActivityDetails.description }}</li>
+
         </ul>
       </div>
       <div class="route-detail">
         <h3>Route Details</h3>
-        <h3>{{ getActivityDetails.activityName }}</h3>
+        <h3>{{ getRouteDetails.routeName }}</h3>
         <ul class="act-details">
-          <li>
-            {{ getActivityDetails.activityDate }} |
-            {{ getActivityDetails.startTime }} |
-            {{ getActivityDetails.endTime }}
-          </li>
-          <li>{{ getActivityDetails.description }}</li>
+          <li>Length | {{ getRouteDetails.distanceMiles }} miles</li>
+          <li>Starting | {{ getRouteDetails.elevation }} feet</li>
+          <li>Elevation Gain | {{ getRouteDetails.ascent }} feet</li>
+          <li class="last">{{ getRouteDetails.description }}</li>
         </ul>
       </div>
     </div>
@@ -38,7 +37,6 @@
 <script>
 import Map from "../components/maps/Map.vue";
 import NavMenu from "../components/NavMenu.vue";
-import ActivitiesTile from "../components/tiles/ActivitiesTile.vue";
 export default {
   name: "activity-detail",
   props: {
@@ -47,7 +45,6 @@ export default {
   components: {
     Map,
     NavMenu,
-    ActivitiesTile,
   },
   data() {
     return {
@@ -61,10 +58,16 @@ export default {
         return activity.activityId == this.$route.params.id;
       });
     },
-    mounted() {
-      const e = document.querySelector("Map");
-      return e.remove();
+    getRouteDetails() {
+      return this.$store.state.routes.find((route) => {
+        return route.routeId == this.getActivityDetails.routeId;
+      });
     },
+    // getBikeDetails(){
+    //   return this.$store.state.user_bikes.find((bike)=>{
+    //     return bike.bikeId == this.getActivityDetails.bikeId;
+    //   })
+    // }
   },
 };
 </script>
@@ -72,7 +75,8 @@ export default {
 <style scoped>
 .main {
   display: flex;
-  width: 100vw;
+  width: 98vw;
+  height: 100vh;
 }
 .nav-menu {
   width: 100%;
@@ -83,19 +87,25 @@ export default {
   display: flex;
   flex-direction: column;
   align-content: center;
-  padding: 1px;
-
+  padding: 20px;
+  
   height: 93vh;
-  width: 70vw;
+  width: 70%;
+  margin-bottom: 20px;
 }
 .route-detail {
-  margin-right: 8px;
   display: flex;
+  justify-content: left;
+  margin: 6px;
+  background-color: whitesmoke;
+  padding: 6px;
+  size: auto;
   border-radius: 8px;
-  height: 25%;
-  width: 95%;
-  background: lightgray;
-  overflow: auto;
+  box-shadow: 2px 10px 20px darkgray;
+  text-align: left;
+}
+.last {
+  padding-top: 10px;
 }
 .tile-head {
   display: flex;
@@ -123,5 +133,21 @@ Map {
 }
 .map .nav-controls .btn {
   display: none;
+}
+@media only screen and (max-width: 700px) {
+  
+  .tile {
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  padding: 20px;
+  
+  height: 75%;
+  width: 90%;
+  margin-bottom: 26%;
+  margin-right: 5px;
+}
 }
 </style>
