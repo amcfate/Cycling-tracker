@@ -14,7 +14,9 @@
             {{ getActivityDetails.startTime }} |
             {{ getActivityDetails.endTime }}
           </li>
+          <li>{{}}</li>
           <li class="last">{{ getActivityDetails.description }}</li>
+
         </ul>
       </div>
       <div class="route-detail">
@@ -61,6 +63,11 @@ export default {
         return route.routeId == this.getActivityDetails.routeId;
       });
     },
+    // getBikeDetails(){
+    //   return this.$store.state.user_bikes.find((bike)=>{
+    //     return bike.bikeId == this.getActivityDetails.bikeId;
+    //   })
+    // }
   },
 };
 </script>
@@ -137,9 +144,10 @@ Map {
   align-content: center;
   padding: 20px;
   
-  height: 79vh;
-  width: 98%;
-  margin-bottom: 20%;
+  height: 75%;
+  width: 90%;
+  margin-bottom: 26%;
+  margin-right: 5px;
 }
 }
 </style>

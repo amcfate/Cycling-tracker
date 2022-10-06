@@ -81,7 +81,7 @@ export default {
     overflow: auto;
   }
   .route-div {
-    height: 50%;
+    min-height: 200px;
     width: 80%;
     margin: 10px;
     background-color: whitesmoke;
@@ -154,6 +154,7 @@ export default {
     align-self: center;
     justify-self: center;
     justify-self: end;
+    overflow: auto;
   }
 }
 

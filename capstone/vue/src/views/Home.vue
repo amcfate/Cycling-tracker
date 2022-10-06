@@ -80,6 +80,7 @@
       <routes-tile v-show="showRouteTile" />
 
       <activities-tile v-show="showActivitiesTile" />
+      
 
       <Map class="map"></Map>
     </div>
