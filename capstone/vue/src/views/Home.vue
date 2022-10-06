@@ -300,6 +300,13 @@ export default {
     justify-content: center;
   }
 
+  .overlay {
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    padding-top: 10px;
+  }
+
   .main {
     display: flex;
     flex-direction: column;
