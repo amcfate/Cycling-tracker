@@ -147,7 +147,9 @@ export default new Vuex.Store({
 
     },
     SET_ACTIVITIES(state, activities) {
-      state.activity = activities
+      activities.forEach(activity => {
+        state.activity.unshift(activity)
+      });
     },
     ADD_TRACKPOINT(state, trackpoint) {
       state.trackpoint.unshift(trackpoint)

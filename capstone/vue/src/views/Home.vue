@@ -218,7 +218,7 @@ export default {
     margin-left: 30%;
     margin-right: 30%;
   }
-  */ .desktop-nav {
+   .desktop-nav {
     height: 100%;
     width: 20%;
     background: #9bcea8;
@@ -318,7 +318,7 @@ export default {
     margin-left: 30%;
     margin-right: 30%;
   }
-  */ .logo:hover {
+  .logo:hover {
     background-color: whitesmoke;
   }
   .desktop-nav {
