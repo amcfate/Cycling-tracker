@@ -148,6 +148,7 @@ export default new Vuex.Store({
     },
     SET_ACTIVITIES(state, activities) {
       activities.forEach(activity => {
+        if(state.activity.indexOf(activity.activityId) == -1)
         state.activity.unshift(activity)
       })
     },

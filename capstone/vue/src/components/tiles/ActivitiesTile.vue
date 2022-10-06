@@ -92,7 +92,7 @@ export default {
     margin: 5%;
   }
 }
-
+/* 
 @media only screen and (min-width: 1440px) {
   .route-tile {
     display: flex;
@@ -122,7 +122,7 @@ export default {
     justify-self: center;
     justify-self: end;
   }
-}
+} */
 
 @media only screen and (max-width: 700px) {
   .route-tile {

@@ -276,7 +276,7 @@ export default {
 
 </script>
 
-<style>
+<style scoped>
 .wrapper {
   display: flex;
   position: relative;
