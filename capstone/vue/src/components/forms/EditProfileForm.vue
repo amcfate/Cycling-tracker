@@ -49,7 +49,7 @@ export default {
       profileService.updateProfileDetails(this.updateInfo).then((response) => {
         if (response.status == 200) {
           this.$store.commit("UPDATE_PROFILE", this.updateInfo);
-          //   this.$router.push("/profile");
+          //alert("You have successfully updated your profile!");
         }
       });
     },
