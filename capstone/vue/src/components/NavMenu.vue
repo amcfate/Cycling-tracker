@@ -49,14 +49,14 @@
         >
       </h3>
 
-      <h3>
+      <!-- <h3>
         <router-link
           v-bind:to="{ name: 'profile' }"
           style="text-decoration: none; color: inherit"
           class="h3"
           >Profile</router-link
         >
-      </h3>
+      </h3> -->
 
       <h3>
         <router-link
@@ -292,6 +292,29 @@ export default {
   }
 }
 @media only screen and (max-width: 700px) {
+  .h3 {
+    margin: 10px;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    border-radius: 2px;
+    box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
+    -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+    -moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+    transition: 100ms ease-in-out;
+  }
+  .h3 {
+    padding-top: 4%;
+    padding-bottom: 4%;
+  }
+  .h3:hover {
+    background-color: #97cea4;
+    box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
+    -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
+    -moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52),
+      inset -1px -1px 9px rgba(97, 104, 104, 0.52),
+      inset 4px 4px 24px rgba(97, 104, 104, 0.52);
+    transform: scale(1.01);
+  }
   .activity {
     height: 50%;
     width: 80%;

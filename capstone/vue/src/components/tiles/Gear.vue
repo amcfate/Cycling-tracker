@@ -86,7 +86,7 @@ export default {
   background-color: #9bcea8;
   border-color: white;
   border-radius: 4px;
-  margin-right: 290px;
+  margin-right: 290px auto;
 }
 
 .remove:hover {
@@ -100,9 +100,7 @@ export default {
 .tile {
   margin: 12px;
   background-color: #9bcea8;
-  background-repeat: no-repeat;
   background-size: 100% 100%;
-  background-image: blur;
   border-radius: 8px;
   width: 94%;
   height: auto;

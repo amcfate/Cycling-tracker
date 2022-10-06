@@ -48,7 +48,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .gear-form {
   display: flexbox;
   flex-direction: column;
@@ -66,6 +66,7 @@ export default {
   justify-content: space-evenly;
   margin: 4px;
   width: 60%;
+  padding: 20px;
 }
 .add-btn {
   margin: 4px;

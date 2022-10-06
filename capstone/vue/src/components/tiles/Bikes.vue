@@ -77,7 +77,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .remove {
   display: inline-block;
   color: black;
@@ -88,7 +88,7 @@ export default {
   background-color: #9bcea8;
   border-color: white;
   border-radius: 4px;
-  margin-right: 280px;
+  margin-right: 280px auto;
 }
 
 .remove:hover {
@@ -117,10 +117,16 @@ export default {
   text-align: left;
   padding: 6px;
 }
+
+.tile-content {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
 .display-content {
   display: flex;
   flex-direction: row;
-  /* width: fit-content; */
+  width: fit-content;
   flex-wrap: wrap;
   margin: 6px;
   background-color: white;
@@ -136,6 +142,7 @@ export default {
   box-shadow: 2px 10px 20px darkgray;
   padding: 6px;
   text-align: left;
+  width: fit-content;
 }
 /* .form {
   display: flex;

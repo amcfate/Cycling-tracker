@@ -97,7 +97,7 @@ export default {
   background-color: #9bcea8;
   border-color: white;
   border-radius: 4px;
-  margin-right: 240px;
+  margin-right: 240px auto;
 }
 
 .remove:hover {

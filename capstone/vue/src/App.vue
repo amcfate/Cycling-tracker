@@ -86,7 +86,7 @@ export default {
   height: 10px;
 }
 *::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
+  background-color: none;
   border-radius: 5px;
 }
 @font-face {
