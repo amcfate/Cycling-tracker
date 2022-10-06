@@ -67,7 +67,7 @@ public class JdbcTrackpointDao implements TrackpointDao{
         BigDecimal longitude = newTrackpoint.getLongitude();
         double elevation = newTrackpoint.getElevation();
 
-        jdbcTemplate.update(sql, (id + 1), latitude, longitude, elevation);
+        jdbcTemplate.update(sql, (id), latitude, longitude, elevation);
     }
 
     @Override

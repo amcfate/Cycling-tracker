@@ -39,29 +39,32 @@
       >
     </nav>
     <!--try to change this to focus event-->
-    <nav class="desktop-nav">
-      <router-link
-        v-bind:to="{ name: 'profile' }"
-        style="text-decoration: none; color: inherit"
-        class="h3"
-        ><h3>{{ userProfile.username }}</h3></router-link
-      >
-      <h3
-        @click="
-          showRouteTile = false;
-          showActivitiesTile = !showActivitiesTile;
-        "
-      >
-        Activities
+    <nav class="desktop-nav" v-else>
+      <h3>
+        <router-link
+          v-bind:to="{ name: 'home' }"
+          style="text-decoration: none; color: inherit"
+          class="h3"
+          >Home</router-link
+        >
       </h3>
 
-      <h3
-        @click="
-          showActivitiesTile = false;
-          showRouteTile = !showRouteTile;
-        "
-      >
-        Routes
+      <h3>
+        <router-link
+          v-bind:to="{ name: 'profile' }"
+          style="text-decoration: none; color: inherit"
+          class="h3"
+          >Profile</router-link
+        >
+      </h3>
+
+      <h3>
+        <router-link
+          v-bind:to="{ name: 'leaderboard' }"
+          style="text-decoration: none; color: inherit"
+          class="h3"
+          >Leaderboard</router-link
+        >
       </h3>
     </nav>
   </div>

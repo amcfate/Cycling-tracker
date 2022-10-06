@@ -31,16 +31,15 @@ export default {
       windowWidth: window.innerWidth,
     };
   },
-  components: {
-    // NavMenu,
+  components: {},
+  created() {
+    this.getAllRoutes();
   },
   mounted() {
     this.$nextTick(() => {
       window.addEventListener("resize", this.onResize);
       this.onResize();
     });
-    this.getAllActivities();
-    this.getAllRoutes();
   },
 
   beforeDestroy() {
