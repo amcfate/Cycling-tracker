@@ -6,8 +6,8 @@
         <div class="map-cage"><Map class="map"></Map></div>
       </div>
       <div class="route-detail">
-        <h3>Activity Details</h3>
-        <h3>{{ getActivityDetails.activityName }}</h3>
+        <h2 class="header">Activity Details</h2>
+        <h3 class="header">{{ getActivityDetails.activityName }}</h3>
         <ul class="act-details">
           <li>
             {{ getActivityDetails.activityDate }} |
@@ -19,8 +19,8 @@
         </ul>
       </div>
       <div class="route-detail">
-        <h3>Route Details</h3>
-        <h3>{{ getRouteDetails.routeName }}</h3>
+        <h2 class="header">Route Details</h2>
+        <h3 class="header">{{ getRouteDetails.routeName }}</h3>
         <ul class="act-details">
           <li>Length | {{ getRouteDetails.distanceMiles }} miles</li>
           <li>Starting | {{ getRouteDetails.elevation }} feet</li>
@@ -79,6 +79,10 @@ export default {
 }
 .nav-menu {
   width: 100%;
+  max-width: 300px;
+}
+.header{
+  margin-left: 10px;
 }
 .tile {
   align-self: center;
@@ -93,11 +97,13 @@ export default {
 }
 .route-detail {
   display: flex;
+  flex-direction: column;
   justify-content: left;
   margin: 6px;
   background-color: whitesmoke;
   padding: 6px;
-  size: auto;
+  width: 97%;
+  height: 35%;
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgray;
   text-align: left;
@@ -121,8 +127,9 @@ export default {
   border-radius: 8px;
   display: flex;
   height: 300px;
-  width: 95%;
+  width: 98%;
   overflow: hidden;
+  margin-bottom: 10px;
 }
 Map {
   height: 100%;

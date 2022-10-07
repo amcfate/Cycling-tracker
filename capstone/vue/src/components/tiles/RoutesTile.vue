@@ -125,7 +125,7 @@ export default {
 
 @media only screen and (max-width: 700px) {
   .route-tile {
-    display: flex;
+   display: flex;
     align-items: center;
     flex-direction: column;
     border-radius: 8px;
@@ -133,13 +133,13 @@ export default {
     padding-left: 5px;
     margin-left: 10px;
     padding-top: 30px;
-    height: 30%;
+    height: 65%;
     width: 80%;
     background: #9bcea8;
     z-index: 5;
     align-self: flex-end;
-    overflow:auto;
-    margin-bottom: 40%;
+    overflow: auto;
+    margin-bottom: 150px;
   }
   .route-div {
     min-height: 150px;

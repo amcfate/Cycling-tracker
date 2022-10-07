@@ -141,11 +141,7 @@ export default {
   },
 
   computed: {
-    lastRoute() {
-      const routes = this.$store.state.routes;
-      const lastRoute = routes.pop();
-      return lastRoute.routeName;
-    },
+ 
   },
   methods: {
     profileButton() {
@@ -246,7 +242,7 @@ export default {
     padding-bottom: 4%;
   }
   .h3:hover {
-    background-color: #97cea4;
+    background-color: whitesmoke;
     box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
     -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
     -moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52),
@@ -254,9 +250,10 @@ export default {
       inset 4px 4px 24px rgba(97, 104, 104, 0.52);
     transform: scale(1.01);
   }
+  
 
   .activity-div {
-    height: 50%;
+    height: 200px;
     width: 90%;
     margin: 10px;
     background-color: whitesmoke;
@@ -329,7 +326,7 @@ export default {
   }
 
   .activity-div {
-    height: 50%;
+    height: 200px;
     width: 90%;
     margin: 10px;
     background-color: whitesmoke;
@@ -375,7 +372,7 @@ export default {
   }
 
   .h3:hover {
-    background-color: #97cea4;
+    background-color: whitesmoke;
     box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
     -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
     -moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52),

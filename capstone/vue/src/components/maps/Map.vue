@@ -7,7 +7,7 @@
       <div class="last-btn" v-on:click="saveRoute()">Save route</div>
     </div>
     <div id="map"></div>
-    <new-route-form  class="route-form" v-show="! showRouteForm"/>
+    <new-route-form  class="route-form" v-show=" !showRouteForm"/>
   </div>
 </template>
 
@@ -202,7 +202,7 @@ export default {
       this.saveTrackPoints()
 
       window.alert("Saved!")
-
+      location.reload();
     },
 
 
