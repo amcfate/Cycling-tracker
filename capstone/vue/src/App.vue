@@ -33,7 +33,7 @@ export default {
   },
   components: {},
   created() {
-    this.getAllRoutes();
+   
   },
   mounted() {
     this.$nextTick(() => {

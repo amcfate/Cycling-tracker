@@ -93,6 +93,7 @@
 
 <script>
 //expand search feature and apply to routes && bikes
+import RouteService from "@/services/RouteServices.js";
 import ActivitiesService from "../services/ActivitiesService.js";
 import Map from "../components/maps/Map.vue";
 import RoutesTile from "../components/tiles/RoutesTile.vue";
@@ -133,6 +134,7 @@ export default {
   },
   created() {
     this.getAllActivities();
+     this.getAllRoutes();
   },
 
   beforeDestroy() {
@@ -170,6 +172,17 @@ export default {
       ActivitiesService.getActivities()
         .then((response) => {
           this.$store.commit("SET_ACTIVITIES", response.data);
+        })
+        .catch((error) => {
+          if (error.response.status == 404) {
+            this.$router.push({ name: "NotFound" });
+          }
+        });
+    },
+        getAllRoutes() {
+      RouteService.getAllRoutes()
+        .then((response) => {
+          this.$store.commit("SET_ROUTES", response.data);
         })
         .catch((error) => {
           if (error.response.status == 404) {

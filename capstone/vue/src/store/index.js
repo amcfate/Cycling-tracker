@@ -23,67 +23,49 @@ export default new Vuex.Store({
     user: currentUser || {},
     routes: [
       {
-        routeName: "steve",
-        description: "",
-        distance: 0,
-        elevation: 0,
-        ascent: 2,
+        routeName: "256 to parkway",
+        description: "Lots of elevation gain, lots of elevation loss. Good views.",
+        distance: 45,
+        elevation: 3500,
+        ascent: 5500,
 
       },
       {
-        routeName: "block",
-        description: "",
-        distance: 40,
-        elevation: 0,
+        routeName: "around the block",
+        description: "A cool down after work.",
+        distance: 1,
+        elevation: 350,
         ascent: 4,
 
       },
-      {
-        routeName: "float",
-        description: "",
-        distance: 500,
-        elevation: 0,
-        ascent: 500,
-
-      },
+    
     ],
     activity: [
       {
-        route_id: 0,
+        route_id: 5,
         user_id: 0,
-        activityName: "activity",
-        activityId: 99,
+        activityName: "Morning ride",
+        activityId: 1,
         is_public: true,
         photos: "xxxxx",
-        description: "cool",
+        description: "Rode down to outerlands for a cup of coffee, then stopped in the park to talk with an old man walking his cat.",
         activity_date: "today",
-        startTime: "morn",
-        end_time: "never",
+        startTime: "08:00:00",
+        end_time: "09:00:00",
       },
       {
-        route_id: 0,
+        route_id: 2,
         user_id: 0,
-        activityName: "bike ride",
+        activityName: "Parkway Ride",
         activityId: 37,
         is_public: true,
         photos: "xxxxx",
-        description: "cool",
+        description: "Got up above the clouds near Black balsam, then bombmed 151 into Brevard. Stopped for some fishing on the Davidson.",
         activity_date: "today",
         startTime: "morn",
         end_time: "never",
       },
-      {
-        route_id: 0,
-        user_id: 0,
-        activityName: "run",
-        activityId: 55,
-        is_public: true,
-        photos: "xxxxx",
-        description: "cool",
-        activity_date: "today",
-        startTime: "morn",
-        end_time: "never",
-      },
+    
     ],
     user_bikes: [
       {
@@ -142,7 +124,13 @@ export default new Vuex.Store({
 
     SET_ROUTES(state, routes) {
       routes.forEach(route => {
-        state.routes.unshift(route)
+        let z = [state.routes.length]
+        for(let i = 0; i < state.routes.length; i++){
+          z.push(state.routes[i].routeId)}
+          if(!z.includes(route.routeId)){
+            state.routes.unshift(route)
+          }
+        
       });
 
     },
