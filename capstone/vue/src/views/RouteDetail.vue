@@ -86,6 +86,7 @@ export default {
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgray;
   text-align: left;
+  overflow: auto;
 }
 .last {
   padding-top: 10px;

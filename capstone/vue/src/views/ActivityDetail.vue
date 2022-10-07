@@ -76,6 +76,7 @@ export default {
   display: flex;
   width: 98vw;
   height: 100vh;
+  overflow: auto;
 }
 .nav-menu {
   width: 100%;
@@ -94,6 +95,7 @@ export default {
   height: 93vh;
   width: 70%;
   margin-bottom: 20px;
+  
 }
 .route-detail {
   display: flex;
@@ -107,6 +109,7 @@ export default {
   border-radius: 8px;
   box-shadow: 2px 10px 20px darkgray;
   text-align: left;
+  overflow: auto;
 }
 .last {
   padding-top: 10px;
@@ -153,5 +156,6 @@ Map {
     margin-bottom: 26%;
     margin-right: 5px;
   }
+
 }
 </style>
