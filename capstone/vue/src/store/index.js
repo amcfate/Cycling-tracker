@@ -23,17 +23,17 @@ export default new Vuex.Store({
     user: currentUser || {},
     routes: [
       {
-        routeName: "steve",
-        description: "",
-        distance: 0,
-        elevation: 0,
-        ascent: 2,
+        routeName: "Brooklyn Trail",
+        description: "Lots of stopping, but beautiful ride with a view of the Hudson.",
+        distance: 18,
+        elevation: 82,
+        ascent: 234,
 
       },
       {
-        routeName: "block",
-        description: "",
-        distance: 40,
+        routeName: "Prospect Park",
+        description: "Low-Demand ride through Prospect, Sean loves this ride!",
+        distance: 12,
         elevation: 0,
         ascent: 4,
 
@@ -49,41 +49,30 @@ export default new Vuex.Store({
     ],
     activity: [
       {
-        route_id: 0,
+        route_id: 5,
         user_id: 0,
-        activityName: "activity",
-        activityId: 99,
+        activityName: "Morning ride",
+        activityId: 1,
         is_public: true,
         photos: "xxxxx",
-        description: "cool",
+        description: "Rode down to outerlands for a cup of coffee, then stopped in the park to talk with an old man walking his cat.",
         activity_date: "today",
-        startTime: "morn",
-        end_time: "never",
+        startTime: "08:00:00",
+        end_time: "09:00:00",
       },
       {
-        route_id: 0,
+        route_id: 6,
         user_id: 0,
-        activityName: "bike ride",
+        activityName: "Parkway Ride",
         activityId: 37,
         is_public: true,
         photos: "xxxxx",
-        description: "cool",
+        description: "Got up above the clouds near Black balsam, then bombmed 151 into Brevard. Stopped for some fishing on the Davidson.",
         activity_date: "today",
         startTime: "morn",
         end_time: "never",
       },
-      {
-        route_id: 0,
-        user_id: 0,
-        activityName: "run",
-        activityId: 55,
-        is_public: true,
-        photos: "xxxxx",
-        description: "cool",
-        activity_date: "today",
-        startTime: "morn",
-        end_time: "never",
-      },
+
     ],
     user_bikes: [
       {
@@ -149,13 +138,14 @@ export default new Vuex.Store({
     SET_ACTIVITIES(state, activities) {
       activities.forEach(activity => {
         let z = [state.activity.length]
-        for(let i = 0; i < state.activity.length; i++){
-          z.push(state.activity[i].activityId)}
-          if(!z.includes(activity.activityId)){
-            state.activity.unshift(activity)
-          }
-        
-        })
+        for (let i = 0; i < state.activity.length; i++) {
+          z.push(state.activity[i].activityId)
+        }
+        if (!z.includes(activity.activityId)) {
+          state.activity.unshift(activity)
+        }
+
+      })
     },
     ADD_TRACKPOINT(state, trackpoint) {
       state.trackpoint.unshift(trackpoint)
