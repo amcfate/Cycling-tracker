@@ -23,6 +23,7 @@ export default new Vuex.Store({
     user: currentUser || {},
     routes: [
       {
+<<<<<<< HEAD
         routeName: "Brooklyn Trail",
         description: "Lots of stopping, but beautiful ride with a view of the Hudson.",
         distance: 18,
@@ -35,17 +36,24 @@ export default new Vuex.Store({
         description: "Low-Demand ride through Prospect, Sean loves this ride!",
         distance: 12,
         elevation: 0,
-        ascent: 4,
+=======
+        routeName: "256 to parkway",
+        description: "Lots of elevation gain, lots of elevation loss. Good views.",
+        distance: 45,
+        elevation: 3500,
+        ascent: 5500,
 
       },
       {
-        routeName: "float",
-        description: "",
-        distance: 500,
-        elevation: 0,
-        ascent: 500,
+        routeName: "around the block",
+        description: "A cool down after work.",
+        distance: 1,
+        elevation: 350,
+>>>>>>> main
+        ascent: 4,
 
       },
+
     ],
     activity: [
       {
@@ -61,7 +69,7 @@ export default new Vuex.Store({
         end_time: "09:00:00",
       },
       {
-        route_id: 6,
+        route_id: 2,
         user_id: 0,
         activityName: "Parkway Ride",
         activityId: 37,
@@ -131,7 +139,14 @@ export default new Vuex.Store({
 
     SET_ROUTES(state, routes) {
       routes.forEach(route => {
-        state.routes.unshift(route)
+        let z = [state.routes.length]
+        for (let i = 0; i < state.routes.length; i++) {
+          z.push(state.routes[i].routeId)
+        }
+        if (!z.includes(route.routeId)) {
+          state.routes.unshift(route)
+        }
+
       });
 
     },
