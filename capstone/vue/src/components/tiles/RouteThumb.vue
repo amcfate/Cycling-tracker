@@ -1,16 +1,18 @@
 <template>
   <div class="home route-thumb">
     <router-link
-      v-bind:to="{ name: 'route-detail', params: { id: route.routeName } }"
+      v-bind:to="{ name: 'route-detail', params: { id: route.routeId } }"
       v-bind:route="route"
       style="text-decoration: none; color: inherit"
     >
-      <h4 class="header">{{ route.routeName }}</h4>
+      <h3 class="header">{{ route.routeName }}</h3>
 
+      <div class="info">
       <h5>Length</h5>
-      <p>{{ route.distance }} miles</p>
+      <p>{{ route.distanceMiles }} miles</p>
       <h5>elevation gain</h5>
       <p>{{ route.ascent }} feet</p>
+      </div>
     </router-link>
   </div>
 </template>
@@ -40,6 +42,12 @@ export default {
   overflow: auto;
 }
 
+ .header{
+   margin-top: 10px;
+    background-color: #9BCEA8;
+    border-radius: 6px;
+    padding: 5px;
+  }
 @media only screen and (max-width: 700px) {
   .route-thumb {
     margin: auto;
@@ -50,7 +58,7 @@ export default {
     background-color: lightgray;
     background-size: 100% 100%;
     border-radius: 8px;
-    height: 80%;
+    height: 200px;
     box-shadow: 2px 10px 20px darkgrey;
     width: auto;
     padding-left: 3%;
@@ -71,7 +79,7 @@ export default {
     background-size: 100% 100%;
     border-radius: 8px;
     width: 70%;
-    height: 80vh;
+    height: 200px;
     box-shadow: 2px 10px 20px darkgrey;
     overflow: auto;
   }

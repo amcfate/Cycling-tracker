@@ -179,7 +179,7 @@ export default {
     padding-bottom: 4%;
   }
   h3:hover {
-    background-color: #97cea4;
+    background-color: whitesmoke;
     box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
     -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
     -moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52),
@@ -307,7 +307,7 @@ export default {
     padding-bottom: 4%;
   }
   .h3:hover {
-    background-color: #97cea4;
+    background-color: whitesmoke;
     box-shadow: 1px 1px 0px 10px rgba(97, 104, 104, 0.52);
     -webkit-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52);
     -moz-box-shadow: 1px 1px 0px 1px rgba(97, 104, 104, 0.52),
