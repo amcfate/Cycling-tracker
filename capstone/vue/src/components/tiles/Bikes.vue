@@ -1,23 +1,25 @@
 <template>
   <div class="tile">
     <div class="tile-head">
-      <h3>My Bikes</h3>
-      <button
-        v-show="showBikes == true"
-        style="align-self: center"
-        class="remove"
-        @click="showBikes = !showBikes"
-      >
-        ^
-      </button>
-      <button
-        v-show="showBikes == false"
-        style="align-self: center"
-        class="remove"
-        @click="showBikes = !showBikes"
-      >
-        v
-      </button>
+      <div class="left-head">
+        <h3>My Bikes</h3>
+        <button
+          v-show="showBikes == true"
+          style="align-self: center"
+          class="remove"
+          @click="showBikes = !showBikes"
+        >
+          ^
+        </button>
+        <button
+          v-show="showBikes == false"
+          style="align-self: center"
+          class="remove"
+          @click="showBikes = !showBikes"
+        >
+          v
+        </button>
+      </div>
       <button class="bikes-btn" @click="showBikeForm = !showBikeForm">
         Add Bikes
       </button>
@@ -78,9 +80,13 @@ export default {
 </script>
 
 <style scoped>
+.left-head {
+  display: flex;
+  flex-direction: row;
+}
 .remove {
   display: inline-block;
-  color: black;
+  color: darkslategray;
   padding: 6px 6px;
   height: 26px;
   font-weight: bolder;

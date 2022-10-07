@@ -9,9 +9,9 @@ import java.time.LocalTime;
 
 public class Activity {
 
-    private int routeId;
+    private String routeName;
     private int userId;
-    private int bikeId;
+    private String bikeName;
     private int activityId;
 
     private String activityName;
@@ -43,12 +43,12 @@ public class Activity {
     }
 
     //constructor w/ no image
-    public Activity(/*int routeId,*/ int userId, int bikeId, String activityName,
+    public Activity(/*int routeId,*/ int userId, String bikeName, String activityName,
                                      boolean isPublic, String description,
                                      Date activityDate, LocalTime startTime, LocalTime endTime) {
         /* this.routeId = routeId;*/
         this.userId = userId;
-        this.bikeId = bikeId;
+        this.bikeName = bikeName;
         this.activityName = activityName;
         this.isPublic = isPublic;
         this.description = description;
@@ -58,14 +58,14 @@ public class Activity {
     }
 
     //constructor to make activity w/ all properties
-    public Activity(int routeId, int userId, int activityId, int bikeId, String activityName,
+    public Activity(String routeName, int userId, int activityId, String bikeName, String activityName,
                     boolean isPublic, String photos, String description,
                     Date activityDate, LocalTime startTime, LocalTime endTime) {
-        this.routeId = routeId;
+        this.routeName = routeName;
         this.userId = userId;
 
         this.activityId = activityId;
-        this.bikeId = bikeId;
+        this.bikeName = bikeName;
         this.activityName = activityName;
         this.isPublic = isPublic;
         this.photos = photos;
@@ -75,13 +75,13 @@ public class Activity {
         this.endTime = endTime;
     }
 
-    public Activity(int routeId, int userId, int activityId, int bikeId, String activityName,
+    public Activity(String routeName, int userId, int activityId, String bikeName, String activityName,
                     boolean isPublic, String description,
                     Date activityDate, LocalTime startTime, LocalTime endTime) {
-        this.routeId = routeId;
+        this.routeName = routeName;
         this.userId = userId;
         this.activityId = activityId;
-        this.bikeId = bikeId;
+        this.bikeName = bikeName;
         this.activityName = activityName;
         this.isPublic = isPublic;
         this.description = description;
@@ -90,12 +90,12 @@ public class Activity {
         this.endTime = endTime;
     }
 
-    public int getRouteId() {
-        return routeId;
+    public String getRouteName() {
+        return routeName;
     }
 
-    public void setRouteId(int routeId) {
-        this.routeId = routeId;
+    public void setRouteName(String routeName) {
+        this.routeName = routeName;
     }
 
     public int getUserId() {
@@ -114,12 +114,12 @@ public class Activity {
         this.activityId = activityId;
     }
 
-    public int getBikeId() {
-        return bikeId;
+    public String getBikeName() {
+        return bikeName;
     }
 
-    public void setBikeId(int bikeId) {
-        this.bikeId = bikeId;
+    public void setBikeName(String bikeName) {
+        this.bikeName = bikeName;
     }
 
     public String getActivityName() {

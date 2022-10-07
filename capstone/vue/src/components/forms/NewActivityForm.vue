@@ -14,16 +14,15 @@
           v-model="newActivity.routeId"
           placeholder="Type routeId FOR NOW..."
         /> -->
-        <select name="routeId" id="" v-model="newActivity.routeId">
+        <select name="routeId" id="" v-model="newActivity.routeName">
           <option v-for="route in routes" :key="route.routeName">
             {{ route.routeName }}
           </option>
         </select>
         <label for="bikeId">Select your bike: </label>
 
-        <select name="bike" id="" v-model="newActivity.bikeId">
-          <option v-for="bike in userBikes" :key="bike.bikeId">
-            <!-- {{ bike.bikeId }} -->
+        <select name="bike" id="" v-model="newActivity.bikeName">
+          <option v-for="bike in userBikes" :key="bike.bikeName">
             {{ bike.bikeName }}
           </option>
         </select>

@@ -7,7 +7,7 @@
         <router-link
           v-bind:to="{ name: 'profile' }"
           style="text-decoration: none; color: inherit"
-          >{{ userProfile.username }}</router-link
+          >@{{ userProfile.username }}</router-link
         >
       </h3>
 
@@ -55,7 +55,7 @@
         <router-link
           v-bind:to="{ name: 'profile' }"
           style="text-decoration: none; color: inherit"
-          >{{ userProfile.username }}</router-link
+          >@{{ userProfile.username }}</router-link
         >
       </h3>
       <h3

@@ -50,7 +50,7 @@ CREATE SEQUENCE seq_route_id
 
 CREATE TABLE route (
 	route_id SERIAL,
-	route_name varchar,
+	route_name varchar UNIQUE,
 	description varchar,
 	distance_miles decimal,
 	elevation int,
@@ -75,9 +75,9 @@ CREATE TABLE trackpoint (
 
 CREATE TABLE activity (
     activity_id SERIAL NOT NULL,
-	route_id int,
+	route_name varchar,
 	user_id int,
-	bike_id int,
+	bike_name varchar,
 	activity_name varchar,
 	is_public boolean,
 	photos varchar,
@@ -88,7 +88,7 @@ CREATE TABLE activity (
 
     CONSTRAINT PK_activity PRIMARY KEY (activity_id),
 
-	CONSTRAINT FK_activity_route FOREIGN KEY (route_id) REFERENCES route (route_id),
+	CONSTRAINT FK_activity_route FOREIGN KEY (route_name) REFERENCES route (route_name),
 	CONSTRAINT FK_activity_user FOREIGN KEY (user_id) REFERENCES users (user_id)
 );
 

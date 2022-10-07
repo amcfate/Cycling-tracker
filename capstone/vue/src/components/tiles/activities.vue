@@ -1,23 +1,25 @@
 <template>
   <div class="tile">
     <div class="tile-head">
-      <h3>My Activities</h3>
-      <button
-        v-show="showActivity == true"
-        style="align-self: center"
-        class="remove"
-        @click="showActivity = !showActivity"
-      >
-        ^
-      </button>
-      <button
-        v-show="showActivity == false"
-        style="align-self: center"
-        class="remove"
-        @click="showActivity = !showActivity"
-      >
-        v
-      </button>
+      <div class="left-head">
+        <h3>My Activities</h3>
+        <button
+          v-show="showActivity == true"
+          style="align-self: center"
+          class="remove"
+          @click="showActivity = !showActivity"
+        >
+          ^
+        </button>
+        <button
+          v-show="showActivity == false"
+          style="align-self: center"
+          class="remove"
+          @click="showActivity = !showActivity"
+        >
+          v
+        </button>
+      </div>
       <button id="activity-btn" @click="showActivityForm = !showActivityForm">
         Add Activity
       </button>
@@ -33,13 +35,19 @@
       <div class="disp-head">
         <h3>{{ activity.activityName }}</h3>
       </div>
-      <ul class="act-details">
-        <li>
-          {{ activity.activityDate }} | {{ activity.startTime }} -
-          {{ activity.endTime }}
-        </li>
-        <li>{{ activity.description }}</li>
-      </ul>
+      <div class="det-lists">
+        <ul class="act-details">
+          <li>
+            {{ activity.activityDate }} | {{ activity.startTime }} -
+            {{ activity.endTime }}
+          </li>
+          <li>{{ activity.description }}</li>
+        </ul>
+        <ul class="act-details">
+          <li>Route: {{ activity.routeName }}</li>
+          <li>Bike: {{ activity.bikeName }}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -58,9 +66,9 @@ export default {
       showActivityForm: false,
       activities: [
         {
-          routeId: "",
+          routeName: "",
           userId: "",
-          bikeId: "",
+          bikeName: "",
           activityName: "",
           activityId: "",
           isPublic: "",
@@ -87,9 +95,23 @@ export default {
 </script>
 
 <style scoped>
+.left-head {
+  display: flex;
+  flex-direction: row;
+}
+.det-lists {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.act-details {
+  width: 40%;
+}
+
 .remove {
   display: inline-block;
-  color: black;
+  color: darkslategray;
   padding: 6px 6px;
   height: 26px;
   font-weight: bolder;

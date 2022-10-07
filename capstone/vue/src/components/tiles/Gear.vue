@@ -1,23 +1,25 @@
 <template>
   <div class="tile">
     <div class="tile-head">
-      <h3>My Gear</h3>
-      <button
-        v-show="showGear == true"
-        style="align-self: center"
-        class="remove"
-        @click="showGear = !showGear"
-      >
-        ^
-      </button>
-      <button
-        v-show="showGear == false"
-        style="align-self: center"
-        class="remove"
-        @click="showGear = !showGear"
-      >
-        v
-      </button>
+      <div class="left-head">
+        <h3>My Gear</h3>
+        <button
+          v-show="showGear == true"
+          style="align-self: center"
+          class="remove"
+          @click="showGear = !showGear"
+        >
+          ^
+        </button>
+        <button
+          v-show="showGear == false"
+          style="align-self: center"
+          class="remove"
+          @click="showGear = !showGear"
+        >
+          v
+        </button>
+      </div>
       <button class="gear-btn" @click="showGearForm = !showGearForm">
         Add Gear
       </button>
@@ -76,9 +78,13 @@ export default {
 </script>
 
 <style scoped>
+.left-head {
+  display: flex;
+  flex-direction: row;
+}
 .remove {
   display: inline-block;
-  color: black;
+  color: darkslategray;
   padding: 6px 6px;
   height: 26px;
   font-weight: bolder;

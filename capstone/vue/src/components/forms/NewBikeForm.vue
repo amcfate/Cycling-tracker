@@ -6,7 +6,7 @@
       <input type="text" name="bikeName" id="" v-model="newBike.bikeName" />
       <label for="type">Discipline: </label>
       <input type="text" v-model="newBike.type" />
-      <label for="bikeWeight">Weight?</label>
+      <label for="bikeWeight">Weight? (lbs.)</label>
       <input type="text" v-model="newBike.bikeWeight" />
       <label class="form-el" for="description">Description:</label>
       <textarea
